@@ -26,6 +26,8 @@ import TransactionsPage from './Pages/TransactionsPage';
 import LostAndFoundPage from "./Pages/LostAndFoundPage";
 import DemandsPage from './Pages/DemandsPage';
 
+require('dotenv').config()
+
 function App() {
 
   const theme = createTheme({

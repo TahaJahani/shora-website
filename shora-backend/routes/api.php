@@ -83,7 +83,8 @@ Route::prefix('demands')->middleware(['auth:sanctum'])->group(function() {
     Route::post('/', [DemandController::class, 'addDemand']);
     Route::post('/like/{id}', [DemandController::class, 'likeDemand'])->whereNumber('id');
     Route::delete('/unlike/{id}', [DemandController::class, 'unlikeDemand'])->whereNumber('id');
-    Route::post('/ban-user/{id}', [DemandController::class, 'banUser'])->whereNumber('id');
+    Route::middleware(['ability:owner,admin'])->post('/ban-user/{demand_id}', [DemandController::class, 'banUser'])->whereNumber('demand_id');
+    Route::middleware(['ability:owner,admin'])->delete('/{id}', [DemandController::class, 'delete'])->whereNumber('id');
     Route::middleware(['ability:owner,admin'])->post('/status', [DemandController::class, 'changeStatus']);
 });
 

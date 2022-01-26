@@ -8,7 +8,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import BlockIcon from '@mui/icons-material/Block';
 import { hasAccess } from "../../Helpers/UserHelper"
 
-export default function DemandItem({ demand, onLikeClicked, loading, banLoading, onBanClicked, onDeleteClicked }) {
+export default function DemandItem({ demand, onLikeClicked, loading, onBanClicked, onDeleteClicked }) {
 
     let statusColor = demand.status === 'rejected' ? 'error' :
         demand.status === 'accepted' ? 'green' : 'orange'
@@ -59,8 +59,8 @@ export default function DemandItem({ demand, onLikeClicked, loading, banLoading,
                         'aria-labelledby': 'basic-button',
                     }}
                 >
-                    <MenuItem onClick={onBanClicked}>مسدود کردن کاربر</MenuItem>
-                    <MenuItem onClick={onDeleteClicked}>حذف درخواست</MenuItem>
+                    <MenuItem onClick={() => {onBanClicked(); handleMenuClosed()}}>مسدود کردن کاربر</MenuItem>
+                    <MenuItem onClick={() => {onDeleteClicked(); handleMenuClosed()}}>حذف درخواست</MenuItem>
                 </Menu>
                 <Typography variant='h6' sx={{ marginTop: 2 }}>
                     {demand.body}

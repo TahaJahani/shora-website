@@ -1,5 +1,6 @@
+
 // const base_url = 'https://api.shora.taha7900.ir/api';
-const base_url = 'http://localhost:8000/api';
+const base_url = process.env.BASE_URL;
 const links = {
     'login': base_url + '/auth/login',
     'sendEmail': base_url + '/auth/send-reset-mail',
@@ -25,7 +26,7 @@ const links = {
     'getDemands': base_url + "/demands",
     'likeDemand': base_url + "/demands/like",
     'unlikeDemand' : base_url + "/demands/unlike",
-    'banDemand': base_url + "/demands/ban-user"
+    'banDemand': base_url + "/demands/ban-user",
 }
 
 export default links;

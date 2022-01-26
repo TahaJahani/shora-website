@@ -74,6 +74,11 @@ class DemandController extends Controller
         return response()->json(['status' => 'ok']);
     }
 
+    public function delete($id) {
+        Demand::where('id', $id)->delete();
+        return response()->json(['status' => 'ok']);
+    }
+
     public function likeDemand($id) {
         $userId = Auth::id();
         $demandClass = addslashes(Demand::class);
