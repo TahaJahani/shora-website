@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TextField, Card, Container, Typography, InputAdornment } from '@mui/material';
+import { TextField, Card, Container, Typography, InputAdornment, Link, Grid } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import sendEmail from '../AxiosCalls/Auth/sendEmail'
@@ -49,6 +49,15 @@ function RegisterPage() {
                     ارسال ایمیل
                 </LoadingButton>
             </Card>
+            <Grid container justifyContent='center'>
+                <Typography sx={{ my: 2 }}>
+                    {'اگر در فرایند بازیابی رمز عبور به مشکلی برخوردید '}
+                    <Link target='_blank' href='https://docs.google.com/forms/d/e/1FAIpQLSdG1VjrwEkf4Zp9ubAL8GdLCngcdLUsGBhXhin30C2-79vyTQ/viewform?usp=sf_link'>
+                        این فرم
+                    </Link>
+                    {' را تکمیل کنید'}
+                </Typography>
+            </Grid>
         </Container>
     )
 }

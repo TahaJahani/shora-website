@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { TextField, Card, Button, Container, Typography, FormControl, InputLabel, Input, InputAdornment, Divider } from '@mui/material';
+import { TextField, Card, Button, Container, Typography, FormControl, InputLabel, Input, InputAdornment, Divider, Box, Grid, Link } from '@mui/material';
+import { IconButton } from '@mui/material';
 import AccountCircle from "@mui/icons-material/AccountCircle"
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
+import DownloadIcon from '@mui/icons-material/Download';
 import { useRecoilState } from 'recoil'
 import { useNavigate } from 'react-router-dom';
 import { userAtom } from '../Atoms/userAtom';
@@ -83,9 +85,16 @@ function LoginPage() {
                     {error}
                 </Typography>
                 <LoadingButton loading={loading} variant='contained' fullWidth onClick={loginClicked}>ورود</LoadingButton>
-                <Divider sx={{marginY: 2, fontFamily: "B Nazanin"}}> یا </Divider>
+                <Divider sx={{ marginY: 2, fontFamily: "B Nazanin" }}> یا </Divider>
                 <Button variant='outlined' fullWidth onClick={registerClicked}>بازیابی رمز عبور</Button>
             </Card>
+            <Grid container justifyContent='center' sx={{ mt: 2 }}>
+                <Link href="https://shora.taha7900.ir/Shora-App.apk">
+                    <Button endIcon={<DownloadIcon sx={{ mr: 1 }} />} variant='text'>
+                        دانلود اپلیکیشن اندروید
+                    </Button>
+                </Link>
+            </Grid>
         </Container>
     )
 }
