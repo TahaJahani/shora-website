@@ -6,7 +6,9 @@ import likeDemand from '../AxiosCalls/Demands/likeDemand'
 import unlikeDemand from '../AxiosCalls/Demands/unlikeDemand'
 import banUser from '../AxiosCalls/Demands/banUser'
 import deleteDemand from '../AxiosCalls/Demands/deleteDemand'
-import { Alert, Grid, Pagination, Snackbar } from '@mui/material'
+import { Alert, Dialog, Fab, Grid, Pagination, Snackbar } from '@mui/material'
+import AddIcon from '@mui/icons-material/Add'
+import { Box } from '@mui/system'
 
 export default function DemandsPage() {
 
@@ -17,6 +19,7 @@ export default function DemandsPage() {
     });
 
     const [loading, setLoading] = React.useState([])
+    const [dialogOpen, setDialogOpen] = React.useState(false)
     const [popupData, setPopUpData] = React.useState({
         open: false,
         message: '',
@@ -94,8 +97,19 @@ export default function DemandsPage() {
     }, [])
 
     return (
-        <div>
-            <AddDemandForm sx={{ marginBottom: 2 }} onDemandAdded={(added) => setDemands([added, ...demands])} />
+        <Box>
+            <Dialog
+                dir='rtl'
+                open={dialogOpen}
+                onClose={() => setDialogOpen(false)}
+                fullWidth={true}
+                maxWidth='md'>
+                <AddDemandForm
+                    onDemandAdded={(added) => {
+                        setDemands([added, ...demands])
+                        setDialogOpen(false);
+                    }} />
+            </Dialog>
             <Grid container justifyContent="center">
                 {pageData.lastPage != 1 &&
                     <Pagination count={pageData.lastPage} onChange={changePage} size="large" shape="rounded" sx={{ marginBottom: 2 }} />}
@@ -105,28 +119,43 @@ export default function DemandsPage() {
                 <TextField label="جستجو" variant='outlined'/>
                 
             </Box> */}
-            {demands.map((demand) => {
-                const { onBan, onDelete, onLike } = demandActionsGenerator(demand)
-                return (
-                    <DemandItem
-                        key={demand.id}
-                        demand={demand}
-                        loading={loading.includes(demand.id)}
-                        onBanClicked={onBan}
-                        onDeleteClicked={onDelete}
-                        onLikeClicked={onLike} />
-                )
-            })}
-            <Snackbar
-                open={popupData.open}
-                autoHideDuration={15000}
-                onClose={() => setPopUpData({ ...popupData, open: false })}>
-                <Alert
-                    severity={popupData.color}
-                    sx={{ width: '100%' }}>
-                    {popupData.message}
-                </Alert>
-            </Snackbar>
-        </div>
+            <Box>
+                {demands.map((demand) => {
+                    const { onBan, onDelete, onLike } = demandActionsGenerator(demand)
+                    return (
+                        <DemandItem
+                            key={demand.id}
+                            demand={demand}
+                            loading={loading.includes(demand.id)}
+                            onBanClicked={onBan}
+                            onDeleteClicked={onDelete}
+                            onLikeClicked={onLike} />
+                    )
+                })}
+                <Snackbar
+                    open={popupData.open}
+                    autoHideDuration={15000}
+                    onClose={() => setPopUpData({ ...popupData, open: false })}>
+                    <Alert
+                        severity={popupData.color}
+                        sx={{ width: '100%' }}>
+                        {popupData.message}
+                    </Alert>
+                </Snackbar>
+            </Box>
+            <Fab
+                sx={{
+                    margin: 1,
+                    position: "fixed",
+                    bottom: 8,
+                    left: 8
+                }}
+                onClick={() => setDialogOpen(true)}
+                variant='extended'
+                color='primary'>
+                افزودن درخواست
+                <AddIcon sx={{ ml: 1 }} />
+            </Fab>
+        </Box>
     )
 }
