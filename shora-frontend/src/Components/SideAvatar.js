@@ -1,5 +1,6 @@
 import * as React from 'react'
 import Avatar from '@mui/material/Avatar';
+import PersonIcon from '@mui/icons-material/Person';
 import Stack from '@mui/material/Stack';
 import { userAtom } from "../Atoms/userAtom"
 import { useRecoilState } from 'recoil';
@@ -32,7 +33,8 @@ function stringAvatar(name) {
             alignSelf: 'center',
             bgcolor: stringToColor(name),
         },
-        children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+        children: <PersonIcon />,
+        // children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
     };
 }
 
