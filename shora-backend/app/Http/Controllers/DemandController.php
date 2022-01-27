@@ -54,12 +54,12 @@ class DemandController extends Controller
         $demand->likes = [];
         
         // Telegram Bot To Notif Groups
-        // $body = $demand->body;
-        // $id = $demand->id;
-        // Http::post("http://bot.shora.taha7900.ir/api/send/AAGtaU5keojVefl8dDAmU4YwVYqaR1k2YYQ", [
-        //     'body' => $body,
-        //     'id' => $id,
-        // ]);
+        $body = $demand->body;
+        $id = $demand->id;
+        Http::post("http://bot.shora.taha7900.ir/api/send/AAGtaU5keojVefl8dDAmU4YwVYqaR1k2YYQ", [
+            'body' => $body,
+            'id' => $id,
+        ]);
 
         return response()->json(['status' => 'ok', 'data' => ['demand' => DemandResource::make($demand)]]);
     }
