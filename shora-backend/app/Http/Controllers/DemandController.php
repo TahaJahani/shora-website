@@ -35,7 +35,7 @@ class DemandController extends Controller
 
     public function addDemand(Request $request) {
         $validator = Validator::make($request->all(), [
-            'body' => 'string'
+            'body' => 'string|max:500'
         ]);
 
         if ($validator->fails())

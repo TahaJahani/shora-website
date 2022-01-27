@@ -11,7 +11,7 @@ const FullWidthTextField = styled(TextField)(() => ({
 export default function AddDemandForm({ sx, onDemandAdded }) {
 
     const [loading, setLoading] = React.useState(false)
-    const [body, setBody] = React.useState();
+    const [body, setBody] = React.useState('');
     const [error, setError] = React.useState()
 
     const submitClicked = () => {
@@ -34,6 +34,8 @@ export default function AddDemandForm({ sx, onDemandAdded }) {
             <CardContent>
                 <FullWidthTextField
                     multiline rows={5}
+                    inputProps={{maxLength: 500}}
+                    helperText={`500 / ${body.length}`}
                     label="متن درخواست"
                     value={body}
                     onChange={(e) => {setError(''); setBody(e.target.value)}}

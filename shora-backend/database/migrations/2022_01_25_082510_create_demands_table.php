@@ -18,7 +18,7 @@ class CreateDemandsTable extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->enum("status", Demand::$status);
-            $table->string("body");
+            $table->string("body", 500);
             $table->timestamps();
             $table->softDeletes();
 
