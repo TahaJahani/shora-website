@@ -6,7 +6,8 @@ import likeDemand from '../AxiosCalls/Demands/likeDemand'
 import unlikeDemand from '../AxiosCalls/Demands/unlikeDemand'
 import banUser from '../AxiosCalls/Demands/banUser'
 import deleteDemand from '../AxiosCalls/Demands/deleteDemand'
-import { Alert, Backdrop, Button, CircularProgress, Dialog, Fab, Grid, Pagination, Snackbar, TextField } from '@mui/material'
+import { Alert, Backdrop, Button, CircularProgress, Dialog, Fab, Grid, Pagination, Snackbar, TextField, Paper, IconButton, InputBase } from '@mui/material'
+import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add'
 import { Box } from '@mui/system'
 
@@ -112,21 +113,24 @@ export default function DemandsPage() {
                         setDialogOpen(false);
                     }} />
             </Dialog>
-            <Grid container alignContent='center' sx={{mb: 2}}>
-                <TextField
-                    onChange={(e) => setToSearch(e.target.value)}
-                    value={toSearch}
-                    size='small'
-                    label="جستجو"
-                    variant='outlined' />
-                <Button
-                    sx={{ mr: 2 }}
-                    onClick={() => {
-                        getDemandsOfPage(1, toSearch)
-                    }}
-                    variant='contained'>
-                    جستجو
-                </Button>
+            <Grid container alignContent='center' sx={{ mb: 2 }}>
+                <Paper
+                    variant='outlined'
+                    sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: { xs: '100%', sm: '400px' } }}>
+                    <InputBase
+                        onChange={(e) => setToSearch(e.target.value)}
+                        value={toSearch}
+                        sx={{ mr: 1, flex: 1 }}
+                        placeholder="جستجو"
+                        inputProps={{ 'aria-label': 'جستجو' }} />
+                    <IconButton
+                        sx={{ p: '10px' }}
+                        onClick={() => {
+                            getDemandsOfPage(1, toSearch)
+                        }}>
+                        <SearchIcon />
+                    </IconButton>
+                </Paper>
             </Grid>
             <Grid container justifyContent="center">
                 {pageData.lastPage != 1 &&
