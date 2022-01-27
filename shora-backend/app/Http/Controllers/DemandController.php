@@ -28,7 +28,7 @@ class DemandController extends Controller
         $demands = Demand::with(['user', 'likes']);
         if ($request->search)
             $demands->where('body', 'LIKE', '%' . $request->search . '%');
-        $demands = $demands->orderBy('created_at', 'DESC')->paginate($request->limit ?? 15);
+        $demands = $demands->orderBy('created_at', 'DESC')->paginate($request->limit ?? 50);
         return response()->json(['status' => 'ok', 'data' => ['demands' => DemandResource::collection($demands), 
                 'has_next' => $demands->hasMorePages(), 'last_page' => $demands->lastPage()]]);
     }

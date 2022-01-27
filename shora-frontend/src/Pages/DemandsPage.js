@@ -6,7 +6,7 @@ import likeDemand from '../AxiosCalls/Demands/likeDemand'
 import unlikeDemand from '../AxiosCalls/Demands/unlikeDemand'
 import banUser from '../AxiosCalls/Demands/banUser'
 import deleteDemand from '../AxiosCalls/Demands/deleteDemand'
-import { Alert, Dialog, Fab, Grid, Pagination, Snackbar } from '@mui/material'
+import { Alert, Button, Dialog, Fab, Grid, Pagination, Snackbar, TextField } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import { Box } from '@mui/system'
 
@@ -17,7 +17,7 @@ export default function DemandsPage() {
         currentPage: 1,
         lastPage: 1,
     });
-
+    const [toSearch, setToSearch] = React.useState('')
     const [loading, setLoading] = React.useState([])
     const [dialogOpen, setDialogOpen] = React.useState(false)
     const [popupData, setPopUpData] = React.useState({
@@ -26,10 +26,10 @@ export default function DemandsPage() {
         color: 'success',
     })
 
-    const getDemandsOfPage = (page) => {
-        getDemands({ page: page }, (res) => {
+    const getDemandsOfPage = (page, search) => {
+        getDemands({ page: page, search: search }, (res) => {
             setPageData({
-                currentPage: 1,
+                currentPage: page,
                 lastPage: res.data.last_page
             })
             setDemands(res.data.demands)
@@ -110,15 +110,26 @@ export default function DemandsPage() {
                         setDialogOpen(false);
                     }} />
             </Dialog>
+            <Grid container alignContent='center' sx={{mb: 2}}>
+                <TextField
+                    onChange={(e) => setToSearch(e.target.value)}
+                    value={toSearch}
+                    size='small'
+                    label="جستجو"
+                    variant='outlined' />
+                <Button
+                    sx={{ mr: 2 }}
+                    onClick={() => {
+                        getDemandsOfPage(1, toSearch)
+                    }}
+                    variant='contained'>
+                    جستجو
+                </Button>
+            </Grid>
             <Grid container justifyContent="center">
                 {pageData.lastPage != 1 &&
                     <Pagination count={pageData.lastPage} onChange={changePage} size="large" shape="rounded" sx={{ marginBottom: 2 }} />}
             </Grid>
-            {/* TODO */}
-            {/* <Box>
-                <TextField label="جستجو" variant='outlined'/>
-                
-            </Box> */}
             <Box>
                 {demands.map((demand) => {
                     const { onBan, onDelete, onLike } = demandActionsGenerator(demand)

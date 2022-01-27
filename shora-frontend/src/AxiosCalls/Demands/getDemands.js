@@ -8,11 +8,11 @@ import { setRecoil } from "recoil-nexus";
 export default function getDemands(data, onSuccess, onFailure) {
 
     const user = getRecoil(userAtom)
-
+    let filteredData = Object.fromEntries(Object.entries(data).filter(([_, v]) => v && v != null && v !== ''));
     let options = {
         method: 'get',
         url: links.getDemands,
-        params: data,
+        params: filteredData,
         user: user,
     }
     authorizedAxios(options)
