@@ -6,7 +6,7 @@ import likeDemand from '../AxiosCalls/Demands/likeDemand'
 import unlikeDemand from '../AxiosCalls/Demands/unlikeDemand'
 import banUser from '../AxiosCalls/Demands/banUser'
 import deleteDemand from '../AxiosCalls/Demands/deleteDemand'
-import { Alert, Button, Dialog, Fab, Grid, Pagination, Snackbar, TextField } from '@mui/material'
+import { Alert, Backdrop, Button, CircularProgress, Dialog, Fab, Grid, Pagination, Snackbar, TextField } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import { Box } from '@mui/system'
 
@@ -16,6 +16,7 @@ export default function DemandsPage() {
     const [pageData, setPageData] = React.useState({
         currentPage: 1,
         lastPage: 1,
+        isLoading: true,
     });
     const [toSearch, setToSearch] = React.useState('')
     const [loading, setLoading] = React.useState([])
@@ -30,14 +31,15 @@ export default function DemandsPage() {
         getDemands({ page: page, search: search }, (res) => {
             setPageData({
                 currentPage: page,
-                lastPage: res.data.last_page
+                lastPage: res.data.last_page,
+                isLoading: false,
             })
             setDemands(res.data.demands)
         }, () => { })
     }
 
     const changePage = (event, value) => {
-        setPageData({ ...pageData, currentPage: value })
+        setPageData({ ...pageData, currentPage: value, isLoading: true })
         getDemandsOfPage(value)
     }
 
@@ -167,6 +169,11 @@ export default function DemandsPage() {
                 افزودن درخواست
                 <AddIcon sx={{ ml: 1 }} />
             </Fab>
+            <Backdrop
+                invisible={true}
+                open={pageData.isLoading}>
+                <CircularProgress color="primary" />
+            </Backdrop>
         </Box>
     )
 }
