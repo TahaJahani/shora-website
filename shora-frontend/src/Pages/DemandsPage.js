@@ -5,7 +5,8 @@ import getDemands from '../AxiosCalls/Demands/getDemands'
 import likeDemand from '../AxiosCalls/Demands/likeDemand'
 import unlikeDemand from '../AxiosCalls/Demands/unlikeDemand'
 import banUser from '../AxiosCalls/Demands/banUser'
-import { Box, Button, Grid, Pagination, TextField, Typography } from '@mui/material'
+import deleteDemand from '../AxiosCalls/Demands/deleteDemand'
+import { Alert, Grid, Pagination, Snackbar } from '@mui/material'
 
 export default function DemandsPage() {
 
@@ -16,7 +17,11 @@ export default function DemandsPage() {
     });
 
     const [loading, setLoading] = React.useState([])
-    const [banLoading, setBanLoading] = React.useState([])
+    const [popupData, setPopUpData] = React.useState({
+        open: false,
+        message: '',
+        color: 'success',
+    })
 
     const getDemandsOfPage = (page) => {
         getDemands({ page: page }, (res) => {
@@ -45,6 +50,45 @@ export default function DemandsPage() {
         setDemands(changedDemands)
     }
 
+    const showPopUp = (message, isSuccess) => {
+        setPopUpData({
+            open: true,
+            message: message,
+            color: isSuccess ? 'success' : 'error',
+        });
+    }
+
+    const demandActionsGenerator = (demand) => {
+        const onLike = () => {
+            const toCall = demand.is_liked ? unlikeDemand : likeDemand;
+            setLoading([...loading, demand.id])
+            toCall(demand.id, () => {
+                toggleLikedInDemand(demand.id)
+                setLoading(loading.filter((id) => id !== demand.id))
+            }, () => { })
+        }
+
+        const onBan = () => {
+            banUser(
+                demand.id,
+                (res) => showPopUp('کاربر با موفقیت مسدود شد', true),
+                (err) => showPopUp(err, false)
+            )
+        }
+
+        const onDelete = () => {
+            deleteDemand(
+                demand.id,
+                () => {
+                    showPopUp('با موفقیت حذف شد', true)
+                    setDemands(demands.filter(item => item.id !== demand.id))
+                },
+                (err) => showPopUp(err, false))
+        }
+
+        return { onBan, onDelete, onLike }
+    }
+
     React.useEffect(() => {
         getDemandsOfPage(1)
     }, [])
@@ -62,31 +106,27 @@ export default function DemandsPage() {
                 
             </Box> */}
             {demands.map((demand) => {
-                const onLike = () => {
-                    const toCall = demand.is_liked ? unlikeDemand : likeDemand;
-                    setLoading([...loading, demand.id])
-                    toCall(demand.id, () => {
-                        toggleLikedInDemand(demand.id)
-                        setLoading(loading.filter((id) => id !== demand.id))
-                    }, () => { })
-                }
-
-                const onBan = () => {
-                    setBanLoading([...banLoading, demand.id]);
-                    banUser(demand.id, () => {
-                        setBanLoading(banLoading.filter((id) => id !== demand.id))
-                    }, () => {})
-                }
+                const { onBan, onDelete, onLike } = demandActionsGenerator(demand)
                 return (
                     <DemandItem
                         key={demand.id}
                         demand={demand}
-                        banLoading={banLoading.includes(demand.id)}
                         loading={loading.includes(demand.id)}
                         onBanClicked={onBan}
+                        onDeleteClicked={onDelete}
                         onLikeClicked={onLike} />
                 )
             })}
+            <Snackbar
+                open={popupData.open}
+                autoHideDuration={15000}
+                onClose={() => setPopUpData({ ...popupData, open: false })}>
+                <Alert
+                    severity={popupData.color}
+                    sx={{ width: '100%' }}>
+                    {popupData.message}
+                </Alert>
+            </Snackbar>
         </div>
     )
 }

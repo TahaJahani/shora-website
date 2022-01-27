@@ -2,8 +2,6 @@ import authorizedAxios from "../../Helpers/authorizaedAxios";
 import links from "../../Data/Links";
 import { getRecoil } from "recoil-nexus";
 import { userAtom } from "../../Atoms/userAtom";
-import { demandsAtom } from "../../Atoms/demandsAtom";
-import { setRecoil } from "recoil-nexus";
 
 export default function deleteDemand(id, onSuccess, onFailure) {
 
@@ -12,7 +10,6 @@ export default function deleteDemand(id, onSuccess, onFailure) {
     let options = {
         method: 'delete',
         url: links.getDemands + `/${id}`,
-        params: data,
         user: user,
     }
     authorizedAxios(options)
