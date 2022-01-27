@@ -1,6 +1,4 @@
-
-// const base_url = 'https://api.shora.taha7900.ir/api';
-const base_url = process.env.BASE_URL;
+const base_url = process.env.REACT_APP_BASE_URL;
 const links = {
     'login': base_url + '/auth/login',
     'sendEmail': base_url + '/auth/send-reset-mail',
