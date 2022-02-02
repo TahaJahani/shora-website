@@ -5,8 +5,9 @@ import getDemands from '../AxiosCalls/Demands/getDemands'
 import likeDemand from '../AxiosCalls/Demands/likeDemand'
 import unlikeDemand from '../AxiosCalls/Demands/unlikeDemand'
 import banUser from '../AxiosCalls/Demands/banUser'
+import changeDemandStatus from '../AxiosCalls/Demands/changeDemandStatus'
 import deleteDemand from '../AxiosCalls/Demands/deleteDemand'
-import { Alert, Backdrop, Button, CircularProgress, Dialog, Fab, Grid, Pagination, Snackbar, TextField, Paper, IconButton, InputBase } from '@mui/material'
+import { Alert, Backdrop, CircularProgress, Dialog, Fab, Grid, Pagination, Snackbar, Paper, IconButton, InputBase } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add'
 import { Box } from '@mui/system'
@@ -93,7 +94,21 @@ export default function DemandsPage() {
                 (err) => showPopUp(err, false))
         }
 
-        return { onBan, onDelete, onLike }
+        const onChangeStatus = (selected) => {
+            changeDemandStatus({
+                demand_id: demand.id,
+                status: selected
+            }, () => {
+                showPopUp('با موفقیت انجام شد', true)
+                setDemands(demands.map(item => {
+                    if (item.id === demand.id)
+                        return {...item, status: selected}
+                    return item
+                }))
+            }, (err) => showPopUp(err, false))
+        }
+
+        return { onBan, onDelete, onLike, onChangeStatus }
     }
 
     React.useEffect(() => {
@@ -134,18 +149,19 @@ export default function DemandsPage() {
                 </Paper>
             </Grid>
             <Grid container justifyContent="center">
-                {pageData.lastPage != 1 &&
+                {pageData.lastPage !== 1 &&
                     <Pagination count={pageData.lastPage} onChange={changePage} size="large" shape="rounded" sx={{ marginBottom: 2 }} />}
             </Grid>
             <div>
                 {demands.map((demand) => {
-                    const { onBan, onDelete, onLike } = demandActionsGenerator(demand)
+                    const { onBan, onDelete, onLike, onChangeStatus } = demandActionsGenerator(demand)
                     return (
                         <DemandItem
                             key={demand.id}
                             demand={demand}
                             loading={loading.includes(demand.id)}
                             onBanClicked={onBan}
+                            onChangeStatusClicked={onChangeStatus}
                             onDeleteClicked={onDelete}
                             onLikeClicked={onLike} />
                     )

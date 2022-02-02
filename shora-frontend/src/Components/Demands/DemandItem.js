@@ -1,17 +1,21 @@
 import * as React from 'react'
 import { Card, CardActionArea, CardActions, CardContent, CardHeader, Typography, Grid, IconButton, Menu, MenuItem } from '@mui/material'
+import { NestedMenuItem } from 'mui-nested-menu'
 import { LoadingButton } from "@mui/lab"
 import translate from "../../Helpers/translate"
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import BlockIcon from '@mui/icons-material/Block';
 import { hasAccess } from "../../Helpers/UserHelper"
 
-export default function DemandItem({ demand, onLikeClicked, loading, onBanClicked, onDeleteClicked }) {
+export default function DemandItem({ demand, onLikeClicked, loading, onBanClicked, onDeleteClicked, onChangeStatusClicked }) {
 
     let statusColor = demand.status === 'rejected' ? 'error' :
         demand.status === 'accepted' ? 'green' : 'orange'
+
+    let statusChangeButtons = ['accepted', 'rejected', 'pending'].filter(item => item !== demand.status)
 
     const isAdmin = hasAccess(['owner', 'admin']);
 
@@ -27,7 +31,7 @@ export default function DemandItem({ demand, onLikeClicked, loading, onBanClicke
     return (
         <Card variant='outlined' sx={{ padding: 2, marginBottom: 2 }}>
             <CardHeader
-                action={ isAdmin && 
+                action={isAdmin &&
                     <IconButton
                         aria-label="more"
                         id="long-button"
@@ -59,8 +63,20 @@ export default function DemandItem({ demand, onLikeClicked, loading, onBanClicke
                         'aria-labelledby': 'basic-button',
                     }}
                 >
-                    <MenuItem onClick={() => {onBanClicked(); handleMenuClosed()}}>مسدود کردن کاربر</MenuItem>
-                    <MenuItem onClick={() => {onDeleteClicked(); handleMenuClosed()}}>حذف درخواست</MenuItem>
+                    <MenuItem onClick={() => { onBanClicked(); handleMenuClosed() }}>مسدود کردن کاربر</MenuItem>
+                    <MenuItem onClick={() => { onDeleteClicked(); handleMenuClosed() }}>حذف درخواست</MenuItem>
+                    <NestedMenuItem 
+                        rightIcon={<ArrowRightIcon />}
+                        label='تغییر وضعیت' 
+                        parentMenuOpen={open}>
+                        {statusChangeButtons.map(item =>
+                            <MenuItem
+                                onClick={() => { onChangeStatusClicked(item); handleMenuClosed() }}>
+                                {translate(item)}
+                            </MenuItem>
+                        )}
+                    </NestedMenuItem>
+
                 </Menu>
                 <Typography variant='h6' sx={{ marginTop: 2 }}>
                     {demand.body}
@@ -68,7 +84,7 @@ export default function DemandItem({ demand, onLikeClicked, loading, onBanClicke
             </CardContent>
             <CardActions>
                 <Grid container justifyContent="flex-end">
-                    <LoadingButton loading={loading} onClick={onLikeClicked} variant='outlined' endIcon={demand.is_liked ? <FavoriteIcon /> : <FavoriteBorderIcon />}>
+                    <LoadingButton disabled={demand.status !== 'pending'} loading={loading} onClick={onLikeClicked} variant='outlined' endIcon={demand.is_liked ? <FavoriteIcon /> : <FavoriteBorderIcon />}>
                         <Typography fontFamily="arial" fontSize="12" sx={{ paddingLeft: 2, paddingRight: 1 }}>
                             {demand.likes_count}
                         </Typography>

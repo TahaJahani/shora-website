@@ -84,7 +84,7 @@ class DemandController extends Controller
         $demandClass = addslashes(Demand::class);
         $demand = Demand::where('id', $id)
             ->whereRaw(DB::raw("id NOT IN (SELECT likeable_id FROM likes WHERE likeable_type = '$demandClass' AND likes.user_id = $userId AND likeable_id = $id)"))->first();
-        if (!$demand)
+        if (!$demand || $demand->status != Demand::PENDING)
             return response()->json(['status' => 'error', 'message' => 'درخواست مورد نظر یافت نشد']);
 
         $like = $demand->likes()->create([
