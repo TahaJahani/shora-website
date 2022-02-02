@@ -2,19 +2,26 @@ import * as React from 'react'
 import DemandItem from "../Components/Demands/DemandItem"
 import AddDemandForm from "../Components/Demands/AddDemandForm"
 import getDemands from '../AxiosCalls/Demands/getDemands'
+import getSingleDemand from '../AxiosCalls/Demands/getSingleDemand'
 import likeDemand from '../AxiosCalls/Demands/likeDemand'
 import unlikeDemand from '../AxiosCalls/Demands/unlikeDemand'
 import banUser from '../AxiosCalls/Demands/banUser'
 import changeDemandStatus from '../AxiosCalls/Demands/changeDemandStatus'
 import deleteDemand from '../AxiosCalls/Demands/deleteDemand'
-import { Alert, Backdrop, CircularProgress, Dialog, Fab, Grid, Pagination, Snackbar, Paper, IconButton, InputBase } from '@mui/material'
+import { Alert, Backdrop, CircularProgress, Dialog, Fab, Grid, Pagination, Snackbar, Paper, IconButton, InputBase, Divider } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add'
 import { Box } from '@mui/system'
+import { useParams } from "react-router-dom";
 
 export default function DemandsPage() {
 
+    const { id } = useParams();
+
+    const showSingleDemand = id && !isNaN(id);
+
     const [demands, setDemands] = React.useState([])
+    const [singleDemand, setSingleDemand] = React.useState();
     const [pageData, setPageData] = React.useState({
         currentPage: 1,
         lastPage: 1,
@@ -102,7 +109,7 @@ export default function DemandsPage() {
                 showPopUp('با موفقیت انجام شد', true)
                 setDemands(demands.map(item => {
                     if (item.id === demand.id)
-                        return {...item, status: selected}
+                        return { ...item, status: selected }
                     return item
                 }))
             }, (err) => showPopUp(err, false))
@@ -112,6 +119,11 @@ export default function DemandsPage() {
     }
 
     React.useEffect(() => {
+        if (showSingleDemand)
+            getSingleDemand(id, (res) => {
+                setSingleDemand(res.data.demand);
+                document.body.style.overflow = 'auto';
+            }, () => { })
         getDemandsOfPage(1)
     }, [])
 
@@ -148,6 +160,23 @@ export default function DemandsPage() {
                     </IconButton>
                 </Paper>
             </Grid>
+            {showSingleDemand && singleDemand &&
+                <div>
+                    <DemandItem
+                        variant='elevation'
+                        sx={{background: '#42a5f515'}}
+                        key={singleDemand.id}
+                        demand={singleDemand}
+                        loading={loading.includes(singleDemand.id)}
+                        onBanClicked={demandActionsGenerator(singleDemand).onBan}
+                        onChangeStatusClicked={demandActionsGenerator(singleDemand).onChangeStatus}
+                        onDeleteClicked={demandActionsGenerator(singleDemand).onDelete}
+                        onLikeClicked={demandActionsGenerator(singleDemand).onLike} />
+                    <Divider sx={{my: 2}}>
+                        سایر درخواست‌ها
+                    </Divider>
+                </div>
+            }
             <Grid container justifyContent="center">
                 {pageData.lastPage !== 1 &&
                     <Pagination count={pageData.lastPage} onChange={changePage} size="large" shape="rounded" sx={{ marginBottom: 2 }} />}

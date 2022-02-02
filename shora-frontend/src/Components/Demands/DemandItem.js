@@ -10,7 +10,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import BlockIcon from '@mui/icons-material/Block';
 import { hasAccess } from "../../Helpers/UserHelper"
 
-export default function DemandItem({ demand, onLikeClicked, loading, onBanClicked, onDeleteClicked, onChangeStatusClicked }) {
+export default function DemandItem({ demand, onLikeClicked, loading, variant = 'outlined', sx,onBanClicked, onDeleteClicked, onChangeStatusClicked }) {
 
     let statusColor = demand.status === 'rejected' ? 'error' :
         demand.status === 'accepted' ? 'green' : 'orange'
@@ -29,7 +29,7 @@ export default function DemandItem({ demand, onLikeClicked, loading, onBanClicke
     };
 
     return (
-        <Card variant='outlined' sx={{ padding: 2, marginBottom: 2 }}>
+        <Card variant={variant} sx={{ ...sx, padding: 2, marginBottom: 2 }}>
             <CardHeader
                 action={isAdmin &&
                     <IconButton

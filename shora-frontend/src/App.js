@@ -56,6 +56,7 @@ function App() {
                   <Route path="lost-and-found" element={<LostAndFoundPage />} />
                   <Route path="events" element={<EventsPage />}/>
                   <Route path="demands" element={<DemandsPage />} />
+                  <Route path="demands/:id" element={<DemandsPage />} />
                 </Route>
               </Route>
             </Routes>

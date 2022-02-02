@@ -79,6 +79,7 @@ Route::prefix('events')->middleware(['auth:sanctum', 'ability:owner,welfare'])->
 });
 
 Route::prefix('demands')->middleware(['auth:sanctum'])->group(function() {
+    Route::get('/{id}', [DemandController::class, 'get'])->whereNumber('id');
     Route::get('/', [DemandController::class, 'getAll']);
     Route::post('/', [DemandController::class, 'addDemand']);
     Route::post('/like/{id}', [DemandController::class, 'likeDemand'])->whereNumber('id');
