@@ -31,7 +31,7 @@ function App() {
   const theme = createTheme({
     direction: "rtl",
     typography: {
-      fontFamily: "B nazanin",
+      fontFamily: "B Nazanin",
       fontSize: 16,
     },
   })
