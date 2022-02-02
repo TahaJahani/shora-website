@@ -8,7 +8,7 @@ import unlikeDemand from '../AxiosCalls/Demands/unlikeDemand'
 import banUser from '../AxiosCalls/Demands/banUser'
 import changeDemandStatus from '../AxiosCalls/Demands/changeDemandStatus'
 import deleteDemand from '../AxiosCalls/Demands/deleteDemand'
-import { Alert, Backdrop, CircularProgress, Dialog, Fab, Grid, Pagination, Snackbar, Paper, IconButton, InputBase, Divider } from '@mui/material'
+import { Alert, Backdrop, CircularProgress, Dialog, Fab, Grid, Pagination, Snackbar, Paper, IconButton, InputBase, Divider, Menu, MenuItem } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add'
 import { Box } from '@mui/system'
@@ -164,7 +164,7 @@ export default function DemandsPage() {
                 <div>
                     <DemandItem
                         variant='elevation'
-                        sx={{background: '#42a5f515'}}
+                        sx={{ background: '#42a5f515' }}
                         key={singleDemand.id}
                         demand={singleDemand}
                         loading={loading.includes(singleDemand.id)}
@@ -172,7 +172,7 @@ export default function DemandsPage() {
                         onChangeStatusClicked={demandActionsGenerator(singleDemand).onChangeStatus}
                         onDeleteClicked={demandActionsGenerator(singleDemand).onDelete}
                         onLikeClicked={demandActionsGenerator(singleDemand).onLike} />
-                    <Divider sx={{my: 2}}>
+                    <Divider sx={{ my: 2 }}>
                         سایر درخواست‌ها
                     </Divider>
                 </div>
@@ -186,6 +186,7 @@ export default function DemandsPage() {
                     const { onBan, onDelete, onLike, onChangeStatus } = demandActionsGenerator(demand)
                     return (
                         <DemandItem
+                            onContextMenu={contextMenuCreator(demand.id)}
                             key={demand.id}
                             demand={demand}
                             loading={loading.includes(demand.id)}
