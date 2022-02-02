@@ -10,7 +10,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import BlockIcon from '@mui/icons-material/Block';
 import { hasAccess } from "../../Helpers/UserHelper"
 
-export default function DemandItem({ demand, onLikeClicked, loading, variant = 'outlined', sx,onBanClicked, onDeleteClicked, onChangeStatusClicked }) {
+export default function DemandItem({ demand, onLikeClicked, loading, variant = 'outlined', sx, onBanClicked, onDeleteClicked, onChangeStatusClicked }) {
 
     let statusColor = demand.status === 'rejected' ? 'error' :
         demand.status === 'accepted' ? 'green' : 'orange'
@@ -18,6 +18,25 @@ export default function DemandItem({ demand, onLikeClicked, loading, variant = '
     let statusChangeButtons = ['accepted', 'rejected', 'pending'].filter(item => item !== demand.status)
 
     const isAdmin = hasAccess(['owner', 'admin']);
+
+    const [contextMenu, setContextMenu] = React.useState(null);
+    const handleContextMenu = (event) => {
+        event.preventDefault();
+        setContextMenu(
+            contextMenu === null
+                ? {
+                    mouseX: event.clientX - 2,
+                    mouseY: event.clientY - 4,
+                }
+                : null,
+        );
+    }
+
+    const handleCloseContextMenu = () => {
+        setContextMenu(null);
+    };
+
+    const getDemandLink = () => process.env.REACT_APP_BASE_FRONT_URL + `home/demands/${demand.id}`
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -29,7 +48,16 @@ export default function DemandItem({ demand, onLikeClicked, loading, variant = '
     };
 
     return (
-        <Card variant={variant} sx={{ ...sx, padding: 2, marginBottom: 2 }}>
+        <Card variant={variant} sx={{ ...sx, padding: 2, marginBottom: 2 }} onContextMenu={handleContextMenu}>
+            <Menu
+                open={contextMenu !== null}
+                onClose={handleCloseContextMenu}
+                anchorReference="anchorPosition"
+                anchorPosition={
+                    contextMenu !== null ? { top: contextMenu.mouseY, left: contextMenu.mouseX } : undefined
+                }>
+                <MenuItem onClick={() => { navigator.clipboard.writeText(getDemandLink()); handleCloseContextMenu() }}>کپی لینک درخواست</MenuItem>
+            </Menu>
             <CardHeader
                 action={isAdmin &&
                     <IconButton
@@ -65,9 +93,9 @@ export default function DemandItem({ demand, onLikeClicked, loading, variant = '
                 >
                     <MenuItem onClick={() => { onBanClicked(); handleMenuClosed() }}>مسدود کردن کاربر</MenuItem>
                     <MenuItem onClick={() => { onDeleteClicked(); handleMenuClosed() }}>حذف درخواست</MenuItem>
-                    <NestedMenuItem 
+                    <NestedMenuItem
                         rightIcon={<ArrowRightIcon />}
-                        label='تغییر وضعیت' 
+                        label='تغییر وضعیت'
                         parentMenuOpen={open}>
                         {statusChangeButtons.map(item =>
                             <MenuItem
