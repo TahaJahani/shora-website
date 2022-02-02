@@ -36,6 +36,7 @@ export default function DemandsPage() {
                 isLoading: false,
             })
             setDemands(res.data.demands)
+            document.body.style.overflow = 'auto';
         }, () => { })
     }
 
@@ -136,7 +137,7 @@ export default function DemandsPage() {
                 {pageData.lastPage != 1 &&
                     <Pagination count={pageData.lastPage} onChange={changePage} size="large" shape="rounded" sx={{ marginBottom: 2 }} />}
             </Grid>
-            <Box>
+            <div>
                 {demands.map((demand) => {
                     const { onBan, onDelete, onLike } = demandActionsGenerator(demand)
                     return (
@@ -149,17 +150,17 @@ export default function DemandsPage() {
                             onLikeClicked={onLike} />
                     )
                 })}
-                <Snackbar
-                    open={popupData.open}
-                    autoHideDuration={15000}
-                    onClose={() => setPopUpData({ ...popupData, open: false })}>
-                    <Alert
-                        severity={popupData.color}
-                        sx={{ width: '100%' }}>
-                        {popupData.message}
-                    </Alert>
-                </Snackbar>
-            </Box>
+            </div>
+            <Snackbar
+                open={popupData.open}
+                autoHideDuration={15000}
+                onClose={() => setPopUpData({ ...popupData, open: false })}>
+                <Alert
+                    severity={popupData.color}
+                    sx={{ width: '100%' }}>
+                    {popupData.message}
+                </Alert>
+            </Snackbar>
             <Fab
                 sx={{
                     margin: 1,

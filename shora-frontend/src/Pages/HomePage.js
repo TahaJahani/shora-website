@@ -46,7 +46,7 @@ function HomePage(props) {
     const container = window !== undefined ? () => window().document.body : undefined;
 
     return (
-        <Box sx={{ display: 'flex', height: '100%' }}>
+        <Box sx={{ display: 'flex' }}>
             <CssBaseline />
             <AppBar sx={{ display: { sm: 'none' }, height: appBarHeight }}>
                 <Toolbar>
@@ -95,7 +95,7 @@ function HomePage(props) {
                     </Drawer>
                 </Box>
             </Box>
-            <Box component="main" sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` }, mt: {xs: `${appBarHeight}px`, sm: 0} }}>
+            <Box component="main" sx={{ p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` }, mt: {xs: `${appBarHeight}px`, sm: 0} }}>
                 <Outlet />
             </Box>
             <CompleteUserInfoDialog open={!dataIsComplete} onSuccess={(data) => {
