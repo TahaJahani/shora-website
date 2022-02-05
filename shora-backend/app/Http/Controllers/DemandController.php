@@ -19,7 +19,7 @@ class DemandController extends Controller
 {
 
     public function get($id) {
-        $demand = Demand::with('likes')->where('id', $id)->first();
+        $demand = Demand::with('likes', 'category')->where('id', $id)->first();
         if (!$demand)
             return response()->json(['status' => 'error', 'message' => 'تقاضای مورد نظر یافت نشد']);
         return response()->json(['status' => 'ok', 'data' => ['demand' => DemandResource::make($demand)]]);

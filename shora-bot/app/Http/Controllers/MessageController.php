@@ -52,7 +52,8 @@ class MessageController extends Controller
         $text = "درخواست شماره $id:\n\n";
         $text .= $body;
         $text .= "\n\n\nاین درخواست در سایت شورای صنفی دانشکده کامپیوتر ثبت شده است\n";
-        $text .= 'https://shora.taha7900.ir';
+        $text .= "لینک دسترسی به درخواست:\n";
+        $text .= "https://shora.taha7900.ir/home/demands/$id";
 
         $groups = RequestGroup::get();
         foreach($groups as $group) {

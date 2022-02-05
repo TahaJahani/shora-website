@@ -29,4 +29,8 @@ class Demand extends Model
     {
         return $this->morphMany(Like::class, 'likeable');
     }
+
+    public function category() {
+        return $this->belongsTo(DemandCategory::class, 'category_id');
+    }
 }

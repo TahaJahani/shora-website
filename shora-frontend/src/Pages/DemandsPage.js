@@ -8,7 +8,7 @@ import unlikeDemand from '../AxiosCalls/Demands/unlikeDemand'
 import banUser from '../AxiosCalls/Demands/banUser'
 import changeDemandStatus from '../AxiosCalls/Demands/changeDemandStatus'
 import deleteDemand from '../AxiosCalls/Demands/deleteDemand'
-import { Alert, Backdrop, CircularProgress, Dialog, Fab, Grid, Pagination, Snackbar, Paper, IconButton, InputBase, Divider, Menu, MenuItem } from '@mui/material'
+import { Alert, Backdrop, CircularProgress, Dialog, Fab, Grid, Pagination, Snackbar, Paper, IconButton, InputBase, Divider, Menu, MenuItem, AlertTitle, Collapse } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add'
 import { Box } from '@mui/system'
@@ -35,6 +35,7 @@ export default function DemandsPage() {
         message: '',
         color: 'success',
     })
+    const [warningOpen, setWarningOpen] = React.useState(true);
 
     const getDemandsOfPage = (page, search) => {
         getDemands({ page: page, search: search }, (res) => {
@@ -129,6 +130,18 @@ export default function DemandsPage() {
 
     return (
         <Box>
+            <Collapse in={warningOpen}>
+                <Alert
+                    sx={{ my: 2, width: { md: '400px', } }}
+                    dir='ltr'
+                    severity='error'
+                    onClose={() => setWarningOpen(false)}>
+                    <AlertTitle dir='rtl'>توجه</AlertTitle>
+                    <div dir='rtl'>
+                        لایک کردن یک درخواست به منزله این است که شما درخواست مشابه را دارید و در صورت نیاز، شماره دانشجویی، نام و نام خانوادگی شما در اختیار نهادهای مرتبط قرار خواهد گرفت
+                    </div>
+                </Alert>
+            </Collapse>
             <Dialog
                 dir='rtl'
                 open={dialogOpen}
@@ -186,7 +199,6 @@ export default function DemandsPage() {
                     const { onBan, onDelete, onLike, onChangeStatus } = demandActionsGenerator(demand)
                     return (
                         <DemandItem
-                            onContextMenu={contextMenuCreator(demand.id)}
                             key={demand.id}
                             demand={demand}
                             loading={loading.includes(demand.id)}
