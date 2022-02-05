@@ -99,6 +99,7 @@ export default function DemandItem({ demand, onLikeClicked, loading, variant = '
                         parentMenuOpen={open}>
                         {statusChangeButtons.map(item =>
                             <MenuItem
+                                key={item}
                                 onClick={() => { onChangeStatusClicked(item); handleMenuClosed() }}>
                                 {translate(item)}
                             </MenuItem>

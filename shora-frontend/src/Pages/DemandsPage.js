@@ -8,12 +8,14 @@ import unlikeDemand from '../AxiosCalls/Demands/unlikeDemand'
 import banUser from '../AxiosCalls/Demands/banUser'
 import changeDemandStatus from '../AxiosCalls/Demands/changeDemandStatus'
 import deleteDemand from '../AxiosCalls/Demands/deleteDemand'
-import { Alert, Backdrop, CircularProgress, Dialog, Fab, Grid, Pagination, Snackbar, Paper, IconButton, InputBase, Divider, Menu, MenuItem, AlertTitle, Collapse } from '@mui/material'
+import { Alert, Backdrop, CircularProgress, Dialog, Fab, Grid, Pagination, Snackbar, Paper, IconButton, InputBase, Divider, Menu, MenuItem, AlertTitle, Collapse, Autocomplete, TextField } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add'
 import { Box } from '@mui/system'
 import { useParams } from "react-router-dom";
 import getDemandCategories from '../AxiosCalls/DemandCategories/getDemandCategories'
+import { useRecoilState } from 'recoil'
+import { demandCategoryAtom } from '../Atoms/demandCategoryAtom'
 
 export default function DemandsPage() {
 
@@ -21,7 +23,11 @@ export default function DemandsPage() {
 
     const showSingleDemand = id && !isNaN(id);
 
+    const allCategories = { id: 0, name: "همه‌ی درخواست‌ها" };
+
     const [demands, setDemands] = React.useState([])
+    const [demandsCategories, setDemandsCategories] = useRecoilState(demandCategoryAtom)
+    const [selectedCategory, setSelectedCategory] = React.useState(allCategories.id)
     const [singleDemand, setSingleDemand] = React.useState();
     const [pageData, setPageData] = React.useState({
         currentPage: 1,
@@ -39,7 +45,7 @@ export default function DemandsPage() {
     const [warningOpen, setWarningOpen] = React.useState(true);
 
     const getDemandsOfPage = (page, search) => {
-        getDemands({ page: page, search: search }, (res) => {
+        getDemands({ page: page, search: search, category_id: selectedCategory }, (res) => {
             setPageData({
                 currentPage: page,
                 lastPage: res.data.last_page,
@@ -51,6 +57,7 @@ export default function DemandsPage() {
     }
 
     const changePage = (event, value) => {
+        setDemands([])
         setPageData({ ...pageData, currentPage: value, isLoading: true })
         getDemandsOfPage(value)
     }
@@ -126,8 +133,12 @@ export default function DemandsPage() {
                 setSingleDemand(res.data.demand);
                 document.body.style.overflow = 'auto';
             }, () => { })
-        getDemandsOfPage(1)
+        getDemandCategories(() => { }, () => { })
     }, [])
+
+    React.useEffect(() => {
+        changePage(1)
+    }, [selectedCategory])
 
     return (
         <Box>
@@ -155,25 +166,40 @@ export default function DemandsPage() {
                         setDialogOpen(false);
                     }} />
             </Dialog>
-            <Grid container alignContent='center' sx={{ mb: 2 }}>
-                <Paper
-                    variant='outlined'
-                    sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: { xs: '100%', sm: '400px' } }}>
-                    <InputBase
-                        onChange={(e) => setToSearch(e.target.value)}
-                        value={toSearch}
-                        sx={{ mr: 1, flex: 1 }}
-                        placeholder="جستجو"
-                        inputProps={{ 'aria-label': 'جستجو' }} />
-                    <IconButton
-                        sx={{ p: '10px' }}
-                        onClick={() => {
-                            getDemandsOfPage(1, toSearch)
-                        }}>
-                        <SearchIcon />
-                    </IconButton>
-                </Paper>
-                
+            <Grid container alignContent='center' sx={{ mb: 2 }} spacing={2}>
+                <Grid item xs={6} sm={3} md={4}>
+                    <Paper
+                        variant='outlined'
+                        sx={{ p: '5px 4px', display: 'flex', alignItems: 'center', width: '100%' }}>
+                        <InputBase
+                            onChange={(e) => setToSearch(e.target.value)}
+                            value={toSearch}
+                            sx={{ mr: 1, flex: 1 }}
+                            placeholder="جستجو"
+                            inputProps={{ 'aria-label': 'جستجو' }} />
+                        <IconButton
+                            sx={{ p: '10px' }}
+                            onClick={() => {
+                                getDemandsOfPage(1, toSearch)
+                            }}>
+                            <SearchIcon />
+                        </IconButton>
+                    </Paper>
+                </Grid>
+                <Grid item xs={6} sm={3} md={4}>
+                    <TextField
+                        value={selectedCategory}
+                        sx={{ width: '100%' }}
+                        select
+                        label="دسته‌ی درخواست"
+                        onChange={(e) => {setSelectedCategory(e.target.value)}} >
+                        {[allCategories, ...demandsCategories].map((option) => (
+                            <MenuItem key={option.id} value={option.id}>
+                                {option.name}
+                            </MenuItem>
+                        ))}
+                    </TextField>
+                </Grid>
             </Grid>
             {showSingleDemand && singleDemand &&
                 <div>

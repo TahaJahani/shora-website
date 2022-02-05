@@ -8,7 +8,7 @@ import { setRecoil } from "recoil-nexus";
 export default function getDemands(data, onSuccess, onFailure) {
 
     const user = getRecoil(userAtom)
-    let filteredData = Object.fromEntries(Object.entries(data).filter(([_, v]) => v && v != null && v !== ''));
+    let filteredData = Object.fromEntries(Object.entries(data).filter(([_, v]) => v && v != null && v !== '' && v != 0));
     let options = {
         method: 'get',
         url: links.getDemands,
