@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DemandCategoryController;
 use App\Http\Controllers\DemandController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\LikeController;
@@ -87,6 +88,10 @@ Route::prefix('demands')->middleware(['auth:sanctum'])->group(function() {
     Route::middleware(['ability:owner,admin'])->post('/ban-user/{demand_id}', [DemandController::class, 'banUser'])->whereNumber('demand_id');
     Route::middleware(['ability:owner,admin'])->delete('/{id}', [DemandController::class, 'delete'])->whereNumber('id');
     Route::middleware(['ability:owner,admin'])->post('/status', [DemandController::class, 'changeStatus']);
+
+    Route::prefix('categories')->group(function() {
+        Route::get('/', [DemandCategoryController::class, 'get']);
+    });
 });
 
 Route::get('/install', function (Request $request) {

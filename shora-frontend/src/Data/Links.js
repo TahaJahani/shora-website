@@ -26,6 +26,7 @@ const links = {
     'unlikeDemand' : base_url + "/demands/unlike",
     'banDemand': base_url + "/demands/ban-user",
     'changeDemandStatus': base_url + "/demands/status",
+    'getDemandCategories': base_url + "/demands/categories",
 }
 
 export default links;

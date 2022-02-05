@@ -13,6 +13,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add'
 import { Box } from '@mui/system'
 import { useParams } from "react-router-dom";
+import getDemandCategories from '../AxiosCalls/DemandCategories/getDemandCategories'
 
 export default function DemandsPage() {
 
@@ -172,6 +173,7 @@ export default function DemandsPage() {
                         <SearchIcon />
                     </IconButton>
                 </Paper>
+                
             </Grid>
             {showSingleDemand && singleDemand &&
                 <div>
