@@ -14,7 +14,8 @@ class AddCategoryIdToDemands extends Migration
     public function up()
     {
         Schema::table('demands', function (Blueprint $table) {
-            //
+            $table->foreignId('category_id')->default(1);
+            $table->foreign('category_id')->references('id')->on('demand_categories');
         });
     }
 

@@ -34,6 +34,7 @@ class DemandResource extends JsonResource
             'body' => $this->body,
             'likes_count' => $count,
             'is_liked' => $is_liked,
+            'category' => $this->category ? $this->category['name'] : '',
             'created_at' => $this->created_at,
         ];
     }

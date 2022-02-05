@@ -17,7 +17,7 @@ class Demand extends Model
     public static $status = ["pending", "accepted", "rejected"];
 
     protected $fillable = [
-        "status", "body", 'user_id',
+        "status", "body", 'user_id', 'category_id',
     ];
 
     public function user()
