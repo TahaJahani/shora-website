@@ -28,7 +28,7 @@ class DemandController extends Controller
     public function getAll(Request $request) {
         $validator = Validator::make($request->all(), [
             'search' => 'string',
-            'category' => 'numeric',
+            'category_id' => 'numeric',
         ]);
 
         if ($validator->fails())
@@ -37,8 +37,8 @@ class DemandController extends Controller
         $demands = Demand::with(['user', 'likes']);
         if ($request->search)
             $demands->where('body', 'LIKE', '%' . $request->search . '%');
-        if ($request->category)
-            $demands->where('category_id', $request->category);
+        if ($request->category_id)
+            $demands->where('category_id', $request->category_id);
         $demands = $demands->orderBy('created_at', 'DESC')->paginate($request->limit ?? 50);
         return response()->json(['status' => 'ok', 'data' => ['demands' => DemandResource::collection($demands), 
                 'has_next' => $demands->hasMorePages(), 'last_page' => $demands->lastPage()]]);
@@ -47,7 +47,7 @@ class DemandController extends Controller
     public function addDemand(Request $request) {
         $validator = Validator::make($request->all(), [
             'body' => 'string|max:500',
-            // 'category_id' => 'numeric|required|exists:demand_categories,id',
+            'category_id' => 'numeric|required|exists:demand_categories,id',
         ]);
 
         if ($validator->fails())
@@ -59,7 +59,7 @@ class DemandController extends Controller
         
         $demand = Demand::create([
             'user_id' => $user->id,
-            // 'category_id' => $request->category_id,
+            'category_id' => $request->category_id,
             'status' => Demand::PENDING,
             'body' => $request->body,
         ]);
