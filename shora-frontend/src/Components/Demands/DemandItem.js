@@ -72,7 +72,7 @@ export default function DemandItem({ demand, onLikeClicked, loading, variant = '
                 }
                 title={
                     <Typography variant='subtitle'>
-                        {"ثبت شده در تاریخ " + new Date(demand.created_at).toLocaleDateString("fa-IR")}
+                        {`ثبت شده در تاریخ ${new Date(demand.created_at).toLocaleDateString("fa-IR")}، در دسته‌ی ${demand.category}`}
                     </Typography>
                 }
                 subheader={
