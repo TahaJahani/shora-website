@@ -32,7 +32,7 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
             <ListItemIcon>
                 <GroupIcon />
             </ListItemIcon>
-            <ListItemText primary='کاربران' />
+            <ListItemText primary='کاربران' style={{textAlign: 'right'}} />
         </ListItem>
     )
 
@@ -43,7 +43,7 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
             <ListItemIcon>
                 <PaidIcon />
             </ListItemIcon>
-            <ListItemText primary='کرایه‌ها' />
+            <ListItemText primary='کرایه‌ها' style={{textAlign: 'right'}} />
         </ListItem>
     )
 
@@ -54,7 +54,7 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
             <ListItemIcon>
                 <LockIcon />
             </ListItemIcon>
-            <ListItemText primary='لاکرها' />
+            <ListItemText primary='لاکرها' style={{textAlign: 'right'}} />
         </ListItem>
     )
 
@@ -65,7 +65,7 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
             <ListItemIcon>
                 <CreditCardIcon />
             </ListItemIcon>
-            <ListItemText primary='تراکنش‌ها' />
+            <ListItemText primary='تراکنش‌ها' style={{textAlign: 'right'}} />
         </ListItem>
     )
 
@@ -76,7 +76,7 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
             <ListItemIcon>
                 <TravelExploreIcon />
             </ListItemIcon>
-            <ListItemText primary='اشیاء پیدا شده' />
+            <ListItemText primary='اشیاء پیدا شده' style={{textAlign: 'right'}} />
         </ListItem>
     )
 
@@ -87,7 +87,7 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
             <ListItemIcon>
                 <EventIcon />
             </ListItemIcon>
-            <ListItemText primary='رویدادها' />
+            <ListItemText primary='رویدادها' style={{textAlign: 'right'}} />
         </ListItem>
     )
 
@@ -98,7 +98,7 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
             <ListItemIcon>
                 <SchoolIcon />
             </ListItemIcon>
-            <ListItemText primary='درخواست‌ها' />
+            <ListItemText primary='درخواست‌ها' style={{textAlign: 'right'}} />
         </ListItem>
     )
 
@@ -111,7 +111,9 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
                     {lostAndFoundItem}
                     <Divider />
                     {rentsItem}
+                    <Divider />
                     {transactionsItem}
+                    <Divider />
                     {lockersItem}
                     <Divider />
                     {eventsItem}
@@ -133,7 +135,9 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
             return (
                 <div>
                     {rentsItem}
+                    <Divider />
                     {transactionsItem}
+                    <Divider />
                     {lockersItem}
                 </div>
             );
