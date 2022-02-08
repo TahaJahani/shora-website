@@ -7,6 +7,8 @@ import getLostAndFound from "../AxiosCalls/LostAndFound/getLostAndFound"
 import LostAndFoundGrid from '../Components/LostAndFound/LostAndFoundGrid';
 import { lostAndFoundAtom } from "../Atoms/lostAndFoundAtom"
 import { getRecoil, setRecoil } from 'recoil-nexus';
+import { Alert, Backdrop, CircularProgress, Dialog, Fab, Grid, Pagination, Snackbar, Paper, IconButton, InputBase, Divider, Menu, MenuItem, AlertTitle, Collapse, Autocomplete, TextField } from '@mui/material'
+import AddIcon from '@mui/icons-material/Add'
 
 export default function () {
     const [found, setFound] = useRecoilState(lostAndFoundAtom);
@@ -31,6 +33,21 @@ export default function () {
         <div>
             {hasAccess(['owner', 'admin', 'financial']) && <AddLostAndFoundForm onAdd={onAdd} />}
             <LostAndFoundGrid found={found} onRowDeleted={onRowDeleted} />
+            
+            
+            {hasAccess(['owner', 'admin', 'financial']) && <><Fab
+                sx={{
+                    margin: 1,
+                    position: "fixed",
+                    bottom: 8,
+                    left: 8
+                }}
+                // onClick={() => setDialogOpen(true)}
+                variant='extended'
+                color='primary'>
+                <AddIcon sx={{ ml: 0.5 }} />
+                ثبت شی جدید
+            </Fab></>}
         </div>
     )
 }

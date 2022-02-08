@@ -57,10 +57,7 @@ export default function LostAndFoundGrid({ found, onRowDeleted }) {
         columns.push(actionsColumn);
 
     return (
-        <Card variant="outlined" sx={{ padding: 2, margin: 2, height: '100%' }}>
-            <Typography variant="h5" mb={2}>
-                اشیای پیدا شده
-            </Typography>
+        <Card variant="outlined" sx={{ padding: 2, margin: 2, height: '100%' }} style={{borderRadius: 20}}>
             <DataGrid
                 rows={found ? found : []}
                 autoHeight={true}
