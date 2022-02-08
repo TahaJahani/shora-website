@@ -24,7 +24,7 @@ function RegisterPage(props) {
                 <div className="textCenter">
                     <Typography variant='h4' sx={{ marginBottom: 6 }}><div style={{fontWeight: 'bold', fontSize: 45, color: '#e53d00'}}>
                         {props.isForRegister == "true" ?
-                         "ثبت‌نام" 
+                         "ثبت‌ نام" 
                          : "بازیابی رمز عبور"}
                     </div></Typography>
                 </div>
@@ -69,7 +69,7 @@ function RegisterPage(props) {
                 <Grid container justifyContent='center'>
                 <Typography sx={{ my: 2, marginBottom: 0, marginTop: 5 }}>
                     {props.isForRegister == "true" ?
-                    'اگر در فرایند ثبت‌نام به مشکلی برخوردید، '
+                    'اگر در فرایند ثبت‌ نام به مشکلی برخوردید، '
                 :
                 'اگر در فرایند بازیابی رمز عبور به مشکلی برخوردید، '}
                     <Link target='_blank' href='https://docs.google.com/forms/d/e/1FAIpQLSdG1VjrwEkf4Zp9ubAL8GdLCngcdLUsGBhXhin30C2-79vyTQ/viewform?usp=sf_link'>

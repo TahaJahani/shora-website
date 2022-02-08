@@ -100,15 +100,21 @@ function LoginPage() {
                     </div>
                 <LoadingButton loading={loading} variant='contained' fullWidth onClick={loginClicked}><span style={{fontSize: 20, fontWeight: 'bold'}}>ورود</span></LoadingButton>
                 <Divider sx={{ marginY: 2, fontFamily: "B Nazanin" }}> یا </Divider>
-                <Button variant='outlined' fullWidth onClick={registerClicked}><span style={{fontSize: 20, fontWeight: 'bold'}}>بازیابی رمز عبور</span></Button>
+                <Button variant='outlined' fullWidth href="/register"><span style={{fontSize: 20, fontWeight: 'bold'}}>ثبت ‌نام</span></Button>
+            
+                <Grid container justifyContent='center' sx={{ mt: 2 }}>
+                    <Button href="/forgot-password" sx={{ mt: 2.5, mb: 0 }} startIcon={<VpnKeyIcon sx={{ ml: 1.5 }} />} variant='text'>
+                        رمز عبورم را فراموش کرده‌ام
+                    </Button>
+                </Grid>
             </Card>
-            <Grid container justifyContent='center' sx={{ mt: 2 }}>
+            {/* <Grid container justifyContent='center' sx={{ mt: 2 }}>
                 <Link href="https://shora.taha7900.ir/Shora-App.apk">
                     <Button endIcon={<DownloadIcon sx={{ mr: 1 }} />} variant='text'>
                         دانلود اپلیکیشن اندروید
                     </Button>
                 </Link>
-            </Grid>
+            </Grid> */}
         </Container>
     )
 }

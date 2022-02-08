@@ -56,6 +56,7 @@ function App() {
               <Route index={true} element={<MainPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage isForRegister="true"/>} />
+              <Route path="/forgot-password" element={<RegisterPage isForRegister="false"/>} />
               <Route path="/reset-password/:hash" element={<PasswordResetPage />} />
               <Route path="/home" element={<ProtectedRoute />}>
                 <Route path="" element={<HomePage />}>
