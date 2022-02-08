@@ -31,10 +31,11 @@ function stringAvatar(name) {
             width: 64,
             height: 64,
             alignSelf: 'center',
-            bgcolor: stringToColor(name),
+            bgcolor: "#e53d00",
+            // bgcolor: stringToColor(name),
         },
-        children: <PersonIcon />,
-        // children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+        // children: <PersonIcon />,
+        children: `${name.split(' ')[0][0]} ${name.split(' ')[1][0]}`,
     };
 }
 
