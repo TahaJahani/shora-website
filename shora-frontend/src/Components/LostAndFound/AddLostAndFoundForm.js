@@ -11,10 +11,12 @@ const rentableTypes = ['locker']//TODO: , 'book']
 
 const FullWidthAutoComplete = styled(Autocomplete)(() => ({
     width: '100%',
+    textAlign: 'right',
 }))
 
 const FullWidthTextField = styled(TextField)(() => ({
-    width: '100%'
+    width: '100%',
+    textAlign: 'right',
 }))
 
 const formatDate = (date) => {
@@ -23,7 +25,7 @@ const formatDate = (date) => {
     else return ''
 }
 
-export default function AddRentForm({ onAdd }) {
+export default function AddRentForm({ onAdd, onCancel }) {
 
     const initialData = {
         name: '',
@@ -52,7 +54,7 @@ export default function AddRentForm({ onAdd }) {
     }
 
     return (
-        <Card variant="outlined" component='form' sx={{ padding: 2, margin: 2 }}>
+        <Card variant="" component='form' sx={{ padding: 2, margin: 2 }} style={{borderRadius: 20}}>
             <Snackbar
                 anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
                 open={open}
@@ -63,30 +65,32 @@ export default function AddRentForm({ onAdd }) {
                 </Alert>
             </Snackbar>
             <Typography variant="h5">
-                ثبت اشیای پیدا شده جدید
+                ثبت شی جدید
             </Typography>
             <Grid container spacing={2} my={2}>
                 <Grid item xs={12} sm={4} md={3}>
                     <FullWidthTextField
-                        label="شی پیدا شده"
+                        placeholder="شی پیدا شده"
                         value={data.name}
                         onChange={(e) => setData({ ...data, name: e.target.value })} />
                 </Grid>
                 <Grid item xs={12} sm={4} md={3}>
                     <FullWidthTextField
-                        label="مکان پیدا شدن"
+                        placeholder="مکان پیدا شدن"
                         value={data.found_in}
                         onChange={(e) => setData({ ...data, found_in: e.target.value })} />
                 </Grid>
                 <Grid item xs={12} sm={4} md={3}>
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
-                        <DatePicker
-                            label="تاریخ پیدا شدن"
-                            inputFormat="dd/MM/yyyy"
-                            value={data.found_at}
-                            onChange={(newValue) => setData({ ...data, found_at: formatDate(newValue) })}
-                            renderInput={(params) => <TextField sx={{ width: '100%' }} {...params} />}
-                        />
+                        <span dir="ltr">
+                            <DatePicker
+                                style={{fontFamily: "Helvetica, sans-serif"}}
+                                inputFormat="yyyy-MM-dd"
+                                value={data.found_at}
+                                onChange={(newValue) => setData({ ...data, found_at: formatDate(newValue) })}
+                                renderInput={(params) => <TextField sx={{ width: '100%' }} {...params} />}
+                            />
+                        </span>
                     </LocalizationProvider>
                 </Grid>
             </Grid>
@@ -94,9 +98,16 @@ export default function AddRentForm({ onAdd }) {
                 {error}
             </Grid>
             <Grid container justifyContent='flex-end' sx={{ marginTop: 2 }}>
+                <Grid item xs={12} sm={1} md={1} justifyItems='flex-end' style={{marginLeft: 20}}>
+                    <Button variant="outlined" sx={{ width: '100%'}} onClick={() => { onCancel(); }}>
+                        <span style={{fontSize: 20, fontWeight: 'bold'}}>لغو</span>
+                    </Button>
+                </Grid>
                 <Grid item xs={12} sm={1} md={1} justifyItems='flex-end'>
+                    
+
                     <LoadingButton loading={loading} variant="contained" sx={{ width: '100%' }} onClick={submitClicked}>
-                        ثبت
+                        <span style={{fontSize: 20, fontWeight: 'bold'}}>ثبت</span>
                     </LoadingButton>
                 </Grid>
             </Grid>

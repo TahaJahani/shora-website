@@ -55,8 +55,7 @@ export default function LostAndFoundGrid({ found, onRowDeleted }) {
 
     if (hasAccess(['owner', 'financial', 'admin']))
         columns.push(actionsColumn);
-// style={{height: (document.documentElement.clientHeight > 100) ? document.documentElement.clientHeight - 100 : 100}}
-            
+         
     return (
         // <Card variant="outlined" sx={{ padding: 2, margin: 2, height: (document.documentElement.clientHeight > 120) ? document.documentElement.clientHeight - 120 : 120 }} style={{borderRadius: 20}}>
             <DataGrid

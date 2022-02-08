@@ -36,6 +36,7 @@ export default function () {
             <LostAndFoundGrid found={found} onRowDeleted={onRowDeleted}
             />
             <Dialog
+                style={{borderRadius: 20}}
                 dir='rtl'
                 open={dialogOpen}
                 onClose={() => setDialogOpen(false)}
@@ -44,7 +45,9 @@ export default function () {
                     <AddLostAndFoundForm onAdd={(newItem) => {
                         onAdd(newItem);
                         setDialogOpen(false);
-                    }} />
+                    }} 
+                    onCancel={() => { setDialogOpen(false); }}
+                    />
             </Dialog>
             
             {hasAccess(['owner', 'admin', 'financial']) && <><Fab
