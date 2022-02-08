@@ -91,11 +91,13 @@ function LoginPage() {
                     }}
                     onChange={(val) => setPassword(val.target.value)}
                     sx={{ marginBottom: 2 }} />
-                <Typography
-                    color='error'
-                    sx={{ marginBottom: 4 }}>
-                    {error}
-                </Typography>
+                    <div className="textCenter">
+                        <Typography
+                            color='error'
+                            sx={{ marginBottom: 2 }}>
+                            {error}
+                        </Typography>
+                    </div>
                 <LoadingButton loading={loading} variant='contained' fullWidth onClick={loginClicked}><span style={{fontSize: 20, fontWeight: 'bold'}}>ورود</span></LoadingButton>
                 <Divider sx={{ marginY: 2, fontFamily: "B Nazanin" }}> یا </Divider>
                 <Button variant='outlined' fullWidth onClick={registerClicked}><span style={{fontSize: 20, fontWeight: 'bold'}}>بازیابی رمز عبور</span></Button>
