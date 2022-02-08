@@ -55,16 +55,18 @@ export default function LostAndFoundGrid({ found, onRowDeleted }) {
 
     if (hasAccess(['owner', 'financial', 'admin']))
         columns.push(actionsColumn);
-
+// style={{height: (document.documentElement.clientHeight > 100) ? document.documentElement.clientHeight - 100 : 100}}
+            
     return (
-        <Card variant="outlined" sx={{ padding: 2, margin: 2, height: '100%' }} style={{borderRadius: 20}}>
+        // <Card variant="outlined" sx={{ padding: 2, margin: 2, height: (document.documentElement.clientHeight > 120) ? document.documentElement.clientHeight - 120 : 120 }} style={{borderRadius: 20}}>
             <DataGrid
                 rows={found ? found : []}
                 autoHeight={true}
                 columns={columns}
-                pageSize={10}
-                rowsPerPageOptions={[10]}
+                pageSize={20}
+                rowsPerPageOptions={[20]}
+                style={{borderRadius: 20, backgroundColor: 'white', height: (document.documentElement.clientHeight > 115) ? document.documentElement.clientHeight - 115 : 115 }}
             />
-        </Card>
+        // </Card>
     );
 }
