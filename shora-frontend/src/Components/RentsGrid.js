@@ -27,7 +27,7 @@ const columns = [
     },
     {
         field: 'locker_code',
-        headerName: 'شماره لاکر',
+        headerName: 'شماره کمد',
         width: 150,
         valueGetter: (params) => `${params.row.rentable.letter} ${params.row.rentable.number}`
     },

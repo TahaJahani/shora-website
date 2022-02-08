@@ -24,7 +24,7 @@ export default function RentDataDialog({ locker, open, onClose, onReturn, loadin
                 <DialogContent>
                     <Grid container spacing={1} mb={3}>
                         <Grid item xs={6} component='h5'>
-                            کد لاکر
+                            کد کمد
                         </Grid>
                         <Grid item xs={6}>
                             {lockerCode}

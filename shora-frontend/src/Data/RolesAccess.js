@@ -50,14 +50,14 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
     )
 
     const lockersItem = (
-        <ListItem button key='لاکرها' onClick={() => onClick('lockers')}
+        <ListItem button key='کمدها' onClick={() => onClick('lockers')}
         className="on-hover-grey"
-        style={{backgroundColor: (selectedItem == 'لاکرها') ? '#e53d0077' : 'transparent'}}
+        style={{backgroundColor: (selectedItem == 'کمدها') ? '#e53d0077' : 'transparent'}}
         >
             <ListItemIcon sx={{ml: -2}}>
                 <LockIcon />
             </ListItemIcon>
-            <ListItemText primary='لاکرها' style={{textAlign: 'right'}} />
+            <ListItemText primary='کمدها' style={{textAlign: 'right'}} />
         </ListItem>
     )
 

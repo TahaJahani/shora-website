@@ -57,7 +57,7 @@ export default function AddRentForm({rentable_id, rentable_type, onSubmit}) {
 
     const submitClicked = () => {
         if (!data.rentable_id)
-            setError('فیلد شماره لاکر اجباری است');
+            setError('فیلد شماره کمد اجباری است');
         else if (!data.amount_paid)
             setError('فیلد مبلغ پرداخت شده اجباری است');
         else {
@@ -114,10 +114,10 @@ export default function AddRentForm({rentable_id, rentable_type, onSubmit}) {
                     {data.rentable_type === 'locker' && lockers && <FullWidthAutoComplete
                         options={lockers}
                         value={selectedLocker ? selectedLocker : null}
-                        noOptionsText='لاکر یافت نشد'
+                        noOptionsText='کمد یافت نشد'
                         onChange={(e, newValue) => setData({ ...data, rentable_id: newValue ? newValue.id : null })}
                         getOptionLabel={(option) => option.letter + option.number}
-                        renderInput={(params) => <TextField {...params} label="شماره لاکر" />}
+                        renderInput={(params) => <TextField {...params} label="شماره کمد" />}
                     />}
                 </Grid>
                 <Grid item xs={12} sm={4} md={3}>
