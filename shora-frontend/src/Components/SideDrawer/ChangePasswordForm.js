@@ -1,8 +1,14 @@
-import { Dialog, TextField, DialogActions, DialogContent, DialogContentText, DialogTitle, Button, Typography, Grid } from '@mui/material'
+import { Alert, Card, Snackbar, Dialog, TextField, DialogActions, DialogContent, DialogContentText, DialogTitle, Button, Typography, Grid } from '@mui/material'
 import LoadingButton from '@mui/lab/LoadingButton';
 import DoneIcon from '@mui/icons-material/Done';
 import * as React from 'react'
 import changePassword from "../../AxiosCalls/Auth/changePassword"
+import { styled } from "@mui/material/styles";
+
+const FullWidthTextField = styled(TextField)(() => ({
+    width: '100%',
+    textAlign: 'right',
+}))
 
 export default function ChangePasswordForm({ open, onClose, onSuccess }) {
 
@@ -37,8 +43,55 @@ export default function ChangePasswordForm({ open, onClose, onSuccess }) {
     }
 
     return (
-        <Dialog open={open} onClose={onClose}>
-            <DialogTitle textAlign='right'>تغییر رمز عبور</DialogTitle>
+        <Dialog open={open} onClose={onClose} dir="rtl">
+        <Card variant="" component='form' sx={{ padding: 2, margin: 2 }} style={{borderRadius: 20}}>
+            <Typography variant="h5">
+                تغییر رمز عبور
+            </Typography>
+            <Grid container spacing={2} my={2}>
+                <Grid item xs={12} sm={4} md={3}>
+                    <FullWidthTextField
+                        placeholder="رمز عبور کنونی"
+                        value={data.old_password}
+                        onChange={(e) => setData({ ...data, old_password: e.target.value })} />
+                </Grid>
+                <Grid item xs={12} sm={4} md={3}>
+                    <FullWidthTextField
+                        placeholder="رمز عبور جدید"
+                        value={data.new_password}
+                        onChange={(e) => setData({ ...data, new_password: e.target.value })} />
+                </Grid>
+                <Grid item xs={12} sm={4} md={3}>
+                    <FullWidthTextField
+                        placeholder="تکرار رمز عبور جدید"
+                        value={data.new_password_confirmation}
+                        onChange={(e) => setData({ ...data, new_password_confirmation: e.target.value })} />
+                </Grid>
+            </Grid>
+            <Grid container color='red'>
+                {error}
+            </Grid>
+            <Grid container justifyContent='flex-end' sx={{ marginTop: 2 }}>
+                <Grid item xs={12} sm={1} md={1} justifyItems='flex-end' style={{marginLeft: 20}}>
+                    <Button variant="outlined" sx={{ width: '100%'}} onClick={() => { onClose(); }}>
+                        <span style={{fontSize: 20, fontWeight: 'bold'}}>لغو</span>
+                    </Button>
+                </Grid>
+                <Grid item xs={12} sm={1} md={1} justifyItems='flex-end'>
+                    
+
+                    <LoadingButton loading={loading} variant="contained" sx={{ width: '100%' }} onClick={submitClicked}>
+                        <span style={{fontSize: 20, fontWeight: 'bold'}}>ثبت</span>
+                    </LoadingButton>
+                </Grid>
+            </Grid>
+        </Card>
+
+
+            {/* <DialogTitle textAlign='right'>تغییر رمز عبور</DialogTitle> */}
+            {/* <Typography variant="h5">
+                تغییر رمز عبور
+            </Typography>
             <DialogContent>
                 <DialogContentText textAlign='right'>
                     برای تغییر رمز عبور، اطلاعات زیر را تکمیل کنید
@@ -84,7 +137,7 @@ export default function ChangePasswordForm({ open, onClose, onSuccess }) {
                     </LoadingButton>
                     <Button variant='text' onClick={onClose}>لغو</Button>
                 </Grid>
-            </DialogActions>
+            </DialogActions> */}
         </Dialog>
     )
 }
