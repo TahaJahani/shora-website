@@ -30,7 +30,7 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
         className="on-hover-grey"
         style={{backgroundColor: (selectedItem == 'کاربران') ? '#e53d0077' : 'transparent'}}
         >
-            <ListItemIcon>
+            <ListItemIcon sx={{ml: -2}}>
                 <GroupIcon />
             </ListItemIcon>
             <ListItemText primary='کاربران' style={{textAlign: 'right'}} />
@@ -42,7 +42,7 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
         className="on-hover-grey"
         style={{backgroundColor: (selectedItem == 'کرایه‌ها') ? '#e53d0077' : 'transparent'}}
         >
-            <ListItemIcon>
+            <ListItemIcon sx={{ml: -2}}>
                 <PaidIcon />
             </ListItemIcon>
             <ListItemText primary='کرایه‌ها' style={{textAlign: 'right'}} />
@@ -54,7 +54,7 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
         className="on-hover-grey"
         style={{backgroundColor: (selectedItem == 'لاکرها') ? '#e53d0077' : 'transparent'}}
         >
-            <ListItemIcon>
+            <ListItemIcon sx={{ml: -2}}>
                 <LockIcon />
             </ListItemIcon>
             <ListItemText primary='لاکرها' style={{textAlign: 'right'}} />
@@ -66,7 +66,7 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
         className="on-hover-grey"
         style={{backgroundColor: (selectedItem == 'تراکنش‌ها') ? '#e53d0077' : 'transparent'}}
         >
-            <ListItemIcon>
+            <ListItemIcon sx={{ml: -2}}>
                 <CreditCardIcon />
             </ListItemIcon>
             <ListItemText primary='تراکنش‌ها' style={{textAlign: 'right'}} />
@@ -78,7 +78,7 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
         className="on-hover-grey"
         style={{backgroundColor: (selectedItem == 'اشیاء پیدا شده') ? '#e53d0077' : 'transparent'}}
         >
-            <ListItemIcon>
+            <ListItemIcon sx={{ml: -2}}>
                 <TravelExploreIcon />
             </ListItemIcon>
             <ListItemText primary='اشیاء پیدا شده' style={{textAlign: 'right'}} />
@@ -90,7 +90,7 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
         className="on-hover-grey"
         style={{backgroundColor: (selectedItem == 'رویدادها') ? '#e53d0077' : 'transparent'}}
         >
-            <ListItemIcon>
+            <ListItemIcon sx={{ml: -2}}>
                 <EventIcon />
             </ListItemIcon>
             <ListItemText primary='رویدادها' style={{textAlign: 'right'}} />
@@ -102,7 +102,7 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
         className="on-hover-grey"
         style={{backgroundColor: (selectedItem == 'درخواست‌ها') ? '#e53d0077' : 'transparent'}}
         >
-            <ListItemIcon>
+            <ListItemIcon sx={{ml: -2}}>
                 <SchoolIcon />
             </ListItemIcon>
             <ListItemText primary='درخواست‌ها' style={{textAlign: 'right'}} />
