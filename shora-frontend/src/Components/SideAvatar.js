@@ -64,15 +64,19 @@ export default function SideAvatar() {
         <div>
             <Stack direction="column" mt={2}>
                 <Avatar {...stringAvatar(user.name + ' ' + user.surname)} mb={2}/>
-                <Typography variant='h6' sx={{ alignSelf: 'center' }} my={2}>
+                <Typography variant='h6' sx={{ alignSelf: 'center', fontWeight: 'bold' }} my={2}>
                     {'خوش آمدید، ' + user.name}
                 </Typography>
-                <Button variant='text' onClick={changePasswordClicked}>
-                    تغییر رمز عبور
-                </Button>
-                <Button variant='text' onClick={logoutClicked}>
-                    خروج
-                </Button>
+                <div className="textCenter">
+                    <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+                        <Button variant='text' onClick={changePasswordClicked}>
+                            تغییر رمز عبور
+                        </Button>
+                        <Button variant='text' onClick={logoutClicked}>
+                            خروج
+                        </Button>
+                    </div>
+                </div>
             </Stack>
             <ChangePasswordForm
                 open={dialogData.isOpen}
