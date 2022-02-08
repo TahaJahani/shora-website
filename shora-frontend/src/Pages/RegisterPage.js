@@ -72,7 +72,7 @@ function RegisterPage(props) {
                     'اگر در فرایند ثبت‌ نام به مشکلی برخوردید، '
                 :
                 'اگر در فرایند بازیابی رمز عبور به مشکلی برخوردید، '}
-                    <Link target='_blank' href='https://docs.google.com/forms/d/e/1FAIpQLSdG1VjrwEkf4Zp9ubAL8GdLCngcdLUsGBhXhin30C2-79vyTQ/viewform?usp=sf_link'>
+                    <Link target='_blank' href='https://docs.google.com/forms/d/e/1FAIpQLSdG1VjrwEkf4Zp9ubAL8GdLCngcdLUsGBhXhin30C2-79vyTQ/viewform?usp=sf_link' style={{textDecoration: 'none'}}>
                         این فرم
                     </Link>
                     {' را تکمیل کنید.'}
