@@ -29,11 +29,23 @@ export default function () {
         setRecoil(lostAndFoundAtom, found.filter(item => item.id !== deleted_id))
     }
 
+    const [dialogOpen, setDialogOpen] = React.useState(false);
+
     return (
         <div>
-            {hasAccess(['owner', 'admin', 'financial']) && <AddLostAndFoundForm onAdd={onAdd} />}
-            <LostAndFoundGrid found={found} onRowDeleted={onRowDeleted} />
-            
+            <LostAndFoundGrid found={found} onRowDeleted={onRowDeleted}
+            />
+            <Dialog
+                dir='rtl'
+                open={dialogOpen}
+                onClose={() => setDialogOpen(false)}
+                fullWidth={true}
+                maxWidth='md'>
+                    <AddLostAndFoundForm onAdd={(newItem) => {
+                        onAdd(newItem);
+                        setDialogOpen(false);
+                    }} />
+            </Dialog>
             
             {hasAccess(['owner', 'admin', 'financial']) && <><Fab
                 sx={{
@@ -42,7 +54,7 @@ export default function () {
                     bottom: 8,
                     left: 8
                 }}
-                // onClick={() => setDialogOpen(true)}
+                onClick={() => setDialogOpen(true)}
                 variant='extended'
                 color='primary'>
                 <AddIcon sx={{ ml: 0.5 }} />
