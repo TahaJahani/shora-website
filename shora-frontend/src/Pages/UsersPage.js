@@ -13,7 +13,7 @@ export default function () {
         getAllUsers(user, (res) => {setUsersList(res.data)}, () => {})
     }, [])
     return (
-        <div>
+        <div style={{backgroundColor: 'white', borderRadius: '20'}}>
             <UsersGrid users={usersList} />
         </div>
     )

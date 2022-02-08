@@ -35,12 +35,12 @@ export default function UsersGrid({ users, showColumns = ['id', 'name', 'surname
     // if (isOwner())
         // add one other column to remove and edit users
     return (
-        <div style={{ height: 400, width: '100%' }}>
+        <div style={{ height: (document.documentElement.clientHeight > 50) ? document.documentElement.clientHeight - 50 : 50, width: '100%' }}>
             <DataGrid
                 rows={users}
                 columns={gridColumns}
-                pageSize={5}
-                rowsPerPageOptions={[5]}
+                pageSize={20}
+                rowsPerPageOptions={[20]}
                 disableSelectionOnClick
             />
         </div>
