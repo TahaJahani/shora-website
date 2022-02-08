@@ -16,7 +16,7 @@ const dictionary = {
         'rents': 'کرایه‌ها',
         'lockers': 'لاکرها',
         'transactions': 'تراکنش‌ها',
-        'lost-and-found': 'اشیاء پیدا شده',
+        'lost-and-found': 'اشیای پیدا شده',
         'events': 'رویدادها',
         'demands': 'درخواست‌ها',
     }

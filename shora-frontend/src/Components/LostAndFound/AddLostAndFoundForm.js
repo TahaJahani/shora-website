@@ -63,7 +63,7 @@ export default function AddRentForm({ onAdd }) {
                 </Alert>
             </Snackbar>
             <Typography variant="h5">
-                ثبت اشیاء پیدا شده جدید
+                ثبت اشیای پیدا شده جدید
             </Typography>
             <Grid container spacing={2} my={2}>
                 <Grid item xs={12} sm={4} md={3}>

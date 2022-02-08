@@ -59,7 +59,7 @@ export default function LostAndFoundGrid({ found, onRowDeleted }) {
     return (
         <Card variant="outlined" sx={{ padding: 2, margin: 2, height: '100%' }}>
             <Typography variant="h5" mb={2}>
-                اشیاء پیدا شده
+                اشیای پیدا شده
             </Typography>
             <DataGrid
                 rows={found ? found : []}

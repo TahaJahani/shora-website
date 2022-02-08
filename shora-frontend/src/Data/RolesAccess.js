@@ -74,14 +74,14 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
     )
 
     const lostAndFoundItem = (
-        <ListItem button key='اشیاء پیدا شده' onClick={() => onClick('lost-and-found')}
+        <ListItem button key='اشیای پیدا شده' onClick={() => onClick('lost-and-found')}
         className="on-hover-grey"
-        style={{backgroundColor: (selectedItem == 'اشیاء پیدا شده') ? '#e53d0077' : 'transparent'}}
+        style={{backgroundColor: (selectedItem == 'اشیای پیدا شده') ? '#e53d0077' : 'transparent'}}
         >
             <ListItemIcon sx={{ml: -2}}>
                 <TravelExploreIcon />
             </ListItemIcon>
-            <ListItemText primary='اشیاء پیدا شده' style={{textAlign: 'right'}} />
+            <ListItemText primary='اشیای پیدا شده' style={{textAlign: 'right'}} />
         </ListItem>
     )
 
