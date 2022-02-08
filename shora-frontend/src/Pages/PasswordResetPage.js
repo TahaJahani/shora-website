@@ -35,7 +35,9 @@ function PasswordResetPage() {
     return (
         <Container maxWidth="sm" alignitems="center" sx={{ marginTop: 8 }}>
             <Card component='form' variant='outlined' sx={{ paddingY: 6, paddingX: 4 }}>
-                <Typography variant='h4' sx={{ marginBottom: 6 }}>بازنشانی رمز عبور</Typography>
+                <div className="textCenter">
+                    <Typography variant='h4' sx={{ marginBottom: 6 }}><div style={{fontWeight: 'bold', fontSize: 45, color: '#e53d00'}}>بازیابی رمز عبور</div></Typography>
+                </div>
                 <TextField
                     variant='outlined'
                     label='رمز عبور جدید'
