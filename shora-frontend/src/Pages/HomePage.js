@@ -27,6 +27,8 @@ function HomePage(props) {
         setMobileOpen(!mobileOpen);
     };
 
+    const [selectedItem, setSelectedItem] = React.useState("کاربران");
+
     const drawer = (
         <div>
             <SideAvatar />
@@ -34,7 +36,7 @@ function HomePage(props) {
                 <Divider />
                 {user.roles.map((role) => (
                     <div key={role}>
-                        <RolesAccess role={role} onChanged={(name) => {setTitle(name); handleDrawerToggle()}}/>
+                        <RolesAccess selectedItem={selectedItem} role={role} onChanged={(name) => {setSelectedItem(name); setTitle(name); handleDrawerToggle();}}/>
                         <Divider />
                     </div>
                 ))}

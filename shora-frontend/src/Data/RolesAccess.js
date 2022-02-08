@@ -14,17 +14,21 @@ import { Divider } from '@mui/material';
 import translate from '../Helpers/translate';
 
 
-const RolesAccess = ({ role, onChanged }) => {
+const RolesAccess = ({ role, onChanged, selectedItem }) => {
+
+    
 
     const navigate = useNavigate()
 
     const onClick = (path) => {
         onChanged(translate(path));
-        navigate(path)
+        navigate(path);
     }
 
     const usersItem = (
-        <ListItem button key='کاربران' onClick={() => onClick('users')}>
+        <ListItem button key='کاربران' onClick={() => onClick('users')}
+        style={{backgroundColor: (selectedItem == 'کاربران') ? '#e53d0077' : 'transparent'}}
+        >
             <ListItemIcon>
                 <GroupIcon />
             </ListItemIcon>
@@ -33,7 +37,9 @@ const RolesAccess = ({ role, onChanged }) => {
     )
 
     const rentsItem = (
-        <ListItem button key='کرایه‌ها' onClick={() => onClick('rents')}>
+        <ListItem button key='کرایه‌ها' onClick={() => onClick('rents')}
+        style={{backgroundColor: (selectedItem == 'کرایه‌ها') ? '#e53d0077' : 'transparent'}}
+        >
             <ListItemIcon>
                 <PaidIcon />
             </ListItemIcon>
@@ -42,7 +48,9 @@ const RolesAccess = ({ role, onChanged }) => {
     )
 
     const lockersItem = (
-        <ListItem button key='لاکرها' onClick={() => onClick('lockers')}>
+        <ListItem button key='لاکرها' onClick={() => onClick('lockers')}
+        style={{backgroundColor: (selectedItem == 'لاکرها') ? '#e53d0077' : 'transparent'}}
+        >
             <ListItemIcon>
                 <LockIcon />
             </ListItemIcon>
@@ -51,7 +59,9 @@ const RolesAccess = ({ role, onChanged }) => {
     )
 
     const transactionsItem = (
-        <ListItem button key='تراکنش‌ها' onClick={() => onClick('transactions')}>
+        <ListItem button key='تراکنش‌ها' onClick={() => onClick('transactions')}
+        style={{backgroundColor: (selectedItem == 'تراکنش‌ها') ? '#e53d0077' : 'transparent'}}
+        >
             <ListItemIcon>
                 <CreditCardIcon />
             </ListItemIcon>
@@ -60,7 +70,9 @@ const RolesAccess = ({ role, onChanged }) => {
     )
 
     const lostAndFoundItem = (
-        <ListItem button key='اشیاء پیدا شده' onClick={() => onClick('lost-and-found')}>
+        <ListItem button key='اشیاء پیدا شده' onClick={() => onClick('lost-and-found')}
+        style={{backgroundColor: (selectedItem == 'اشیاء پیدا شده') ? '#e53d0077' : 'transparent'}}
+        >
             <ListItemIcon>
                 <TravelExploreIcon />
             </ListItemIcon>
@@ -69,7 +81,9 @@ const RolesAccess = ({ role, onChanged }) => {
     )
 
     const eventsItem = (
-        <ListItem button key='رویدادها' onClick={() => onClick('events')}>
+        <ListItem button key='رویدادها' onClick={() => onClick('events')}
+        style={{backgroundColor: (selectedItem == 'رویدادها') ? '#e53d0077' : 'transparent'}}
+        >
             <ListItemIcon>
                 <EventIcon />
             </ListItemIcon>
@@ -78,7 +92,9 @@ const RolesAccess = ({ role, onChanged }) => {
     )
 
     const demandsItem = (
-        <ListItem button key='درخواست‌ها' onClick={() => onClick('demands')}>
+        <ListItem button key='درخواست‌ها' onClick={() => onClick('demands')}
+        style={{backgroundColor: (selectedItem == 'درخواست‌ها') ? '#e53d0077' : 'transparent'}}
+        >
             <ListItemIcon>
                 <SchoolIcon />
             </ListItemIcon>
