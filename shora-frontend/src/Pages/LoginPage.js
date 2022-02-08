@@ -49,9 +49,9 @@ function LoginPage() {
 
     return (
         <Container maxWidth="sm" alignitems="center" sx={{ marginTop: 8 }}>
-            <Card component='form' variant='outlined' sx={{ paddingY: 6, paddingX: 4 }}>
+            <Card component='form' sx={{ paddingY: 6, paddingX: 4 }} style={{borderRadius: 20, backgroundColor: 'rgba(255, 255, 255, 0.8)'}}>
                 <div className="textCenter">
-                    <Typography variant='h4' sx={{ marginBottom: 6 }}>ورود</Typography>
+                    <Typography variant='h4' sx={{ marginBottom: 6 }}><div style={{fontWeight: 'bold', fontSize: 45}}>ورود به سامانه</div></Typography>
                 </div>
                 <TextField
                     align='center'

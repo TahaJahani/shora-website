@@ -29,6 +29,16 @@ import DemandsPage from './Pages/DemandsPage';
 function App() {
 
   const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#e53d00',
+      },
+      secondary: {
+        light: '#ffe900',
+        main: '#ffe900',
+        contrastText: '#ffcc00',
+      },
+    },
     direction: "rtl",
     typography: {
       fontFamily: "B Nazanin",
