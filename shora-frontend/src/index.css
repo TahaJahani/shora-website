@@ -3,7 +3,7 @@
   --color2: #c8dde2;
   --color3: #d5eaf0;
 
-  --myblue: #9dcedb;
+  --my-orange: #e53d00;
 }
 
 body {
@@ -21,7 +21,7 @@ body {
   linear-gradient(150deg, var(--color2) 12%, transparent 12.5%, transparent 87%, var(--color2) 87.5%, var(--color2)),
   linear-gradient(60deg, var(--color3) 25%, transparent 25.5%, transparent 75%, var(--color3) 75%, var(--color3)), 
   linear-gradient(60deg, var(--color3) 25%, transparent 25.5%, transparent 75%, var(--color3) 75%, var(--color3));
-  background-size: 40px 70px;
+  background-size:40px 70px;
   background-position: 0 0, 0 0, 20px 35px, 20px 35px, 0 0, 20px 35px;
 }
 
