@@ -50,10 +50,13 @@ function LoginPage() {
     return (
         <Container maxWidth="sm" alignitems="center" sx={{ marginTop: 8 }}>
             <Card component='form' variant='outlined' sx={{ paddingY: 6, paddingX: 4 }}>
-                <Typography variant='h4' sx={{ marginBottom: 6 }}>ورود</Typography>
+                <div className="textCenter">
+                    <Typography variant='h4' sx={{ marginBottom: 6 }}>ورود</Typography>
+                </div>
                 <TextField
+                    align='center'
                     variant='outlined'
-                    label='شماره دانشجویی'
+                    placeholder='شماره‌ی دانش‌جویی'
                     fullWidth
                     onChange={(val) => setUsername(val.target.value)}
                     InputProps={{
@@ -67,7 +70,7 @@ function LoginPage() {
                 <TextField
                     variant='outlined'
                     type='password'
-                    label='رمز عبور'
+                    placeholder='رمز عبور'
                     fullWidth
                     InputProps={{
                         startAdornment: (
@@ -83,9 +86,9 @@ function LoginPage() {
                     sx={{ marginBottom: 4 }}>
                     {error}
                 </Typography>
-                <LoadingButton loading={loading} variant='contained' fullWidth onClick={loginClicked}>ورود</LoadingButton>
+                <LoadingButton loading={loading} variant='contained' fullWidth onClick={loginClicked}><span style={{fontSize: 20, fontWeight: 'bold'}}>ورود</span></LoadingButton>
                 <Divider sx={{ marginY: 2, fontFamily: "B Nazanin" }}> یا </Divider>
-                <Button variant='outlined' fullWidth onClick={registerClicked}>بازیابی رمز عبور</Button>
+                <Button variant='outlined' fullWidth onClick={registerClicked}><span style={{fontSize: 20, fontWeight: 'bold'}}>بازیابی رمز عبور</span></Button>
             </Card>
             <Grid container justifyContent='center' sx={{ mt: 2 }}>
                 <Link href="https://shora.taha7900.ir/Shora-App.apk">
