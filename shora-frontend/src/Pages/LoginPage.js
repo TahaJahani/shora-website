@@ -40,7 +40,15 @@ function LoginPage() {
                     navigate('/home');
                 } else {
                     setLoading(false);
-                    setError(res.data.message);
+                    if (res.data.message == "The student number field is required.") {
+                        setError("وارد کردن شماره‌ی دانش‌جویی لازم است.");
+                    } else if (res.data.message == "The password field is required.") {
+                        setError("وارد کردن کلمه‌ی عبور لازم است.");
+                    } else if (res.data.message ==  "نام کاربری یا رمز عبور نادرست می‌باشد") {
+                        setError("شماره‌ی دانش‌جویی یا کلمه‌ی عبور اشتباه است.");
+                    } else {
+                        setError("خطایی رخ داده است.");
+                    }
                 }
             });
     }
@@ -51,15 +59,17 @@ function LoginPage() {
         <Container maxWidth="sm" alignitems="center" sx={{ marginTop: 8 }}>
             <Card component='form' sx={{ paddingY: 6, paddingX: 4 }} style={{borderRadius: 20, backgroundColor: 'rgba(255, 255, 255, 0.8)'}}>
                 <div className="textCenter">
-                    <Typography variant='h4' sx={{ marginBottom: 6 }}><div style={{fontWeight: 'bold', fontSize: 45}}>ورود به سامانه</div></Typography>
+                    <Typography variant='h4' sx={{ marginBottom: 6 }}><div style={{fontWeight: 'bold', fontSize: 45, color: '#e53d00'}}>ورود به سامانه</div></Typography>
                 </div>
                 <TextField
-                    align='center'
                     variant='outlined'
                     placeholder='شماره‌ی دانش‌جویی'
                     fullWidth
                     onChange={(val) => setUsername(val.target.value)}
                     InputProps={{
+                        inputProps: {
+                            style: {textAlign: 'right',},
+                        },
                         startAdornment: (
                             <InputAdornment position="start">
                                 <AccountCircle />
