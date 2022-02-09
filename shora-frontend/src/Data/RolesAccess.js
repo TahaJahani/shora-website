@@ -123,7 +123,7 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
                     <Divider />
                     {lockersItem}
                     <Divider />
-                    {eventsItem}
+                    {/* {eventsItem} TODO */}
                     <Divider />
                     {demandsItem}
                 </div>
@@ -159,7 +159,7 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
         case 'welfare':
             return (
                 <div>
-                    {eventsItem}
+                    {/* {eventsItem} TODO */}
                 </div>
             )
         default:
