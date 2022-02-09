@@ -1,4 +1,4 @@
-import { Grid, Dialog, DialogContent, TextField, IconButton } from '@mui/material';
+import { Grid, Dialog, DialogContent, TextField, IconButton, Paper, InputBase } from '@mui/material';
 import * as React from 'react'
 import LockerItem from "./LockerItem";
 import AddRentForm from "../AddRentForm"
@@ -6,6 +6,7 @@ import RentDataDialog from './RentDataDialog';
 import finishRent from '../../AxiosCalls/Rents/finishRent'
 import { useRecoilState } from 'recoil';
 import { lockersDetailAtom } from '../../Atoms/lockresDetailAtom'
+import SearchIcon from '@mui/icons-material/Search';
 
 export default function LockerGroup() {
 
@@ -43,21 +44,21 @@ export default function LockerGroup() {
 
     return (
         <div>
-            <span dir="ltr">
-                <TextField
-                    fullWidth
-                    variant="outlined"
-                    placeholder="جست‌وجو"
-                    value={searchPredicate}
+            <Paper
+                variant='outlined'
+                sx={{ p: '5px 4px', display: 'flex', alignItems: 'center', width: '98.5%' }}
+                style={{marginBottom: 16}}>
+                <InputBase
                     onChange={(e) => setSearchPredicate(e.target.value)}
-                    style={{ marginBottom: 16, width: '98.5%', backgroundColor: 'white' }}
-                    InputProps={{
-                        inputProps: {
-                            style: { textAlign: 'center', fontSize: 20 }
-                        }
-                    }}
-                />
-              </span>
+                    value={searchPredicate}
+                    sx={{ mr: 1, flex: 1 }}
+                    placeholder="جست‌وجو"
+                    inputProps={{ 'aria-label': 'جست‌وجو', style: { fontSize: 20 } }} />
+                <IconButton
+                    sx={{ p: '10px' }} >
+                    <SearchIcon />
+                </IconButton>
+            </Paper>
 
             <Grid container spacing={2} sx={{ width: { xs: "100%", lg: "100%" }, marginRight: 'auto', marginLeft: 'auto' }}>
                 {lockers && getCurrentLockers().map((locker) => (
