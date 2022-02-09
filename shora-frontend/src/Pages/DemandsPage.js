@@ -37,6 +37,7 @@ export default function DemandsPage() {
     const [toSearch, setToSearch] = React.useState('')
     const [loading, setLoading] = React.useState([])
     const [dialogOpen, setDialogOpen] = React.useState(false)
+    const [likeDialogOpen, setLikeDialogOpen] = React.useState(false)
     const [popupData, setPopUpData] = React.useState({
         open: false,
         message: '',
@@ -141,19 +142,23 @@ export default function DemandsPage() {
     }, [selectedCategory])
 
     return (
+        <>
+        {/* <div className="textCenter">
+                <Collapse in={warningOpen}>
+                    <Alert
+                        // sx={{ my: 2, width: '100%' }}
+                        sx={{ my: 1, width: { md: '50%', } }}
+                        dir='ltr'
+                        severity='error'
+                        onClose={() => setWarningOpen(false)}>
+                        <AlertTitle dir='rtl' style={{marginRight: 10}} >توجه</AlertTitle>
+                        <div dir='rtl' style={{marginRight: 10}}>
+                            لایک کردن یک درخواست به منزله این است که شما درخواست مشابه را دارید و در صورت نیاز، شماره دانشجویی، نام و نام خانوادگی شما در اختیار نهادهای مرتبط قرار خواهد گرفت
+                        </div>
+                    </Alert>
+                </Collapse>
+        </div> */}
         <Box>
-            <Collapse in={warningOpen}>
-                <Alert
-                    sx={{ my: 2, width: { md: '400px', } }}
-                    dir='ltr'
-                    severity='error'
-                    onClose={() => setWarningOpen(false)}>
-                    <AlertTitle dir='rtl'>توجه</AlertTitle>
-                    <div dir='rtl'>
-                        لایک کردن یک درخواست به منزله این است که شما درخواست مشابه را دارید و در صورت نیاز، شماره دانشجویی، نام و نام خانوادگی شما در اختیار نهادهای مرتبط قرار خواهد گرفت
-                    </div>
-                </Alert>
-            </Collapse>
             <Dialog
                 dir='rtl'
                 open={dialogOpen}
@@ -166,8 +171,16 @@ export default function DemandsPage() {
                         setDialogOpen(false);
                     }} />
             </Dialog>
+            <Dialog
+                dir='rtl'
+                open={likeDialogOpen}
+                onClose={() => setLikeDialogOpen(false)}
+                fullWidth={true}
+                maxWidth='md'>
+                Hi
+            </Dialog>
             <Grid container alignContent='center' sx={{ mb: 2 }} spacing={2}>
-                <Grid item xs={6} sm={3} md={4}>
+                <Grid item xs={6} sm={3} md={6}>
                     <Paper
                         variant='outlined'
                         sx={{ p: '5px 4px', display: 'flex', alignItems: 'center', width: '100%' }}>
@@ -186,12 +199,11 @@ export default function DemandsPage() {
                         </IconButton>
                     </Paper>
                 </Grid>
-                <Grid item xs={6} sm={3} md={4}>
+                <Grid item xs={6} sm={3} md={6}>
                     <TextField
                         value={selectedCategory}
-                        sx={{ width: '100%' }}
+                        sx={{ width: '100%', backgroundColor: 'white' }}
                         select
-                        label="دسته‌ی درخواست"
                         onChange={(e) => {setSelectedCategory(e.target.value)}} >
                         {[allCategories, ...demandsCategories].map((option) => (
                             <MenuItem key={option.id} value={option.id}>
@@ -266,5 +278,6 @@ export default function DemandsPage() {
                 <CircularProgress color="primary" />
             </Backdrop>
         </Box>
+        </>
     )
 }
