@@ -83,16 +83,13 @@ export default function RentsGrid({ rents }) {
         columns.push(actionsColumn);
 
     return (
-        <Card variant="outlined" sx={{ padding: 2, margin: 2, height: '100%' }}>
-            <Typography variant="h5" mb={2}>
-                کرایه‌های فعال
-            </Typography>
+        <Card variant="" sx={{ padding: 2, margin: 2, height: '100%' }}>
             <DataGrid
                 rows={rents ? rents : []}
                 autoHeight={true}
                 columns={columns}
-                pageSize={5}
-                rowsPerPageOptions={[5]}
+                pageSize={20}
+                rowsPerPageOptions={[20]}
             />
             <FinishRentDialog {...dialogData} onSubmit={onSubmit} onClose={() => setDialogData({...dialogData, isOpen: false})} />
         </Card>

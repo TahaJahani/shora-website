@@ -82,7 +82,7 @@ export default function AddRentForm({rentable_id, rentable_type, onSubmit}) {
     const selectedLocker = lockers ? lockers.find(item => item.id === data.rentable_id) : null
 
     return (
-        <Card variant="outlined" component='form' sx={{ padding: 2, margin: 2 }}>
+        <Card variant="" component='form' sx={{ padding: 2, margin: 2 }}>
             <Snackbar
                 anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
                 open={open}
@@ -92,9 +92,7 @@ export default function AddRentForm({rentable_id, rentable_type, onSubmit}) {
                     با موفقیت ثبت شد
                 </Alert>
             </Snackbar>
-            <Typography variant="h5">
-                ثبت کرایه جدید
-            </Typography>
+            
             <Grid container spacing={2} my={2}>
                 <Grid item xs={12} sm={4} md={3}>
                     <FullWidthTextField

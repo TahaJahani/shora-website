@@ -1,4 +1,4 @@
-import { Grid, Dialog, DialogContent } from '@mui/material';
+import { Grid, Dialog, DialogContent, TextField, IconButton } from '@mui/material';
 import * as React from 'react'
 import LockerItem from "./LockerItem";
 import AddRentForm from "../AddRentForm"
@@ -10,6 +10,7 @@ import { lockersDetailAtom } from '../../Atoms/lockresDetailAtom'
 export default function LockerGroup() {
 
     const [lockers, setLockers] = useRecoilState(lockersDetailAtom)
+    const [searchPredicate, setSearchPredicate] = React.useState('')
     const [selectedLocker, setSelectedLocker] = React.useState();
     const [dialogOpen, setDialogOpen] = React.useState(false);
     const [rentDialogData, setRentDialogData] = React.useState({
@@ -34,11 +35,33 @@ export default function LockerGroup() {
         }, (err) => { console.log(err) })
     }
 
+    const getCurrentLockers = () => {
+        return lockers.filter((locker) => {
+            return (searchPredicate == '') || ((locker.letter.toString() + locker.number.toString()).includes(searchPredicate))
+        });
+    }
+
     return (
         <div>
-            <Grid container spacing={2} sx={{ width: { xs: "100%", lg: "50%" }, marginRight: 'auto', marginLeft: 'auto' }}>
-                {lockers && lockers.map((locker) => (
-                    <Grid item xs={4} md={4} lg={4} key={locker.id}>
+            <span dir="ltr">
+                <TextField
+                    fullWidth
+                    variant="outlined"
+                    placeholder="جست‌وجو"
+                    value={searchPredicate}
+                    onChange={(e) => setSearchPredicate(e.target.value)}
+                    style={{ marginBottom: 16, width: '98.5%', backgroundColor: 'white' }}
+                    InputProps={{
+                        inputProps: {
+                            style: { textAlign: 'center', fontSize: 20 }
+                        }
+                    }}
+                />
+              </span>
+
+            <Grid container spacing={2} sx={{ width: { xs: "100%", lg: "100%" }, marginRight: 'auto', marginLeft: 'auto' }}>
+                {lockers && getCurrentLockers().map((locker) => (
+                    <Grid item xs={2} md={2} lg={2} key={locker.id}>
                         <LockerItem locker={locker} onClick={() => { lockerClicked(locker) }} />
                     </Grid>
                 ))}
