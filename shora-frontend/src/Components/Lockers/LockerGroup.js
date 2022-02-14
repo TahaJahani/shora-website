@@ -69,7 +69,7 @@ export default function LockerGroup() {
             </Grid>
             <Dialog sx={{ direction: 'rtl' }} fullWidth maxWidth='md' open={dialogOpen} onClose={() => setDialogOpen(false)}>
                 <DialogContent>
-                    <AddRentForm rentable_id={selectedLocker ? selectedLocker.id : null} rentable_type='locker' onSubmit={() => setDialogOpen(false)} />
+                    <AddRentForm rentable_id={selectedLocker ? selectedLocker.id : null} rentable_type='locker' onSubmit={() => setDialogOpen(false)} onCancel={() => setDialogOpen(false)} />
                 </DialogContent>
             </Dialog>
             <RentDataDialog

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { hasAccess, isFinancial } from '../Helpers/UserHelper';
 import { Card, Typography, IconButton } from '@mui/material';
-import DoneIcon from '@mui/icons-material/Done';
+import DeleteIcon from '@mui/icons-material/Delete';
 import FinishRentDialog from "./FinishRentDialog"
 import finishRent from "../AxiosCalls/Rents/finishRent"
 
@@ -66,14 +66,14 @@ export default function RentsGrid({ rents }) {
         with: 150,
         renderCell: (params) => (
             <div>
-                <IconButton color="success" onClick={() => {
+                <IconButton color="error" onClick={() => {
                     setDialogData({
                         loading: false,
                         isOpen: true,
                         selectedRent: params.row,
                     })
                 }}>
-                    <DoneIcon />
+                    <DeleteIcon />
                 </IconButton>
             </div>
         ),

@@ -28,7 +28,7 @@ export default function() {
                 onClose={() => setDialogOpen(false)}
                 fullWidth={true}
                 maxWidth='md'>
-                    <AddRentForm />
+                    <AddRentForm onCancel={() => setDialogOpen(false)} />
             </Dialog>
             
             <Fab

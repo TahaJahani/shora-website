@@ -2,7 +2,7 @@ import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { Card, Typography, IconButton } from '@mui/material';
 import DoneIcon from '@mui/icons-material/Done';
-import ClearIcon from '@mui/icons-material/Clear';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { hasAccess } from '../../Helpers/UserHelper';
 import deleteLostAndFound from "../../AxiosCalls/LostAndFound/deleteLostAndFound"
 import returnLostAndFound from "../../AxiosCalls/LostAndFound/returnLostAndFound"
@@ -13,12 +13,12 @@ const columns = [
     {
         field: 'name',
         headerName: 'شی پیدا شده',
-        width: 150,
+        width: 250,
     },
     {
         field: 'found_in',
         headerName: 'مکان پیدا شدن',
-        width: 150,
+        width: 250,
     },
     {
         field: 'found_at',
@@ -35,19 +35,19 @@ export default function LostAndFoundGrid({ found, onRowDeleted }) {
         with: 150,
         renderCell: (params) => (
             <div>
-                <IconButton color="success" onClick={() => {
+                {/* <IconButton color="success" onClick={() => {
                     returnLostAndFound(params.row.id, () => {
                         onRowDeleted(params.row.id)
                     }, () => {});
                 }}>
                     <DoneIcon />
-                </IconButton>
+                </IconButton> */}
                 <IconButton color="error" onClick={() => {
                     deleteLostAndFound(params.row.id, () => {
                         onRowDeleted(params.row.id)
                     }, () => {})
                 }}>
-                    <ClearIcon />
+                    <DeleteIcon />
                 </IconButton>
             </div>
         ),

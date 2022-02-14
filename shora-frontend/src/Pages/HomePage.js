@@ -48,7 +48,11 @@ function HomePage(props) {
                     </div>
                 ))}
             </List>
-
+            {/* <div className="textCenter">
+                <Button variant='text'>
+                    درباره‌ی ما
+                </Button>
+            </div> */}
         </div>
     );
 
