@@ -34,7 +34,14 @@ function HomePage(props) {
             <SideAvatar />
             <List>
                 <Divider />
-                {user.roles.map((role) => (
+                {
+                user.roles.includes("owner") ? (
+                    <div key={"owner"}>
+                        <RolesAccess selectedItem={selectedItem} role={"owner"} onChanged={(name) => {setSelectedItem(name); setTitle(name); handleDrawerToggle();}}/>
+                        <Divider />
+                    </div>
+                 ) :
+                user.roles.map((role) => (
                     <div key={role}>
                         <RolesAccess selectedItem={selectedItem} role={role} onChanged={(name) => {setSelectedItem(name); setTitle(name); handleDrawerToggle();}}/>
                         <Divider />

@@ -141,6 +141,10 @@ export default function DemandsPage() {
         changePage(1)
     }, [selectedCategory])
 
+    const getDemands = () => {
+        return demands.filter(demand => (toSearch == '') || demand.title.toLowerCase().includes(toSearch.toLowerCase()) || demand.category.toLowerCase().includes(toSearch.toLowerCase()) || demand.body.toLowerCase().includes(toSearch.toLowerCase())) || [];
+    } 
+
     return (
         <>
         {/* <div className="textCenter">
@@ -188,8 +192,8 @@ export default function DemandsPage() {
                             onChange={(e) => setToSearch(e.target.value)}
                             value={toSearch}
                             sx={{ mr: 1, flex: 1 }}
-                            placeholder="جستجو"
-                            inputProps={{ 'aria-label': 'جستجو' }} />
+                            placeholder="جست‌وجو"
+                            inputProps={{ 'aria-label': 'جست‌وجو' }} />
                         <IconButton
                             sx={{ p: '10px' }}
                             onClick={() => {

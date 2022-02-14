@@ -34,3 +34,19 @@ code {
   font-family: "B Nazanin";
   src: local("B Nazanin"), url("./Fonts/B-Nazanin.TTF") format("truetype");
 }
+
+.MuiTablePagination-displayedRows {
+  visibility: hidden;
+}
+
+.MuiDataGrid-cell {
+  font-size: 120%;
+}
+
+.MuiDataGrid-columnHeaderTitle {
+  font-size: 120%;
+}
+
+.MuiDataGrid-overlay {
+  visibility: hidden;
+}

@@ -38,7 +38,7 @@ export default function LockerGroup() {
 
     const getCurrentLockers = () => {
         return lockers.filter((locker) => {
-            return (searchPredicate == '') || ((locker.letter.toString() + locker.number.toString()).includes(searchPredicate))
+            return (searchPredicate == '') || ((locker.letter.toString() + locker.number.toString()).toLowerCase().includes(searchPredicate.toLowerCase()))
         });
     }
 
