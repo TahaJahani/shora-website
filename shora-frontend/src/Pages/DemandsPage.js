@@ -242,7 +242,7 @@ export default function DemandsPage() {
 
             {/* <Box sx={{ overflowY: 'scroll', height: '100%' }}> */}
             {/* <ImageList variant="masonry" cols={2} gap={20} dir={"rtl"}> */}
-            <Masonry dir="rtl" columns={{ xs: 1, sm: 1, md: 2 }} spacing={2}>
+            <Masonry dir="rtl" columns={{ xs: 1, sm: 1, md: 2 }} spacing={2} sx={{marginLeft: 0}}>
                 {demands.map((demand) => {
                     const { onBan, onDelete, onLike, onChangeStatus } = demandActionsGenerator(demand)
                     return (
