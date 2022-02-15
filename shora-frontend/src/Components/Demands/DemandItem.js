@@ -107,7 +107,7 @@ export default function DemandItem({ demand, onLikeClicked, loading, variant = '
                     </NestedMenuItem>
 
                 </Menu>
-                <Typography variant='h6' sx={{ marginTop: 2, display: '-webkit-box', overflow: 'hidden', WebkitBoxOrient: 'vertical', WebkitLineClamp: 3, minHeight: 110 }}>
+                <Typography variant='h6' sx={{ marginTop: 2, display: '-webkit-box', overflow: 'hidden', WebkitBoxOrient: 'vertical', WebkitLineClamp: 5, minHeight: 185 }}>
                     {demand.body}
                 </Typography>
             </CardContent>

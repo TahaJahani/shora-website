@@ -8,7 +8,7 @@ import unlikeDemand from '../AxiosCalls/Demands/unlikeDemand'
 import banUser from '../AxiosCalls/Demands/banUser'
 import changeDemandStatus from '../AxiosCalls/Demands/changeDemandStatus'
 import deleteDemand from '../AxiosCalls/Demands/deleteDemand'
-import { Alert, Backdrop, CircularProgress, Dialog, Fab, Grid, Pagination, Snackbar, Paper, IconButton, InputBase, Divider, Menu, MenuItem, AlertTitle, Collapse, Autocomplete, TextField } from '@mui/material'
+import { Alert, ImageList, Backdrop, CircularProgress, Dialog, Fab, Grid, Pagination, Snackbar, Paper, IconButton, InputBase, Divider, Menu, MenuItem, AlertTitle, Collapse, Autocomplete, TextField } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add'
 import { Box } from '@mui/system'
@@ -238,11 +238,32 @@ export default function DemandsPage() {
                 {pageData.lastPage !== 1 &&
                     <Pagination count={pageData.lastPage} onChange={changePage} size="large" shape="rounded" sx={{ marginBottom: 2 }} />}
             </Grid>
-            <Grid container spacing={{ xs: 2, md: 1.2 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+
+            <Box sx={{ overflowY: 'scroll', height: '100%' }}>
+            <ImageList variant="masonry" cols={2} gap={1} dir={"rtl"}>
                 {demands.map((demand) => {
                     const { onBan, onDelete, onLike, onChangeStatus } = demandActionsGenerator(demand)
                     return (
-                        <Grid item xs={2} sm={4} md={4} key={demand.id}>
+                        // <Grid item xs={4} sm={8} md={6} key={demand.id}>
+                            <DemandItem  dir={"rtl"}
+                                key={demand.id}
+                                demand={demand}
+                                loading={loading.includes(demand.id)}
+                                onBanClicked={onBan}
+                                onChangeStatusClicked={onChangeStatus}
+                                onDeleteClicked={onDelete}
+                                onLikeClicked={onLike} />
+                        // </Grid>
+                    )
+                })}
+            </ImageList>
+            </Box>
+
+            {/* <Grid container spacing={{ xs: 2, md: 1.2 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                {demands.map((demand) => {
+                    const { onBan, onDelete, onLike, onChangeStatus } = demandActionsGenerator(demand)
+                    return (
+                        <Grid item xs={4} sm={8} md={6} key={demand.id}>
                             <DemandItem
                                 key={demand.id}
                                 demand={demand}
@@ -254,7 +275,7 @@ export default function DemandsPage() {
                         </Grid>
                     )
                 })}
-            </Grid>
+            </Grid> */}
             <Snackbar
                 open={popupData.open}
                 autoHideDuration={15000}
