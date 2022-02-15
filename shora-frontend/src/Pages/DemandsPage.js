@@ -8,7 +8,8 @@ import unlikeDemand from '../AxiosCalls/Demands/unlikeDemand'
 import banUser from '../AxiosCalls/Demands/banUser'
 import changeDemandStatus from '../AxiosCalls/Demands/changeDemandStatus'
 import deleteDemand from '../AxiosCalls/Demands/deleteDemand'
-import { Alert, ImageList, Backdrop, CircularProgress, Dialog, Fab, Grid, Pagination, Snackbar, Paper, IconButton, InputBase, Divider, Menu, MenuItem, AlertTitle, Collapse, Autocomplete, TextField } from '@mui/material'
+import { Masonry } from '@mui/lab';
+import { Alert, ImageList, ImageListItem, Backdrop, CircularProgress, Dialog, Fab, Grid, Pagination, Snackbar, Paper, IconButton, InputBase, Divider, Menu, MenuItem, AlertTitle, Collapse, Autocomplete, TextField } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add'
 import { Box } from '@mui/system'
@@ -239,12 +240,13 @@ export default function DemandsPage() {
                     <Pagination count={pageData.lastPage} onChange={changePage} size="large" shape="rounded" sx={{ marginBottom: 2 }} />}
             </Grid>
 
-            <Box sx={{ overflowY: 'scroll', height: '100%' }}>
-            <ImageList variant="masonry" cols={2} gap={1} dir={"rtl"}>
+            {/* <Box sx={{ overflowY: 'scroll', height: '100%' }}> */}
+            {/* <ImageList variant="masonry" cols={2} gap={20} dir={"rtl"}> */}
+            <Masonry dir="rtl" columns={{ xs: 1, sm: 1, md: 2 }} spacing={2}>
                 {demands.map((demand) => {
                     const { onBan, onDelete, onLike, onChangeStatus } = demandActionsGenerator(demand)
                     return (
-                        // <Grid item xs={4} sm={8} md={6} key={demand.id}>
+                        <ImageListItem key={demand.id} sx={{width: '100%'}}>
                             <DemandItem  dir={"rtl"}
                                 key={demand.id}
                                 demand={demand}
@@ -253,11 +255,11 @@ export default function DemandsPage() {
                                 onChangeStatusClicked={onChangeStatus}
                                 onDeleteClicked={onDelete}
                                 onLikeClicked={onLike} />
-                        // </Grid>
+                        </ImageListItem>
                     )
                 })}
-            </ImageList>
-            </Box>
+            </Masonry>
+            {/* </Box> */}
 
             {/* <Grid container spacing={{ xs: 2, md: 1.2 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                 {demands.map((demand) => {
@@ -296,8 +298,9 @@ export default function DemandsPage() {
                 onClick={() => setDialogOpen(true)}
                 variant='extended'
                 color='primary'>
+                    <AddIcon sx={{ ml: 1 }} />
                 افزودن درخواست
-                <AddIcon sx={{ ml: 1 }} />
+                
             </Fab>
             <Backdrop
                 invisible={true}

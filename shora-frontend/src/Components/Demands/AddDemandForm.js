@@ -32,8 +32,8 @@ export default function AddDemandForm({ sx, onDemandAdded }) {
     }
 
     return (
-        <Card sx={{ ...sx, padding: 2 }} elevation={2}>
-            <Typography variant='h6'>
+        <Card variant="" component='form' sx={{ ...sx, padding: 2, margin: 2 }} style={{borderRadius: 20}}>
+            <Typography variant='h5'>
                 ثبت درخواست جدید
             </Typography>
             <CardContent>

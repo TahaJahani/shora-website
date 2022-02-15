@@ -48,7 +48,7 @@ export default function DemandItem({ demand, onLikeClicked, loading, variant = '
     };
 
     return (
-        <Card variant={variant} sx={{ ...sx, padding: 2, marginBottom: 2 }} onContextMenu={handleContextMenu}>
+        <Card variant={variant} sx={{ ...sx, padding: 2, marginBottom: 2 }} onContextMenu={handleContextMenu} sx={{borderRadius: 5, padding: 2}}>
             <Menu
                 open={contextMenu !== null}
                 onClose={handleCloseContextMenu}
@@ -71,12 +71,17 @@ export default function DemandItem({ demand, onLikeClicked, loading, variant = '
                     </IconButton>
                 }
                 title={
-                    <Typography variant='subtitle'>
-                        {`ثبت شده در تاریخ ${new Date(demand.created_at).toLocaleDateString("fa-IR")}، در دسته‌ی ${demand.category}`}
-                    </Typography>
+                    <>
+                        <Typography variant='subtitle' style={{maxLines: 1, fontSize: 17}}>
+                            {`ثبت شده در تاریخ ${new Date(demand.created_at).toLocaleDateString("fa-IR")}، دسته‌ی ${demand.category}`}
+                        </Typography>
+                        {/* <Typography variant='subtitle' style={{maxLines: 1, fontSize: 15}}>
+                        {`ثبت شده در تاریخ ${new Date(demand.created_at).toLocaleDateString("fa-IR")}، دسته‌ی ${demand.category}`}
+                        </Typography> */}
+                    </>
                 }
                 subheader={
-                    <Typography variant='subtitle2' fontWeight="bold" color={statusColor}>
+                    <Typography variant='subtitle2' fontWeight="bold" color={statusColor} sx={{marginTop: 2}}>
                         {"وضعیت: " + translate(demand.status)}
                     </Typography>
                 }
@@ -107,13 +112,13 @@ export default function DemandItem({ demand, onLikeClicked, loading, variant = '
                     </NestedMenuItem>
 
                 </Menu>
-                <Typography variant='h6' sx={{ marginTop: 2, display: '-webkit-box', overflow: 'hidden', WebkitBoxOrient: 'vertical', WebkitLineClamp: 5, minHeight: 185 }}>
+                <Typography variant='h6' sx={{ marginTop: 1 }}>
                     {demand.body}
                 </Typography>
             </CardContent>
             <CardActions>
                 <Grid container justifyContent="flex-end">
-                    <LoadingButton disabled={demand.status !== 'pending'} loading={loading} onClick={onLikeClicked} variant='outlined' endIcon={demand.is_liked ? <FavoriteIcon /> : <FavoriteBorderIcon />}>
+                    <LoadingButton sx={{borderRadius: 999}} disabled={demand.status !== 'pending'} loading={loading} onClick={onLikeClicked} variant='outlined' endIcon={demand.is_liked ? <FavoriteIcon /> : <FavoriteBorderIcon />}>
                         <Typography fontFamily="arial" fontSize="12" sx={{ paddingLeft: 2, paddingRight: 1 }}>
                             {demand.likes_count}
                         </Typography>
