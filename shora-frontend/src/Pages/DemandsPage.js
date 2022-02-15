@@ -141,7 +141,7 @@ export default function DemandsPage() {
         changePage(1)
     }, [selectedCategory])
 
-    const getDemands = () => {
+    const filterDemands = () => {
         return demands.filter(demand => (toSearch == '') || demand.title.toLowerCase().includes(toSearch.toLowerCase()) || demand.category.toLowerCase().includes(toSearch.toLowerCase()) || demand.body.toLowerCase().includes(toSearch.toLowerCase())) || [];
     } 
 
@@ -238,21 +238,23 @@ export default function DemandsPage() {
                 {pageData.lastPage !== 1 &&
                     <Pagination count={pageData.lastPage} onChange={changePage} size="large" shape="rounded" sx={{ marginBottom: 2 }} />}
             </Grid>
-            <div>
+            <Grid container spacing={{ xs: 2, md: 1.2 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                 {demands.map((demand) => {
                     const { onBan, onDelete, onLike, onChangeStatus } = demandActionsGenerator(demand)
                     return (
-                        <DemandItem
-                            key={demand.id}
-                            demand={demand}
-                            loading={loading.includes(demand.id)}
-                            onBanClicked={onBan}
-                            onChangeStatusClicked={onChangeStatus}
-                            onDeleteClicked={onDelete}
-                            onLikeClicked={onLike} />
+                        <Grid item xs={2} sm={4} md={4} key={demand.id}>
+                            <DemandItem
+                                key={demand.id}
+                                demand={demand}
+                                loading={loading.includes(demand.id)}
+                                onBanClicked={onBan}
+                                onChangeStatusClicked={onChangeStatus}
+                                onDeleteClicked={onDelete}
+                                onLikeClicked={onLike} />
+                        </Grid>
                     )
                 })}
-            </div>
+            </Grid>
             <Snackbar
                 open={popupData.open}
                 autoHideDuration={15000}
