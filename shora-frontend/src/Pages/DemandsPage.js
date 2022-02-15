@@ -186,7 +186,7 @@ export default function DemandsPage({setSelectedItem}) {
                 Hi
             </Dialog>
             <Grid container alignContent='center' sx={{ mb: 2 }} spacing={2}>
-                <Grid item xs={6} sm={3} md={6}>
+                <Grid item xs={6} sm={6} md={6}>
                     <Paper
                         variant='outlined'
                         sx={{ p: '5px 4px', display: 'flex', alignItems: 'center', width: '100%' }}>
@@ -205,7 +205,7 @@ export default function DemandsPage({setSelectedItem}) {
                         </IconButton>
                     </Paper>
                 </Grid>
-                <Grid item xs={6} sm={3} md={6}>
+                <Grid item xs={6} sm={6} md={6}>
                     <TextField
                         value={selectedCategory}
                         sx={{ width: '100%', backgroundColor: 'white' }}
