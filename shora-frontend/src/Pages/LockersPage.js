@@ -4,11 +4,12 @@ import getLockersList from "../AxiosCalls/Lockers/getLockersList"
 import LockerGroup from "../Components/Lockers/LockerGroup"
 import { useRecoilState } from 'recoil';
 
-export default function () {
+export default function ({setSelectedItem}) {
 
     const [lockers, setLockers] = useRecoilState(lockersDetailAtom)
 
     React.useEffect(() => {
+        setSelectedItem('کمدها');
         getLockersList((res) => {
             setLockers(res.data.lockers);
         }, () => { })

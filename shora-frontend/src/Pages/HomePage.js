@@ -27,8 +27,6 @@ function HomePage(props) {
         setMobileOpen(!mobileOpen);
     };
 
-    const [selectedItem, setSelectedItem] = React.useState("کاربران");
-
     const drawer = (
         <div>
             <SideAvatar />
@@ -37,13 +35,13 @@ function HomePage(props) {
                 {
                 user.roles.includes("owner") ? (
                     <div key={"owner"}>
-                        <RolesAccess selectedItem={selectedItem} role={"owner"} onChanged={(name) => {setSelectedItem(name); setTitle(name); handleDrawerToggle();}}/>
+                        <RolesAccess selectedItem={props.selectedItem} role={"owner"} onChanged={(name) => {setTitle(name); handleDrawerToggle();}}/>
                         <Divider />
                     </div>
                  ) :
                 user.roles.map((role) => (
                     <div key={role}>
-                        <RolesAccess selectedItem={selectedItem} role={role} onChanged={(name) => {setSelectedItem(name); setTitle(name); handleDrawerToggle();}}/>
+                        <RolesAccess selectedItem={props.selectedItem} role={role} onChanged={(name) => {setTitle(name); handleDrawerToggle();}}/>
                         <Divider />
                     </div>
                 ))}
@@ -98,7 +96,7 @@ function HomePage(props) {
                         {drawer}
                     </Drawer>
                     </Collapse>
-                    <Collapse orientation="horizontal" in={mobileOpen}>
+                    {/* <Collapse orientation="horizontal" in={mobileOpen}> */}
                     <Drawer
                          transitionDuration={0}
                         anchor='right'
@@ -111,7 +109,7 @@ function HomePage(props) {
                     >
                         {drawer}
                     </Drawer>
-                    </Collapse>
+                    {/* </Collapse> */}
                 </Box>
             </Box>
             <Box component="main" sx={{ p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` }, mt: {xs: `${appBarHeight}px`, sm: 0} }}>

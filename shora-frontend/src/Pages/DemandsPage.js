@@ -18,7 +18,7 @@ import getDemandCategories from '../AxiosCalls/DemandCategories/getDemandCategor
 import { useRecoilState } from 'recoil'
 import { demandCategoryAtom } from '../Atoms/demandCategoryAtom'
 
-export default function DemandsPage() {
+export default function DemandsPage({setSelectedItem}) {
 
     const { id } = useParams();
 
@@ -130,6 +130,7 @@ export default function DemandsPage() {
     }
 
     React.useEffect(() => {
+        setSelectedItem('درخواست‌ها');
         if (showSingleDemand)
             getSingleDemand(id, (res) => {
                 setSingleDemand(res.data.demand);

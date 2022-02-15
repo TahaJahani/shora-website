@@ -7,11 +7,12 @@ import { Alert, Backdrop, CircularProgress, Dialog, Fab, Grid, Pagination, Snack
 import getRents from "../AxiosCalls/Rents/getRents"
 import AddIcon from '@mui/icons-material/Add'
 
-export default function() {
+export default function({setSelectedItem}) {
 
     const [rents, setRents] = useRecoilState(rentsAtom)
 
     React.useEffect(() => {
+        setSelectedItem('کرایه‌ها');
         if (!rents)
             getRents((res) => setRents(res.data.rents))
     }, []);

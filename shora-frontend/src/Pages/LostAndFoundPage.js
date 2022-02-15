@@ -10,10 +10,11 @@ import { getRecoil, setRecoil } from 'recoil-nexus';
 import { Alert, Backdrop, CircularProgress, Dialog, Fab, Grid, Pagination, Snackbar, Paper, IconButton, InputBase, Divider, Menu, MenuItem, AlertTitle, Collapse, Autocomplete, TextField } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 
-export default function () {
+export default function ({setSelectedItem}) {
     const [found, setFound] = useRecoilState(lostAndFoundAtom);
 
     React.useEffect(() => {
+        setSelectedItem('اشیای پیدا شده');
         if (!found) {
             getLostAndFound((res) => {
                 setFound(res.data.lost_and_found);

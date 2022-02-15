@@ -44,7 +44,9 @@ function App() {
       fontFamily: "B Nazanin",
       fontSize: 16,
     },
-  })
+  });
+
+  const [selectedItem, setSelectedItem] = React.useState("کاربران");
 
   return (
     <CookiesProvider>
@@ -59,14 +61,14 @@ function App() {
               <Route path="/forgot-password" element={<RegisterPage isForRegister="false"/>} />
               <Route path="/reset-password/:hash" element={<PasswordResetPage />} />
               <Route path="/home" element={<ProtectedRoute />}>
-                <Route path="" element={<HomePage />}>
-                  <Route path="users" element={<UsersPage />} />
-                  <Route path="rents" element={<RentsPage />} />
-                  <Route path="lockers" element={<LockersPage />} />
-                  <Route path="transactions" element={<TransactionsPage />} />
-                  <Route path="lost-and-found" element={<LostAndFoundPage />} />
-                  <Route path="events" element={<EventsPage />}/>
-                  <Route path="demands" element={<DemandsPage />} />
+                <Route path="" element={<HomePage selectedItem={selectedItem} setSelectedItem={setSelectedItem} />}>
+                  <Route path="users" element={<UsersPage setSelectedItem={setSelectedItem} />} />
+                  <Route path="rents" element={<RentsPage setSelectedItem={setSelectedItem} />} />
+                  <Route path="lockers" element={<LockersPage setSelectedItem={setSelectedItem} />} />
+                  <Route path="transactions" element={<TransactionsPage setSelectedItem={setSelectedItem} />} />
+                  <Route path="lost-and-found" element={<LostAndFoundPage setSelectedItem={setSelectedItem} />} />
+                  <Route path="events" element={<EventsPage setSelectedItem={setSelectedItem} />}/>
+                  <Route path="demands" element={<DemandsPage setSelectedItem={setSelectedItem} />} />
                   <Route path="demands/:id" element={<DemandsPage />} />
                 </Route>
               </Route>
@@ -86,7 +88,7 @@ function ProtectedRoute() {
     setUser(userCookie.user)
     return (
       <div>
-        <h2>Loading...</h2>
+        {/* <h2>Loading...</h2> */}
       </div>
     )
   }
