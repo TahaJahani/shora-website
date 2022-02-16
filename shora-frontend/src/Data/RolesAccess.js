@@ -28,7 +28,7 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
     const usersItem = (
         <ListItem button key='اعضای شورا' onClick={() => onClick('users')}
         className="on-hover-grey"
-        style={{backgroundColor: (selectedItem == 'اعضای شورا') ? '#e53d0077' : 'transparent'}}
+        style={{backgroundColor: (selectedItem == 'اعضای شورا') ? '#e55c0077' : 'transparent'}}
         >
             <ListItemIcon sx={{ml: -2}}>
                 <GroupIcon />
@@ -40,7 +40,7 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
     const rentsItem = (
         <ListItem button key='کرایه‌ها' onClick={() => onClick('rents')}
         className="on-hover-grey"
-        style={{backgroundColor: (selectedItem == 'کرایه‌ها') ? '#e53d0077' : 'transparent'}}
+        style={{backgroundColor: (selectedItem == 'کرایه‌ها') ? '#e55c0077' : 'transparent'}}
         >
             <ListItemIcon sx={{ml: -2}}>
                 <PaidIcon />
@@ -52,7 +52,7 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
     const lockersItem = (
         <ListItem button key='کمدها' onClick={() => onClick('lockers')}
         className="on-hover-grey"
-        style={{backgroundColor: (selectedItem == 'کمدها') ? '#e53d0077' : 'transparent'}}
+        style={{backgroundColor: (selectedItem == 'کمدها') ? '#e55c0077' : 'transparent'}}
         >
             <ListItemIcon sx={{ml: -2}}>
                 <LockIcon />
@@ -64,7 +64,7 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
     const transactionsItem = (
         <ListItem button key='تراکنش‌ها' onClick={() => onClick('transactions')}
         className="on-hover-grey"
-        style={{backgroundColor: (selectedItem == 'تراکنش‌ها') ? '#e53d0077' : 'transparent'}}
+        style={{backgroundColor: (selectedItem == 'تراکنش‌ها') ? '#e55c0077' : 'transparent'}}
         >
             <ListItemIcon sx={{ml: -2}}>
                 <CreditCardIcon />
@@ -76,7 +76,7 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
     const lostAndFoundItem = (
         <ListItem button key='اشیای پیدا شده' onClick={() => onClick('lost-and-found')}
         className="on-hover-grey"
-        style={{backgroundColor: (selectedItem == 'اشیای پیدا شده') ? '#e53d0077' : 'transparent'}}
+        style={{backgroundColor: (selectedItem == 'اشیای پیدا شده') ? '#e55c0077' : 'transparent'}}
         >
             <ListItemIcon sx={{ml: -2}}>
                 <TravelExploreIcon />
@@ -88,7 +88,7 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
     const eventsItem = (
         <ListItem button key='رویدادها' onClick={() => onClick('events')}
         className="on-hover-grey"
-        style={{backgroundColor: (selectedItem == 'رویدادها') ? '#e53d0077' : 'transparent'}}
+        style={{backgroundColor: (selectedItem == 'رویدادها') ? '#e55c0077' : 'transparent'}}
         >
             <ListItemIcon sx={{ml: -2}}>
                 <EventIcon />
@@ -100,7 +100,7 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
     const demandsItem = (
         <ListItem button key='درخواست‌ها' onClick={() => onClick('demands')}
         className="on-hover-grey"
-        style={{backgroundColor: (selectedItem == 'درخواست‌ها') ? '#e53d0077' : 'transparent'}}
+        style={{backgroundColor: (selectedItem == 'درخواست‌ها') ? '#e55c0077' : 'transparent'}}
         >
             <ListItemIcon sx={{ml: -2}}>
                 <SchoolIcon />

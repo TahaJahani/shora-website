@@ -79,7 +79,7 @@ function LoginPage() {
             <Container maxWidth="sm" alignitems="center" sx={{ marginTop: 4, marginBottom: 2 }}>
                 <Card component='form' sx={{ paddingY: 6, paddingX: 4 }} style={{borderRadius: 20, backgroundColor: 'rgba(255, 255, 255, 0.8)'}}>
                     <div className="textCenter">
-                        <Typography variant='h4' sx={{ marginBottom: 6 }}><div style={{fontWeight: 'bold', fontSize: 45, color: '#e53d00'}}>ورود به سامانه</div></Typography>
+                        <Typography variant='h4' sx={{ marginBottom: 6 }}><div style={{fontWeight: 'bold', fontSize: 45, color: '#e55c00'}}>ورود به سامانه</div></Typography>
                     </div>
                     <TextField
                         variant='outlined'

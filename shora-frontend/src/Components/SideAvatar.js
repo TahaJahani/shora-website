@@ -31,7 +31,7 @@ function stringAvatar(name) {
             width: 64,
             height: 64,
             alignSelf: 'center',
-            bgcolor: "#e53d00",
+            bgcolor: "#e55c00",
             // bgcolor: stringToColor(name),
         },
         // children: <PersonIcon />,

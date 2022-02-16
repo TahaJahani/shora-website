@@ -1,9 +1,17 @@
 :root {
-  --color1: #9dcedb;
-  --color2: #c8dde2;
-  --color3: #d5eaf0;
+  --color1: white;
+  --color2: #d6d586;
+  --color3: #d1a588;
 
-  --my-orange: #e53d00;
+  /* --color1: #9dcedb;
+  --color2: #c8dde2;
+  --color3: #d5eaf0; */
+
+
+  --my-orange: #e55c00;
+
+  --bg-primary: #c0ebfa;
+  --bg-secondary: #7FD7F5;
 }
 
 body {
@@ -14,7 +22,14 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  background-color: var(--color1);
+  background: radial-gradient(1.5em 6.28571em at 1.95em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(1.5em 6.28571em at -0.45em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 1.5em 5.5em, radial-gradient(2.3em 4.57143em at 2.99em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.3) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(2.3em 4.57143em at -0.69em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.3) 55%, rgba(255, 255, 255, 0) 55%) 2.3em 4em, radial-gradient(3.5em 6.28571em at 4.55em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(3.5em 6.28571em at -1.05em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 3.5em 5.5em,
+  radial-gradient(rgb(226, 206, 115),rgb(245, 222, 93));
+  /* radial-gradient(rgb(253, 224, 94),rgb(248, 220, 59)); */
+  background-color: mediumspringgreen;
+  background-size: 1.5em 11em, 1.5em 11em, 2.3em 8em, 2.3em 8em, 3.5em 11em, 3.5em 11em, 100% 100%;
+  background-repeat: repeat;
+
+  /* background-color: var(--color1);
   background-image: linear-gradient(30deg, var(--color2) 12%, transparent 12.5%, transparent 87%, var(--color2) 87.5%, var(--color2)),
   linear-gradient(150deg, var(--color2) 12%, transparent 12.5%, transparent 87%, var(--color2) 87.5%, var(--color2)),
   linear-gradient(30deg, var(--color2) 12%, transparent 12.5%, transparent 87%, var(--color2) 87.5%, var(--color2)),
@@ -22,7 +37,7 @@ body {
   linear-gradient(60deg, var(--color3) 25%, transparent 25.5%, transparent 75%, var(--color3) 75%, var(--color3)), 
   linear-gradient(60deg, var(--color3) 25%, transparent 25.5%, transparent 75%, var(--color3) 75%, var(--color3));
   background-size:40px 70px;
-  background-position: 0 0, 0 0, 20px 35px, 20px 35px, 0 0, 20px 35px;
+  background-position: 0 0, 0 0, 20px 35px, 20px 35px, 0 0, 20px 35px; */
 }
 
 code {
