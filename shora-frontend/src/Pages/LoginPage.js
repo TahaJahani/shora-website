@@ -38,7 +38,7 @@ function LoginPage() {
                     setLoading(false);
                     setUserCookie('user', JSON.stringify(res.data.data.user))
                     setUser(res.data.data.user)
-                    navigate('/home');
+                    navigate('/home/demands');
                 } else {
                     setLoading(false);
                     if (res.data.message == "The student number field is required.") {

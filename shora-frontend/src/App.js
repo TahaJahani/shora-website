@@ -46,7 +46,7 @@ function App() {
     },
   });
 
-  const [selectedItem, setSelectedItem] = React.useState("کاربران");
+  const [selectedItem, setSelectedItem] = React.useState("اعضای شورا");
 
   return (
     <CookiesProvider>
