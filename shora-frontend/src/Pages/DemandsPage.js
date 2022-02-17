@@ -194,7 +194,7 @@ export default function DemandsPage({setSelectedItem}) {
                 <Grid item xs={6} sm={6} md={6}>
                     <Paper
                         variant='outlined'
-                        sx={{ p: '5px 4px', display: 'flex', alignItems: 'center', width: '100%' }}
+                        sx={{ p: '5px 4px', display: 'flex', alignItems: 'center', width: '100%'}}
                         className={"demand-card-bg"}>
                         <InputBase
                             onChange={(e) => setToSearch(e.target.value)}
