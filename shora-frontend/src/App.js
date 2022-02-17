@@ -27,9 +27,9 @@ import LostAndFoundPage from "./Pages/LostAndFoundPage";
 import DemandsPage from './Pages/DemandsPage';
 
 function App() {
-
-  const theme = createTheme({
+  const lightTheme = createTheme({
     palette: {
+      mode: 'light',
       primary: {
         main: '#e55c00',
       },
@@ -46,11 +46,40 @@ function App() {
     },
   });
 
+  const darkTheme = createTheme({
+    palette: {
+      mode: 'dark',
+      primary: {
+        main: '#e55c00',
+      },
+      secondary: {
+        light: '#ffe900',
+        main: '#ffe900',
+        contrastText: '#ffcc00',
+      },
+    },
+    direction: "rtl",
+    typography: {
+      fontFamily: "B Nazanin",
+      fontSize: 16,
+    },
+  });
+
+  const [theme, setTheme] = React.useState('light');
+
   const [selectedItem, setSelectedItem] = React.useState("اعضای شورا");
+
+  React.useEffect(() => {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => setTheme(e.matches ? 'dark' : 'light'));
+    setTheme(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+    return () => {
+      window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', () => { });
+    }
+  }, []);
 
   return (
     <CookiesProvider>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme == 'light' ? lightTheme : darkTheme}>
         <div dir='rtl'>
           <RecoilRoot>
             <RecoilNexus />
