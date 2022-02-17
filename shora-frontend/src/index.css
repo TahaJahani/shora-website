@@ -61,7 +61,8 @@ body {
   }
 
   .on-hover-grey:hover {
-    background-color: #d8c9c9 !important;
+    background-color: #ddd3be !important;
+    transition: all 0.25s;
   }
 }
 
