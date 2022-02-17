@@ -143,8 +143,13 @@ export default function DemandsPage({setSelectedItem}) {
         changePage(1)
     }, [selectedCategory])
 
-    const filterDemands = () => {
-        return demands.filter(demand => (toSearch == '') || demand.title.toLowerCase().includes(toSearch.toLowerCase()) || demand.category.toLowerCase().includes(toSearch.toLowerCase()) || demand.body.toLowerCase().includes(toSearch.toLowerCase())) || [];
+    const filteredDemands = () => {
+        return demands.filter(demand => {
+            if (toSearch == '') return true;
+            if (demand["category"].toLowerCase().includes(toSearch.toLowerCase())) return true;
+            if (demand["body"].toLowerCase().includes(toSearch.toLowerCase())) return true;
+            return false;
+        })
     } 
 
     return (
@@ -247,7 +252,7 @@ export default function DemandsPage({setSelectedItem}) {
             {/* <ImageList variant="masonry" cols={2} gap={20} dir={"rtl"}> */}
             <div style={{marginLeft: -15}}>
             <Masonry dir="rtl" columns={{ xs: 1, sm: 1, md: 2 }} spacing={2}>
-                {demands.map((demand) => {
+                {filteredDemands().map((demand) => {
                     const { onBan, onDelete, onLike, onChangeStatus } = demandActionsGenerator(demand)
                     return (
                         <ImageListItem key={demand.id} sx={{width: '100%'}}>

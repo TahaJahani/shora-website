@@ -60,8 +60,17 @@ body {
     background-color: #ffffffcc !important;    
   }
 
+  .MuiPaper-root {
+    background-color: #ffffffcc !important;
+  }
+
   .on-hover-grey:hover {
     background-color: #ddd3be !important;
+    transition: all 0.25s;
+  }
+
+  .on-hover-light-grey:hover {
+    background-color: #ebe6dc !important;
     transition: all 0.25s;
   }
 }
@@ -80,8 +89,18 @@ body {
     background-color: #000000cc !important;
   }
 
+  .MuiPaper-root {
+    background-color: #000000cc !important;
+  }
+
   .on-hover-grey:hover {
     background-color: #494747 !important;
+    transition: all 0.25s;
+  }
+
+  .on-hover-light-grey:hover {
+    background-color: #383636 !important;
+    transition: all 0.25s;
   }
 }
 
