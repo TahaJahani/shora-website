@@ -51,6 +51,36 @@ body {
   width: 100%;
 } */
 
+.option-picker {
+  margin-right: 10px;
+}
+
+.submit-button {
+  margin-right: 5px;
+  width: 120%;
+}
+
+@media (max-width: 599px) {
+  .center-details-in-small {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media (min-width: 600px) {
+  .option-picker {
+    margin-right: 15px;
+  }
+
+  .submit-button {
+    margin-left: 20px;
+    margin-right: 0;
+    width: 100%;
+  }
+}
+
 @media (prefers-color-scheme: light) {
   body {
     background: radial-gradient(1.5em 6.28571em at 1.95em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(1.5em 6.28571em at -0.45em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 1.5em 5.5em, radial-gradient(2.3em 4.57143em at 2.99em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.3) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(2.3em 4.57143em at -0.69em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.3) 55%, rgba(255, 255, 255, 0) 55%) 2.3em 4em, radial-gradient(3.5em 6.28571em at 4.55em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(3.5em 6.28571em at -1.05em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 3.5em 5.5em,
@@ -68,9 +98,14 @@ body {
     color: #000000;
   }
 
+  .MuiPaper-root {
+    background-image: none !important;
+  }
+
   @media (min-width: 600px) {
-    .MuiPaper-root {
+    .MuiPaper-root.MuiPaper-elevation.MuiDrawer-paper.MuiDrawer-paperAnchorRight.MuiDrawer-paperAnchorDockedRight {
       background-color: #ffffffcc !important;
+      background-image: none !important;
     }
   }
 
@@ -103,9 +138,14 @@ body {
     color: #ffffff;
   }
 
+  .MuiPaper-root {
+    background-image: none !important;
+  }
+
   @media (min-width: 600px) {
-    .MuiPaper-root {
+    .MuiPaper-root.MuiPaper-elevation.MuiDrawer-paper.MuiDrawer-paperAnchorRight.MuiDrawer-paperAnchorDockedRight {
       background-color: #000000cc !important;
+      background-image: none !important;
     }
   }
 
@@ -144,4 +184,12 @@ code {
 
 .MuiDataGrid-overlay {
   visibility: hidden;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-transition: "color 999999999999999999s ease-out, background-color 999999999999999999s ease-out";
+    -webkit-transition-delay: 999999999999999999s;
 }

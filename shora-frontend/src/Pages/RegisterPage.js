@@ -10,7 +10,26 @@ function RegisterPage(props) {
     const [error, setError] = React.useState();
     const [loading, setLoading] = React.useState(false);
 
+    // https://stackoverflow.com/questions/41348459/regex-in-react-email-validation
+    const isEmail = (val) => {
+        let regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (!regEmail.test(val)){
+          return false;
+        }
+        return true;
+    }
+
     const sendClicked = async () => {
+        if (email == null || email == "") {
+            setError("لطفا ایمیل خود را وارد نمایید.")
+            return;
+        }
+
+        if (!isEmail(email)) {
+            setError("لطفا ایمیل معتبری را وارد نمایید.")
+            return;
+        }
+
         setLoading(true)
         sendEmail(email, () => {
             setLoading(false)
@@ -20,7 +39,7 @@ function RegisterPage(props) {
 
     return (
         <Container maxWidth="sm" alignitems="center" sx={{ marginTop: 8 }}>
-            <Card component='form' sx={{ paddingY: 6, paddingX: 4 }} style={{borderRadius: 20, backgroundColor: 'rgba(255, 255, 255, 0.8)'}}>
+            <Card component='form' sx={{ paddingY: 6, paddingX: 4 }} style={{borderRadius: 20}} className={"demand-card-bg"}>
                 <div className="textCenter">
                     <Typography variant='h4' sx={{ marginBottom: 6 }}><div style={{fontWeight: 'bold', fontSize: 45, color: '#e55c00'}}>
                         {props.isForRegister == "true" ?
@@ -51,7 +70,9 @@ function RegisterPage(props) {
                 <Typography
                     color='error'
                     sx={{ marginBottom: 4 }}>
-                    {error}
+                        <span style={{textAlign: 'center'}} className="textCenter">
+                            {error}
+                        </span>
                 </Typography>
                 <LoadingButton
                     variant='contained'
