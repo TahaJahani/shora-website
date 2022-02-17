@@ -47,13 +47,14 @@ export default function LockerGroup() {
             <Paper
                 variant='outlined'
                 sx={{ p: '5px 4px', display: 'flex', alignItems: 'center', width: '98.5%' }}
-                style={{marginBottom: 16}}>
+                style={{marginBottom: 16}}
+                className={"demand-card-bg"}>
                 <InputBase
                     onChange={(e) => setSearchPredicate(e.target.value)}
                     value={searchPredicate}
                     sx={{ mr: 1, flex: 1 }}
                     placeholder="جست‌وجو"
-                    inputProps={{ 'aria-label': 'جست‌وجو', style: { fontSize: 20 } }} />
+                    inputProps={{'aria-label': 'جست‌وجو', style: { fontSize: 20 } }} />
                 <IconButton
                     sx={{ p: '10px' }} >
                     <SearchIcon />
