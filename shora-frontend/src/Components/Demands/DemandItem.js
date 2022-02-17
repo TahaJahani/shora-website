@@ -112,7 +112,7 @@ export default function DemandItem({ demand, onLikeClicked, loading, variant = '
                     </NestedMenuItem>
 
                 </Menu>
-                <Typography variant='h6' sx={{ marginTop: 1 }}>
+                <Typography variant='h6' sx={{ marginTop: 1, textAlign: 'justify', textAlignLast: 'right' }}>
                     {demand.body}
                 </Typography>
             </CardContent>
