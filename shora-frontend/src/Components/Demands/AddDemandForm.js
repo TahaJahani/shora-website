@@ -41,7 +41,7 @@ export default function AddDemandForm({ sx, onDemandAdded }) {
                     multiline rows={5}
                     inputProps={{ maxLength: 500 }}
                     helperText={`500 / ${body.length}`}
-                    label="متن درخواست"
+                    placeholder="متن درخواست"
                     value={body}
                     onChange={(e) => { setError(''); setBody(e.target.value) }}
                     sx={{ marginBottom: 2 }} />
@@ -54,7 +54,9 @@ export default function AddDemandForm({ sx, onDemandAdded }) {
                             value={selectedCategory}
                             select
                             label="دسته‌ی درخواست"
-                            onChange={(e) => { setSelectedCategory(e.target.value) }} >
+                            onChange={(e) => { setSelectedCategory(e.target.value) }}
+                            style={{marginRight: 15}}
+                            >
                             {demandsCategories.map((option) => (
                                 <MenuItem key={option.id} value={option.id}>
                                     {option.name}
@@ -62,11 +64,18 @@ export default function AddDemandForm({ sx, onDemandAdded }) {
                             ))}
                         </FullWidthTextField>
                     </Grid>
-                    <Grid item xs={12} md={1} sm={2}>
+                    {/* <Grid item xs={12} md={1} sm={2}>
                     <LoadingButton sx={{width: '100%'}} loading={loading} variant='contained' onClick={submitClicked}>
                         ثبت
                     </LoadingButton>
-                    </Grid>
+                    </Grid> */}
+                    <Grid item xs={12} sm={1} md={1} justifyItems='flex-end' style={{marginLeft: 20}}>
+                    
+
+                    <LoadingButton loading={loading} variant="contained" sx={{ width: '100%' }} onClick={submitClicked}>
+                        <span style={{fontSize: 20, fontWeight: 'bold'}}>ثبت</span>
+                    </LoadingButton>
+                </Grid>
                 </Grid>
             </CardActions>
         </Card>

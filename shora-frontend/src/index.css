@@ -59,6 +59,10 @@ body {
   .demand-card-bg {
     background-color: #ffffffcc !important;    
   }
+
+  .on-hover-grey:hover {
+    background-color: #d8c9c9 !important;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -73,6 +77,10 @@ body {
 
   .demand-card-bg {
     background-color: #000000cc !important;
+  }
+
+  .on-hover-grey:hover {
+    background-color: #494747 !important;
   }
 }
 
