@@ -83,7 +83,7 @@ export default function RentsGrid({ rents }) {
         columns.push(actionsColumn);
 
     return (
-        <Card variant="" sx={{ padding: 2, margin: 2, height: '100%' }}>
+        <Card variant="" sx={{ padding: 2, margin: 2, height: '100%' }} style={{borderRadius: 20}} className={"demand-card-bg"}>
             <DataGrid
                 rows={rents ? rents : []}
                 autoHeight={true}
