@@ -112,7 +112,8 @@ function HomePage(props) {
                     {/* </Collapse> */}
                 </Box>
             </Box>
-            <Box component="main" sx={{ p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` }, mt: {xs: `${appBarHeight}px`, sm: 0} }}>
+            {/* <Box component="main" sx={{ p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` }, mt: {xs: `${appBarHeight}px`, sm: 0} }}> */}
+            <Box component="main" sx={{ p: 3, width: '100%', mt: {xs: `${appBarHeight}px`, sm: 0} }}>
                 <Outlet />
             </Box>
             <CompleteUserInfoDialog open={!dataIsComplete} onSuccess={(data) => {

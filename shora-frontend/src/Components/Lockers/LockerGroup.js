@@ -63,7 +63,7 @@ export default function LockerGroup() {
 
             <Grid container spacing={2} sx={{ width: { xs: "100%", lg: "100%" }, marginRight: 'auto', marginLeft: 'auto' }}>
                 {lockers && getCurrentLockers().map((locker) => (
-                    <Grid item xs={2} md={2} lg={2} key={locker.id}>
+                    <Grid item xs={12} md={4} lg={2} key={locker.id}>
                         <LockerItem locker={locker} onClick={() => { lockerClicked(locker) }} />
                     </Grid>
                 ))}
