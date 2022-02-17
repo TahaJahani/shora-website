@@ -17,6 +17,7 @@ import { useParams } from "react-router-dom";
 import getDemandCategories from '../AxiosCalls/DemandCategories/getDemandCategories'
 import { useRecoilState } from 'recoil'
 import { demandCategoryAtom } from '../Atoms/demandCategoryAtom'
+import { ListItemIcon } from '@mui/material';
 
 export default function DemandsPage({setSelectedItem}) {
 
@@ -188,7 +189,7 @@ export default function DemandsPage({setSelectedItem}) {
                 onClose={() => setLikeDialogOpen(false)}
                 fullWidth={true}
                 maxWidth='md'>
-                Hi
+                &nbsp;
             </Dialog>
             <Grid container alignContent='center' sx={{ mb: 2 }} spacing={2}>
                 <Grid item xs={6} sm={6} md={6}>
@@ -298,6 +299,20 @@ export default function DemandsPage({setSelectedItem}) {
                     {popupData.message}
                 </Alert>
             </Snackbar>
+
+            
+            {/* <Fab
+                sx={{
+                    margin: 1,
+                    position: "fixed",
+                    bottom: 8,
+                    left: 180
+                }}
+                onClick={() => setDialogOpen(true)}
+                variant='extended'
+                color='primary'>
+                    <AddIcon />
+            </Fab> */}
             <Fab
                 sx={{
                     margin: 1,

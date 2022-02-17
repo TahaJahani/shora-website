@@ -64,6 +64,10 @@ body {
     background-color: #ffffffcc !important;    
   }
 
+  .text-color {
+    color: #000000;
+  }
+
   @media (min-width: 600px) {
     .MuiPaper-root {
       background-color: #ffffffcc !important;
@@ -93,6 +97,10 @@ body {
 
   .demand-card-bg {
     background-color: #000000cc !important;
+  }
+
+  .text-color {
+    color: #ffffff;
   }
 
   @media (min-width: 600px) {
