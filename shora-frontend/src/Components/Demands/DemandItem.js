@@ -81,7 +81,7 @@ export default function DemandItem({ demand, onLikeClicked, loading, variant = '
                     </>
                 }
                 subheader={
-                    <Typography variant='subtitle2' fontWeight="bold" color={statusColor} sx={{marginTop: 2}}>
+                    <Typography variant='subtitle2' fontWeight="bold" color={statusColor} sx={{marginTop: 2, fontSize: 20}}>
                         {"وضعیت: " + translate(demand.status)}
                     </Typography>
                 }
