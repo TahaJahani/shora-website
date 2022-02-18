@@ -17,7 +17,12 @@ export default function ({setSelectedItem}) {
         setSelectedItem('اشیای پیدا شده');
         if (!found) {
             getLostAndFound((res) => {
-                setFound(res.data.lost_and_found);
+                setFound(res.data.lost_and_found.map(item => {
+                    return {
+                        ...item,
+                        found_at: (new Date(item.found_at)).toLocaleDateString('fa-IR'),
+                    };   
+                }));
             }, () => { })
         }
     }, [])
