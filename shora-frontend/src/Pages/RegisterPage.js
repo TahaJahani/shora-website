@@ -88,7 +88,7 @@ function RegisterPage(props) {
                 <Button variant='outlined' fullWidth href='/login'><span style={{fontSize: 20, fontWeight: 'bold'}}>بازگشت به صفحه‌ی ورود</span></Button>
             
                 <Grid container justifyContent='center'>
-                <Typography sx={{ my: 2, marginBottom: 0, marginTop: 5 }}>
+                <Typography sx={{ my: 2, marginBottom: 0, marginTop: 5, textAlign: 'center' }}>
                     {props.isForRegister == "true" ?
                     'اگر در فرایند ثبت‌ نام به مشکلی برخوردید، '
                 :

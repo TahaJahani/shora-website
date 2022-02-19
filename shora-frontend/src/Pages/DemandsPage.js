@@ -164,21 +164,6 @@ export default function DemandsPage({setSelectedItem}) {
 
     return (
         <>
-        {/* <div className="textCenter">
-                <Collapse in={warningOpen}>
-                    <Alert
-                        // sx={{ my: 2, width: '100%' }}
-                        sx={{ my: 1, width: { md: '50%', } }}
-                        dir='ltr'
-                        severity='error'
-                        onClose={() => setWarningOpen(false)}>
-                        <AlertTitle dir='rtl' style={{marginRight: 10}} >توجه</AlertTitle>
-                        <div dir='rtl' style={{marginRight: 10}}>
-                            لایک کردن یک درخواست به منزله این است که شما درخواست مشابه را دارید و در صورت نیاز، شماره دانشجویی، نام و نام خانوادگی شما در اختیار نهادهای مرتبط قرار خواهد گرفت
-                        </div>
-                    </Alert>
-                </Collapse>
-        </div> */}
         <Box>
             <Dialog
                 dir='rtl'
@@ -258,10 +243,8 @@ export default function DemandsPage({setSelectedItem}) {
                     <Pagination count={pageData.lastPage} onChange={changePage} size="large" shape="rounded" sx={{ marginBottom: 2 }} />}
             </Grid>
 
-            {/* <Box sx={{ overflowY: 'scroll', height: '100%' }}> */}
-            {/* <ImageList variant="masonry" cols={2} gap={20} dir={"rtl"}> */}
             <div style={{marginLeft: -15}}>
-            <Masonry dir="rtl" columns={{ xs: 1, sm: 1, md: 2, xl: 4 }} spacing={2}>
+            <Masonry dir="rtl" columns={{ xs: 1, sm: 1, md: 2, xxl: 4 }} spacing={2}>
                 {filteredDemands().map((demand) => {
                     const { onBan, onDelete, onLike, onChangeStatus } = demandActionsGenerator(demand)
                     return (
@@ -279,25 +262,6 @@ export default function DemandsPage({setSelectedItem}) {
                 })}
             </Masonry>
             </div>
-            {/* </Box> */}
-
-            {/* <Grid container spacing={{ xs: 2, md: 1.2 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-                {demands.map((demand) => {
-                    const { onBan, onDelete, onLike, onChangeStatus } = demandActionsGenerator(demand)
-                    return (
-                        <Grid item xs={4} sm={8} md={6} key={demand.id}>
-                            <DemandItem
-                                key={demand.id}
-                                demand={demand}
-                                loading={loading.includes(demand.id)}
-                                onBanClicked={onBan}
-                                onChangeStatusClicked={onChangeStatus}
-                                onDeleteClicked={onDelete}
-                                onLikeClicked={onLike} />
-                        </Grid>
-                    )
-                })}
-            </Grid> */}
             <Snackbar
                 open={popupData.open}
                 autoHideDuration={15000}
@@ -308,20 +272,7 @@ export default function DemandsPage({setSelectedItem}) {
                     {popupData.message}
                 </Alert>
             </Snackbar>
-
             
-            {/* <Fab
-                sx={{
-                    margin: 1,
-                    position: "fixed",
-                    bottom: 8,
-                    left: 180
-                }}
-                onClick={() => setDialogOpen(true)}
-                variant='extended'
-                color='primary'>
-                    <AddIcon />
-            </Fab> */}
             <Fab
                 sx={{
                     margin: 1,
