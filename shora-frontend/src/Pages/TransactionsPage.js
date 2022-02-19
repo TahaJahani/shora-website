@@ -4,6 +4,8 @@ import AddTransactionForm from '../Components/Transactions/AddTransactionForm'
 import TransactionsGrid from '../Components/Transactions/TransactionsGrid'
 import { transactionsAtom } from '../Atoms/transactionsAtom'
 import getTransactions from "../AxiosCalls/Transactions/getTransactions"
+import { Alert, Backdrop, CircularProgress, Dialog, Fab, Grid, Pagination, Snackbar, Paper, IconButton, InputBase, Divider, Menu, MenuItem, AlertTitle, Collapse, Autocomplete, TextField } from '@mui/material'
+import AddIcon from '@mui/icons-material/Add'
 
 export default function TransactionsPage({setSelectedItem}) {
 
@@ -15,10 +17,36 @@ export default function TransactionsPage({setSelectedItem}) {
             getTransactions(() => {}, () => {})
     }, [])
 
+    const [dialogOpen, setDialogOpen] = React.useState(false);
+
     return (
-        <div>
-            <AddTransactionForm />
+        <div style={{height: '100%'}}>
+
             <TransactionsGrid transactions={transactions}/>
+
+            <Dialog
+                style={{borderRadius: 20}}
+                dir='rtl'
+                open={dialogOpen}
+                onClose={() => setDialogOpen(false)}
+                fullWidth={true}
+                maxWidth='md'>
+                    <AddTransactionForm onCancel={() => setDialogOpen(false)} />
+            </Dialog>
+
+            <Fab
+                sx={{
+                    margin: 1,
+                    position: "fixed",
+                    bottom: 8,
+                    left: 8
+                }}
+                onClick={() => setDialogOpen(true)}
+                variant='extended'
+                color='primary'>
+                <AddIcon sx={{ ml: 0.5 }} />
+                ثبت تراکنش جدید
+            </Fab>
         </div>
     )
 }

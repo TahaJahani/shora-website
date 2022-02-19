@@ -22,7 +22,7 @@ const formatDate = (date) => {
     else return '';
 }
 
-export default function AddTransactionForm() {
+export default function AddTransactionForm({onCancel}) {
 
     const initialData = {
         amount: '',
@@ -55,7 +55,7 @@ export default function AddTransactionForm() {
     }
 
     return (
-        <Card variant="outlined" component='form' sx={{ padding: 2, margin: 2 }}>
+        <Card variant="" component='form' sx={{ padding: 2, margin: 2 }} style={{borderRadius: 20}}>
             <Snackbar
                 anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
                 open={open}
@@ -85,10 +85,9 @@ export default function AddTransactionForm() {
                 </Grid>
                 <Grid item xs={12} sm={4} md={3}>
                     <FullWidthTextField
-                        label="مبلغ تراکنش"
                         type='number'
                         InputProps={{
-                            startAdornment: <InputAdornment position="start">تومان</InputAdornment>,
+                            startAdornment: <InputAdornment position="start">مبلغ به تومان</InputAdornment>,
                             inputProps: { min: 0 }
                         }}
                         value={data.amount}
@@ -111,7 +110,7 @@ export default function AddTransactionForm() {
                     <FullWidthTextField
                         multiline
                         rows={3}
-                        label="توضیح تراکنش"
+                        placeholder="توضیح تراکنش"
                         value={data.description}
                         onChange={(e) => setData({ ...data, description: e.target.value })} />
                 </Grid>
@@ -120,12 +119,19 @@ export default function AddTransactionForm() {
                 {error}
             </Grid>
             <Grid container justifyContent='flex-end' sx={{ marginTop: 2 }}>
+                <Grid item xs={12} sm={1} md={1} justifyItems='flex-end' style={{marginLeft: 20}}>
+                    <Button variant="outlined" sx={{ width: '100%'}} onClick={() => { onCancel(); }}>
+                        <span style={{fontSize: 20, fontWeight: 'bold'}}>لغو</span>
+                    </Button>
+                </Grid>
                 <Grid item xs={12} sm={1} md={1} justifyItems='flex-end'>
                     <LoadingButton loading={loading} variant="contained" sx={{ width: '100%' }} onClick={submitClicked}>
-                        ثبت
+                        <span style={{fontSize: 20, fontWeight: 'bold'}}>ثبت</span>
                     </LoadingButton>
                 </Grid>
             </Grid>
+
+            
         </Card>
     )
 }

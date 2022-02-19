@@ -49,19 +49,19 @@ export default function ChangePasswordForm({ open, onClose, onSuccess }) {
                 تغییر رمز عبور
             </Typography>
             <Grid container spacing={2} my={2}>
-                <Grid item xs={12} sm={4} md={3}>
+                <Grid item xs={12} sm={4} md={4}>
                     <FullWidthTextField
                         placeholder="رمز عبور کنونی"
                         value={data.old_password}
                         onChange={(e) => setData({ ...data, old_password: e.target.value })} />
                 </Grid>
-                <Grid item xs={12} sm={4} md={3}>
+                <Grid item xs={12} sm={4} md={4}>
                     <FullWidthTextField
                         placeholder="رمز عبور جدید"
                         value={data.new_password}
                         onChange={(e) => setData({ ...data, new_password: e.target.value })} />
                 </Grid>
-                <Grid item xs={12} sm={4} md={3}>
+                <Grid item xs={12} sm={4} md={4}>
                     <FullWidthTextField
                         placeholder="تکرار رمز عبور جدید"
                         value={data.new_password_confirmation}
@@ -71,8 +71,9 @@ export default function ChangePasswordForm({ open, onClose, onSuccess }) {
             <Grid container color='red'>
                 {error}
             </Grid>
-            <Grid container justifyContent='flex-end' sx={{ marginTop: 2 }}>
-                <Grid item xs={12} sm={1} md={1} justifyItems='flex-end' style={{marginLeft: 20}}>
+            <div className={"form-father-div-style"}>
+            <Grid container justifyContent='flex-end' className={"form-grid-buttons-style"}>
+                <Grid item xs={12} sm={1} md={1} justifyItems='flex-end' className={"form-laghv-button-style"}>
                     <Button variant="outlined" sx={{ width: '100%'}} onClick={() => { onClose(); }}>
                         <span style={{fontSize: 20, fontWeight: 'bold'}}>لغو</span>
                     </Button>
@@ -85,6 +86,7 @@ export default function ChangePasswordForm({ open, onClose, onSuccess }) {
                     </LoadingButton>
                 </Grid>
             </Grid>
+            </div>
         </Card>
 
 

@@ -40,6 +40,7 @@ export default function DemandsPage({setSelectedItem}) {
     const [loading, setLoading] = React.useState([])
     const [dialogOpen, setDialogOpen] = React.useState(false)
     const [likeDialogOpen, setLikeDialogOpen] = React.useState(false)
+    const [isSnackbarOpen, setSnackbarOpen] = React.useState(false);
     const [popupData, setPopUpData] = React.useState({
         open: false,
         message: '',
@@ -138,7 +139,15 @@ export default function DemandsPage({setSelectedItem}) {
                 document.body.style.overflow = 'auto';
             }, () => { })
         getDemandCategories(() => { }, () => { })
-    }, [])
+    }, []);
+
+    React.useEffect(() => {
+        let myWebSocket = new WebSocket("ws://localhost:9091");
+        myWebSocket.onmessage = function(evt) {
+            getDemandCategories(() => { }, () => { });
+            setSnackbarOpen(true);
+        };
+    });
 
     React.useEffect(() => {
         changePage(1)
@@ -252,7 +261,7 @@ export default function DemandsPage({setSelectedItem}) {
             {/* <Box sx={{ overflowY: 'scroll', height: '100%' }}> */}
             {/* <ImageList variant="masonry" cols={2} gap={20} dir={"rtl"}> */}
             <div style={{marginLeft: -15}}>
-            <Masonry dir="rtl" columns={{ xs: 1, sm: 1, md: 2 }} spacing={2}>
+            <Masonry dir="rtl" columns={{ xs: 1, sm: 1, md: 2, xl: 4 }} spacing={2}>
                 {filteredDemands().map((demand) => {
                     const { onBan, onDelete, onLike, onChangeStatus } = demandActionsGenerator(demand)
                     return (
@@ -333,6 +342,12 @@ export default function DemandsPage({setSelectedItem}) {
                 <CircularProgress color="primary" />
             </Backdrop> */}
         </Box>
+        <Snackbar open={isSnackbarOpen} autoHideDuration={6000} onClose={() => setSnackbarOpen(false)}>
+            <span dir="ltr"><Alert onClose={() => setSnackbarOpen(false)} severity={"info"}>
+                درخواست جدیدی ثبت شده است
+            </Alert></span>
+        </Snackbar>
+
         </>
     )
 }
