@@ -132,7 +132,7 @@ export default function DemandsPage({setSelectedItem}) {
     }
 
     React.useEffect(() => {
-        setSelectedItem('درخواست‌ها');
+        if (setSelectedItem) setSelectedItem('درخواست‌ها');
         if (showSingleDemand)
             getSingleDemand(id, (res) => {
                 setSingleDemand(res.data.demand);
@@ -233,9 +233,9 @@ export default function DemandsPage({setSelectedItem}) {
                         onChangeStatusClicked={demandActionsGenerator(singleDemand).onChangeStatus}
                         onDeleteClicked={demandActionsGenerator(singleDemand).onDelete}
                         onLikeClicked={demandActionsGenerator(singleDemand).onLike} />
-                    <Divider sx={{ my: 2 }}>
+                    <Divider sx={{ my: 2 }}> <span style={{fontColor: 'white', fontSize: 25}}>
                         سایر درخواست‌ها
-                    </Divider>
+                        </span></Divider>
                 </div>
             }
             <Grid container justifyContent="center">
@@ -272,7 +272,7 @@ export default function DemandsPage({setSelectedItem}) {
                     {popupData.message}
                 </Alert>
             </Snackbar>
-            
+
             <Fab
                 sx={{
                     margin: 1,

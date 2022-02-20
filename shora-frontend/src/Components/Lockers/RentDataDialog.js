@@ -15,7 +15,7 @@ export default function RentDataDialog({ locker, open, onClose, onReturn, loadin
     let lockerCode = locker ? locker.letter + locker.number : null
     let daysRemaining = locker && locker.rents && locker.rents[0] ? getDaysRemaining(locker.rents[0]) : 100;
     let holdingUser = locker && locker.rents && locker.rents[0] ?
-        locker.rents[0].user.name + ' ' + locker.rents[0].user.surname + ', ' + locker.rents[0].user.student_number : null
+        locker.rents[0].user.name + ' ' + locker.rents[0].user.surname + ' - ' + locker.rents[0].user.student_number : null
     let returnDeadline = holdingUser ? new Date(locker.rents[0].return_deadline).toLocaleDateString("fa-IR") : null
 
     return (
@@ -23,32 +23,37 @@ export default function RentDataDialog({ locker, open, onClose, onReturn, loadin
             <Dialog sx={{ direction: 'rtl', padding: 2 }} open={open} onClose={onClose}>
                 <DialogContent>
                     <Grid container spacing={1} mb={3}>
-                        <Grid item xs={6} component='h5'>
+                        <Grid item xs={6} component='h4' style={{fontSize: 20}}>
                             کد کمد
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={6} style={{fontSize: 20}}>
                             {lockerCode}
                         </Grid>
-                        <Grid item xs={6} component='h5'>
+                        <Grid item xs={6} component='h4' style={{fontSize: 20}}>
                             شخص دارنده
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={6} style={{fontSize: 20}}>
                             {holdingUser}
                         </Grid>
-                        <Grid item xs={6} component='h5'>
+                        <Grid item xs={6} component='h4' style={{fontSize: 20}}>
                             زمان تحویل
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={6} style={{fontSize: 20}}>
                             {returnDeadline}
                         </Grid>
-                        <Grid item xs={12} component='h5'>
+                        <br /><br />
+                        <Grid item xs={12} component='h4' style={{fontSize: 20}}>
+                            <div className="textCenter">
                             زمان باقی‌مانده
+                            </div>
                         </Grid>
+                        <br /><br />
                         <Grid item xs={12}>
                             <ColorfulProgressBar value={daysRemaining} variant='determinate' />
                         </Grid>
                     </Grid>
-                    <FinishRentForm onSubmit={onReturn} loading={loading} selectedRent={locker ? locker.rents[0] : null}/>
+                    <br /><br />
+                    <FinishRentForm onCancel={onClose} onSubmit={onReturn} loading={loading} selectedRent={locker ? locker.rents[0] : null}/>
                 </DialogContent>
             </Dialog>
         </div>

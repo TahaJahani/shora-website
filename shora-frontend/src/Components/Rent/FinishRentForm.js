@@ -37,7 +37,7 @@ export default function FinishRentForm({ loading, selectedRent, onSubmit }) {
             <Grid container spacing={2} mb={2} padding={1}>
                 <Grid item xs={12} sm={6} md={6}>
                     <FullWidthTextField
-                        label="مبلغ بازگشتی"
+                        placeholder="مبلغ بازگشتی (تومان)"
                         type='number'
                         value={data.amount_returned}
                         onChange={(e) => setData({ ...data, amount_returned: e.target.value })} />
@@ -58,8 +58,8 @@ export default function FinishRentForm({ loading, selectedRent, onSubmit }) {
                 {error}
             </DialogContentText>
             <DialogActions>
-                <LoadingButton loading={loading} variant="contained" onClick={submitClicked}>
-                    عودت
+                <LoadingButton loading={loading} variant="contained" sx={{ width: '100%' }} onClick={submitClicked}>
+                <span style={{fontSize: 20, fontWeight: 'bold'}}>عودت</span>
                 </LoadingButton>
             </DialogActions>
         </div>
