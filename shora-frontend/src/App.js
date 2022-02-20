@@ -94,6 +94,7 @@ function App() {
           <RecoilRoot>
             <RecoilNexus />
             <Routes>
+              
               <Route index={true} element={<MainPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage isForRegister="true"/>} />
@@ -101,14 +102,21 @@ function App() {
               <Route path="/reset-password/:hash" element={<PasswordResetPage />} />
               <Route path="/home" element={<ProtectedRoute />}>
                 <Route path="" element={<HomePage selectedItem={selectedItem} setSelectedItem={setSelectedItem} />}>
-                  <Route path="users" element={<UsersPage setSelectedItem={setSelectedItem} />} />
-                  <Route path="rents" element={<RentsPage setSelectedItem={setSelectedItem} />} />
-                  <Route path="lockers" element={<LockersPage setSelectedItem={setSelectedItem} />} />
-                  <Route path="transactions" element={<TransactionsPage setSelectedItem={setSelectedItem} />} />
-                  <Route path="lost-and-found" element={<LostAndFoundPage setSelectedItem={setSelectedItem} />} />
-                  <Route path="events" element={<EventsPage setSelectedItem={setSelectedItem} />}/>
-                  <Route path="demands" element={<DemandsPage setSelectedItem={setSelectedItem} />} />
-                  <Route path="demands/:id" element={<DemandsPage />} />
+                  {/* <AnimatedSwitch
+                    atEnter={{ opacity: 0 }}
+                    atLeave={{ opacity: 0 }}
+                    atActive={{ opacity: 1 }}
+                    className="switch-wrapper"
+                  > */}
+                    <Route path="users" element={<UsersPage setSelectedItem={setSelectedItem} />} />
+                    <Route path="rents" element={<RentsPage setSelectedItem={setSelectedItem} />} />
+                    <Route path="lockers" element={<LockersPage setSelectedItem={setSelectedItem} />} />
+                    <Route path="transactions" element={<TransactionsPage setSelectedItem={setSelectedItem} />} />
+                    <Route path="lost-and-found" element={<LostAndFoundPage setSelectedItem={setSelectedItem} />} />
+                    <Route path="events" element={<EventsPage setSelectedItem={setSelectedItem} />}/>
+                    <Route path="demands" element={<DemandsPage setSelectedItem={setSelectedItem} />} />
+                    <Route path="demands/:id" element={<DemandsPage />} />
+                  {/* </AnimatedSwitch> */}
                 </Route>
               </Route>
             </Routes>

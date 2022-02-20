@@ -6,6 +6,7 @@ import {useRecoilState} from "recoil"
 import { Alert, Backdrop, CircularProgress, Dialog, Fab, Grid, Pagination, Snackbar, Paper, IconButton, InputBase, Divider, Menu, MenuItem, AlertTitle, Collapse, Autocomplete, TextField } from '@mui/material'
 import getRents from "../AxiosCalls/Rents/getRents"
 import AddIcon from '@mui/icons-material/Add'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 export default function({setSelectedItem}) {
 
@@ -21,7 +22,15 @@ export default function({setSelectedItem}) {
 
     return(
         <div style={{height: '100%'}}>
-            <RentsGrid rents={rents} />
+            <ReactCSSTransitionGroup
+            transitionAppear={true}
+            transitionAppearTimeout={600}
+            transitionEnterTimeout={600}
+            transitionLeaveTimeout={200}
+            transitionName={'SlideIn'}
+            >
+                <RentsGrid rents={rents} />
+            </ReactCSSTransitionGroup>
             <Dialog
                 style={{borderRadius: 20}}
                 dir='rtl'

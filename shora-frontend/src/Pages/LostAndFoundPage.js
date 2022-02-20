@@ -9,6 +9,7 @@ import { lostAndFoundAtom } from "../Atoms/lostAndFoundAtom"
 import { getRecoil, setRecoil } from 'recoil-nexus';
 import { Alert, Backdrop, CircularProgress, Dialog, Fab, Grid, Pagination, Snackbar, Paper, IconButton, InputBase, Divider, Menu, MenuItem, AlertTitle, Collapse, Autocomplete, TextField } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 export default function ({setSelectedItem}) {
     const [found, setFound] = useRecoilState(lostAndFoundAtom);
@@ -39,8 +40,15 @@ export default function ({setSelectedItem}) {
 
     return (
         <div>
-            <LostAndFoundGrid found={found} onRowDeleted={onRowDeleted}
-            />
+            <ReactCSSTransitionGroup
+            transitionAppear={true}
+            transitionAppearTimeout={600}
+            transitionEnterTimeout={600}
+            transitionLeaveTimeout={200}
+            transitionName={'SlideIn'}
+            >
+                <LostAndFoundGrid found={found} onRowDeleted={onRowDeleted} />
+            </ReactCSSTransitionGroup>
             <Dialog
                 style={{borderRadius: 20}}
                 dir='rtl'

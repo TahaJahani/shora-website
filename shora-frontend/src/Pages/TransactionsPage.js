@@ -6,6 +6,7 @@ import { transactionsAtom } from '../Atoms/transactionsAtom'
 import getTransactions from "../AxiosCalls/Transactions/getTransactions"
 import { Alert, Backdrop, CircularProgress, Dialog, Fab, Grid, Pagination, Snackbar, Paper, IconButton, InputBase, Divider, Menu, MenuItem, AlertTitle, Collapse, Autocomplete, TextField } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 export default function TransactionsPage({setSelectedItem}) {
 
@@ -21,8 +22,15 @@ export default function TransactionsPage({setSelectedItem}) {
 
     return (
         <div style={{height: '100%'}}>
-
+            <ReactCSSTransitionGroup
+            transitionAppear={true}
+            transitionAppearTimeout={600}
+            transitionEnterTimeout={600}
+            transitionLeaveTimeout={200}
+            transitionName={'SlideIn'}
+            >
             <TransactionsGrid transactions={transactions}/>
+            </ReactCSSTransitionGroup>
 
             <Dialog
                 style={{borderRadius: 20}}

@@ -18,6 +18,7 @@ import getDemandCategories from '../AxiosCalls/DemandCategories/getDemandCategor
 import { useRecoilState } from 'recoil'
 import { demandCategoryAtom } from '../Atoms/demandCategoryAtom'
 import { ListItemIcon } from '@mui/material';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 export default function DemandsPage({setSelectedItem}) {
 
@@ -49,6 +50,17 @@ export default function DemandsPage({setSelectedItem}) {
     const [warningOpen, setWarningOpen] = React.useState(true);
 
     const getDemandsOfPage = (page, search) => {
+        let resdata = JSON.parse(localStorage.getItem("resdata"));
+        if (resdata != undefined && resdata != null) {
+            setPageData({
+                currentPage: page,
+                lastPage: resdata.last_page,
+                isLoading: false,
+            })
+            setDemands(resdata.demands)
+            document.body.style.overflow = 'auto';    
+        }
+        
         getDemands({ page: page, search: search, category_id: selectedCategory }, (res) => {
             setPageData({
                 currentPage: page,
@@ -57,6 +69,7 @@ export default function DemandsPage({setSelectedItem}) {
             })
             setDemands(res.data.demands)
             document.body.style.overflow = 'auto';
+            localStorage.setItem("resdata", JSON.stringify(res.data));
         }, () => { })
     }
 
@@ -164,6 +177,14 @@ export default function DemandsPage({setSelectedItem}) {
 
     return (
         <>
+        <ReactCSSTransitionGroup
+        transitionAppear={true}
+        transitionAppearTimeout={600}
+        transitionEnterTimeout={600}
+        transitionLeaveTimeout={200}
+        transitionName={'SlideIn'}
+        >
+        
         <Box>
             <Dialog
                 dir='rtl'
@@ -273,7 +294,24 @@ export default function DemandsPage({setSelectedItem}) {
                 </Alert>
             </Snackbar>
 
-            <Fab
+            
+            {/* <Backdrop
+                invisible={true}
+                open={pageData.isLoading}>
+                <CircularProgress color="primary" />
+            </Backdrop> */}
+        </Box>
+        
+        
+        </ReactCSSTransitionGroup>
+
+        <Snackbar open={isSnackbarOpen} autoHideDuration={6000} onClose={() => setSnackbarOpen(false)}>
+            <span dir="ltr"><Alert onClose={() => setSnackbarOpen(false)} severity={"info"}>
+                درخواست جدیدی ثبت شده است
+            </Alert></span>
+        </Snackbar>
+
+        <Fab
                 sx={{
                     margin: 1,
                     position: "fixed",
@@ -286,19 +324,7 @@ export default function DemandsPage({setSelectedItem}) {
                     <AddIcon sx={{ ml: 1 }} />
                 افزودن درخواست
                 
-            </Fab>
-            {/* <Backdrop
-                invisible={true}
-                open={pageData.isLoading}>
-                <CircularProgress color="primary" />
-            </Backdrop> */}
-        </Box>
-        <Snackbar open={isSnackbarOpen} autoHideDuration={6000} onClose={() => setSnackbarOpen(false)}>
-            <span dir="ltr"><Alert onClose={() => setSnackbarOpen(false)} severity={"info"}>
-                درخواست جدیدی ثبت شده است
-            </Alert></span>
-        </Snackbar>
-
+        </Fab>
         </>
     )
 }
