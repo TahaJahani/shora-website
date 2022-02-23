@@ -32,7 +32,7 @@ const formatDate = (date) => {
     else return ''
 }
 
-export default function AddRentForm({rentable_id, rentable_type, onSubmit}) {
+export default function AddRentForm({rentable_id, rentable_type, onSubmit, onCancel}) {
 
     let return_deadline = new Date(new Date().getYear() + 1900, 5, 21);
     if (new Date().getTime() > return_deadline.getTime())
@@ -57,7 +57,7 @@ export default function AddRentForm({rentable_id, rentable_type, onSubmit}) {
 
     const submitClicked = () => {
         if (!data.rentable_id)
-            setError('فیلد شماره لاکر اجباری است');
+            setError('فیلد شماره کمد اجباری است');
         else if (!data.amount_paid)
             setError('فیلد مبلغ پرداخت شده اجباری است');
         else {
@@ -82,7 +82,7 @@ export default function AddRentForm({rentable_id, rentable_type, onSubmit}) {
     const selectedLocker = lockers ? lockers.find(item => item.id === data.rentable_id) : null
 
     return (
-        <Card variant="outlined" component='form' sx={{ padding: 2, margin: 2 }}>
+        <Card variant="" component='form' sx={{ padding: 2, margin: 2 }} style={{borderRadius: 20}}>
             <Snackbar
                 anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
                 open={open}
@@ -92,6 +92,7 @@ export default function AddRentForm({rentable_id, rentable_type, onSubmit}) {
                     با موفقیت ثبت شد
                 </Alert>
             </Snackbar>
+            
             <Typography variant="h5">
                 ثبت کرایه جدید
             </Typography>
@@ -114,10 +115,10 @@ export default function AddRentForm({rentable_id, rentable_type, onSubmit}) {
                     {data.rentable_type === 'locker' && lockers && <FullWidthAutoComplete
                         options={lockers}
                         value={selectedLocker ? selectedLocker : null}
-                        noOptionsText='لاکر یافت نشد'
+                        noOptionsText='کمد یافت نشد'
                         onChange={(e, newValue) => setData({ ...data, rentable_id: newValue ? newValue.id : null })}
                         getOptionLabel={(option) => option.letter + option.number}
-                        renderInput={(params) => <TextField {...params} label="شماره لاکر" />}
+                        renderInput={(params) => <TextField {...params} label="شماره کمد" />}
                     />}
                 </Grid>
                 <Grid item xs={12} sm={4} md={3}>
@@ -164,9 +165,14 @@ export default function AddRentForm({rentable_id, rentable_type, onSubmit}) {
                 {error}
             </Grid>
             <Grid container justifyContent='flex-end' sx={{ marginTop: 2 }}>
+                <Grid item xs={12} sm={1} md={1} justifyItems='flex-end' style={{marginLeft: 20}}>
+                    <Button variant="outlined" sx={{ width: '100%'}} onClick={() => { onCancel(); }}>
+                        <span style={{fontSize: 20, fontWeight: 'bold'}}>لغو</span>
+                    </Button>
+                </Grid>
                 <Grid item xs={12} sm={1} md={1} justifyItems='flex-end'>
                     <LoadingButton loading={loading} variant="contained" sx={{ width: '100%' }} onClick={submitClicked}>
-                        ثبت
+                        <span style={{fontSize: 20, fontWeight: 'bold'}}>ثبت</span>
                     </LoadingButton>
                 </Grid>
             </Grid>

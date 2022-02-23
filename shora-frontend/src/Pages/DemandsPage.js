@@ -8,7 +8,8 @@ import unlikeDemand from '../AxiosCalls/Demands/unlikeDemand'
 import banUser from '../AxiosCalls/Demands/banUser'
 import changeDemandStatus from '../AxiosCalls/Demands/changeDemandStatus'
 import deleteDemand from '../AxiosCalls/Demands/deleteDemand'
-import { Alert, Backdrop, CircularProgress, Dialog, Fab, Grid, Pagination, Snackbar, Paper, IconButton, InputBase, Divider, Menu, MenuItem, AlertTitle, Collapse, Autocomplete, TextField } from '@mui/material'
+import { Masonry } from '@mui/lab';
+import { Alert, ImageList, ImageListItem, Backdrop, CircularProgress, Dialog, Fab, Grid, Pagination, Snackbar, Paper, IconButton, InputBase, Divider, Menu, MenuItem, AlertTitle, Collapse, Autocomplete, TextField } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add'
 import { Box } from '@mui/system'
@@ -16,8 +17,10 @@ import { useParams } from "react-router-dom";
 import getDemandCategories from '../AxiosCalls/DemandCategories/getDemandCategories'
 import { useRecoilState } from 'recoil'
 import { demandCategoryAtom } from '../Atoms/demandCategoryAtom'
+import { ListItemIcon } from '@mui/material';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-export default function DemandsPage() {
+export default function DemandsPage({setSelectedItem}) {
 
     const { id } = useParams();
 
@@ -37,6 +40,8 @@ export default function DemandsPage() {
     const [toSearch, setToSearch] = React.useState('')
     const [loading, setLoading] = React.useState([])
     const [dialogOpen, setDialogOpen] = React.useState(false)
+    const [likeDialogOpen, setLikeDialogOpen] = React.useState(false)
+    const [isSnackbarOpen, setSnackbarOpen] = React.useState(false);
     const [popupData, setPopUpData] = React.useState({
         open: false,
         message: '',
@@ -45,6 +50,17 @@ export default function DemandsPage() {
     const [warningOpen, setWarningOpen] = React.useState(true);
 
     const getDemandsOfPage = (page, search) => {
+        let resdata = JSON.parse(localStorage.getItem("resdata"));
+        if (resdata != undefined && resdata != null) {
+            setPageData({
+                currentPage: page,
+                lastPage: resdata.last_page,
+                isLoading: false,
+            })
+            setDemands(resdata.demands)
+            document.body.style.overflow = 'auto';    
+        }
+        
         getDemands({ page: page, search: search, category_id: selectedCategory }, (res) => {
             setPageData({
                 currentPage: page,
@@ -53,6 +69,7 @@ export default function DemandsPage() {
             })
             setDemands(res.data.demands)
             document.body.style.overflow = 'auto';
+            localStorage.setItem("resdata", JSON.stringify(res.data));
         }, () => { })
     }
 
@@ -128,32 +145,47 @@ export default function DemandsPage() {
     }
 
     React.useEffect(() => {
+        if (setSelectedItem) setSelectedItem('درخواست‌ها');
         if (showSingleDemand)
             getSingleDemand(id, (res) => {
                 setSingleDemand(res.data.demand);
                 document.body.style.overflow = 'auto';
             }, () => { })
         getDemandCategories(() => { }, () => { })
-    }, [])
+    }, []);
+
+    React.useEffect(() => {
+        let myWebSocket = new WebSocket("ws://localhost:9091");
+        myWebSocket.onmessage = function(evt) {
+            getDemandCategories(() => { }, () => { });
+            setSnackbarOpen(true);
+        };
+    });
 
     React.useEffect(() => {
         changePage(1)
     }, [selectedCategory])
 
+    const filteredDemands = () => {
+        return demands.filter(demand => {
+            if (toSearch == '') return true;
+            if (demand["category"].toLowerCase().includes(toSearch.toLowerCase())) return true;
+            if (demand["body"].toLowerCase().includes(toSearch.toLowerCase())) return true;
+            return false;
+        })
+    } 
+
     return (
+        <>
+        <ReactCSSTransitionGroup
+        transitionAppear={true}
+        transitionAppearTimeout={600}
+        transitionEnterTimeout={600}
+        transitionLeaveTimeout={200}
+        transitionName={'SlideIn'}
+        >
+        
         <Box>
-            <Collapse in={warningOpen}>
-                <Alert
-                    sx={{ my: 2, width: { md: '400px', } }}
-                    dir='ltr'
-                    severity='error'
-                    onClose={() => setWarningOpen(false)}>
-                    <AlertTitle dir='rtl'>توجه</AlertTitle>
-                    <div dir='rtl'>
-                        لایک کردن یک درخواست به منزله این است که شما درخواست مشابه را دارید و در صورت نیاز، شماره دانشجویی، نام و نام خانوادگی شما در اختیار نهادهای مرتبط قرار خواهد گرفت
-                    </div>
-                </Alert>
-            </Collapse>
             <Dialog
                 dir='rtl'
                 open={dialogOpen}
@@ -166,17 +198,26 @@ export default function DemandsPage() {
                         setDialogOpen(false);
                     }} />
             </Dialog>
+            <Dialog
+                dir='rtl'
+                open={likeDialogOpen}
+                onClose={() => setLikeDialogOpen(false)}
+                fullWidth={true}
+                maxWidth='md'>
+                &nbsp;
+            </Dialog>
             <Grid container alignContent='center' sx={{ mb: 2 }} spacing={2}>
-                <Grid item xs={6} sm={3} md={4}>
+                <Grid item xs={6} sm={6} md={6}>
                     <Paper
                         variant='outlined'
-                        sx={{ p: '5px 4px', display: 'flex', alignItems: 'center', width: '100%' }}>
+                        sx={{ p: '5px 4px', display: 'flex', alignItems: 'center', width: '100%'}}
+                        className={"demand-card-bg"}>
                         <InputBase
                             onChange={(e) => setToSearch(e.target.value)}
                             value={toSearch}
                             sx={{ mr: 1, flex: 1 }}
-                            placeholder="جستجو"
-                            inputProps={{ 'aria-label': 'جستجو' }} />
+                            placeholder="جست‌وجو"
+                            inputProps={{ 'aria-label': 'جست‌وجو' }} />
                         <IconButton
                             sx={{ p: '10px' }}
                             onClick={() => {
@@ -186,12 +227,12 @@ export default function DemandsPage() {
                         </IconButton>
                     </Paper>
                 </Grid>
-                <Grid item xs={6} sm={3} md={4}>
+                <Grid item xs={6} sm={6} md={6}>
                     <TextField
                         value={selectedCategory}
                         sx={{ width: '100%' }}
+                        className={"demand-card-bg"}
                         select
-                        label="دسته‌ی درخواست"
                         onChange={(e) => {setSelectedCategory(e.target.value)}} >
                         {[allCategories, ...demandsCategories].map((option) => (
                             <MenuItem key={option.id} value={option.id}>
@@ -213,29 +254,34 @@ export default function DemandsPage() {
                         onChangeStatusClicked={demandActionsGenerator(singleDemand).onChangeStatus}
                         onDeleteClicked={demandActionsGenerator(singleDemand).onDelete}
                         onLikeClicked={demandActionsGenerator(singleDemand).onLike} />
-                    <Divider sx={{ my: 2 }}>
+                    <Divider sx={{ my: 2 }}> <span style={{fontColor: 'white', fontSize: 25}}>
                         سایر درخواست‌ها
-                    </Divider>
+                        </span></Divider>
                 </div>
             }
             <Grid container justifyContent="center">
                 {pageData.lastPage !== 1 &&
                     <Pagination count={pageData.lastPage} onChange={changePage} size="large" shape="rounded" sx={{ marginBottom: 2 }} />}
             </Grid>
-            <div>
-                {demands.map((demand) => {
+
+            <div style={{marginLeft: -15}}>
+            <Masonry dir="rtl" columns={{ xs: 1, sm: 1, md: 2, xxl: 4 }} spacing={2}>
+                {filteredDemands().map((demand) => {
                     const { onBan, onDelete, onLike, onChangeStatus } = demandActionsGenerator(demand)
                     return (
-                        <DemandItem
-                            key={demand.id}
-                            demand={demand}
-                            loading={loading.includes(demand.id)}
-                            onBanClicked={onBan}
-                            onChangeStatusClicked={onChangeStatus}
-                            onDeleteClicked={onDelete}
-                            onLikeClicked={onLike} />
+                        <ImageListItem key={demand.id} sx={{width: '100%'}}>
+                            <DemandItem  dir={"rtl"}
+                                key={demand.id}
+                                demand={demand}
+                                loading={loading.includes(demand.id)}
+                                onBanClicked={onBan}
+                                onChangeStatusClicked={onChangeStatus}
+                                onDeleteClicked={onDelete}
+                                onLikeClicked={onLike} />
+                        </ImageListItem>
                     )
                 })}
+            </Masonry>
             </div>
             <Snackbar
                 open={popupData.open}
@@ -247,7 +293,25 @@ export default function DemandsPage() {
                     {popupData.message}
                 </Alert>
             </Snackbar>
-            <Fab
+
+            
+            {/* <Backdrop
+                invisible={true}
+                open={pageData.isLoading}>
+                <CircularProgress color="primary" />
+            </Backdrop> */}
+        </Box>
+        
+        
+        </ReactCSSTransitionGroup>
+
+        <Snackbar open={isSnackbarOpen} autoHideDuration={6000} onClose={() => setSnackbarOpen(false)}>
+            <span dir="ltr"><Alert onClose={() => setSnackbarOpen(false)} severity={"info"}>
+                درخواست جدیدی ثبت شده است
+            </Alert></span>
+        </Snackbar>
+
+        <Fab
                 sx={{
                     margin: 1,
                     position: "fixed",
@@ -257,14 +321,10 @@ export default function DemandsPage() {
                 onClick={() => setDialogOpen(true)}
                 variant='extended'
                 color='primary'>
+                    <AddIcon sx={{ ml: 1 }} />
                 افزودن درخواست
-                <AddIcon sx={{ ml: 1 }} />
-            </Fab>
-            <Backdrop
-                invisible={true}
-                open={pageData.isLoading}>
-                <CircularProgress color="primary" />
-            </Backdrop>
-        </Box>
+                
+        </Fab>
+        </>
     )
 }

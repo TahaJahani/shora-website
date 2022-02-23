@@ -64,10 +64,7 @@ export default function TransactionsGrid({ transactions }) {
     //     columns.push(actionsColumn);
 
     return (
-        <Card variant="outlined" sx={{ padding: 2, margin: 2, height: '100%' }}>
-            <Typography variant="h5" mb={2}>
-                تاریخچه تراکنش‌ها
-            </Typography>
+        <Card variant="" sx={{ padding: 2, margin: 2, height: '100%' }} style={{borderRadius: 20}} className={"demand-card-bg"}>
             <DataGrid
                 rows={transactions ? transactions : []}
                 autoHeight={true}

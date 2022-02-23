@@ -2,7 +2,7 @@ import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { hasAccess, isFinancial } from '../Helpers/UserHelper';
 import { Card, Typography, IconButton } from '@mui/material';
-import DoneIcon from '@mui/icons-material/Done';
+import DeleteIcon from '@mui/icons-material/Delete';
 import FinishRentDialog from "./FinishRentDialog"
 import finishRent from "../AxiosCalls/Rents/finishRent"
 
@@ -27,7 +27,7 @@ const columns = [
     },
     {
         field: 'locker_code',
-        headerName: 'شماره لاکر',
+        headerName: 'شماره کمد',
         width: 150,
         valueGetter: (params) => `${params.row.rentable.letter} ${params.row.rentable.number}`
     },
@@ -66,14 +66,14 @@ export default function RentsGrid({ rents }) {
         with: 150,
         renderCell: (params) => (
             <div>
-                <IconButton color="success" onClick={() => {
+                <IconButton color="error" onClick={() => {
                     setDialogData({
                         loading: false,
                         isOpen: true,
                         selectedRent: params.row,
                     })
                 }}>
-                    <DoneIcon />
+                    <DeleteIcon />
                 </IconButton>
             </div>
         ),
@@ -83,16 +83,13 @@ export default function RentsGrid({ rents }) {
         columns.push(actionsColumn);
 
     return (
-        <Card variant="outlined" sx={{ padding: 2, margin: 2, height: '100%' }}>
-            <Typography variant="h5" mb={2}>
-                کرایه‌های فعال
-            </Typography>
+        <Card variant="" sx={{ padding: 2, margin: 2, height: '100%' }} style={{borderRadius: 20}} className={"demand-card-bg"}>
             <DataGrid
                 rows={rents ? rents : []}
                 autoHeight={true}
                 columns={columns}
-                pageSize={5}
-                rowsPerPageOptions={[5]}
+                pageSize={20}
+                rowsPerPageOptions={[20]}
             />
             <FinishRentDialog {...dialogData} onSubmit={onSubmit} onClose={() => setDialogData({...dialogData, isOpen: false})} />
         </Card>

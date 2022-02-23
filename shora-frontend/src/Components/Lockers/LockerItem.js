@@ -12,7 +12,7 @@ export default function LockerItem({ locker, onClick }) {
 
     return (
         <ButtonBase onClick={onClick} sx={{ width: '100%' }}>
-            <Card sx={{ height: "150px", width: '100%' }}>
+            <Card sx={{ height: "150px", width: '100%', borderRadius: 3 }} className="demand-card-bg on-hover-grey">
                 <CardContent>
                     <Box mb={6} sx={{ textAlign: 'center', border: "1px solid " + color, borderRadius: "4px", color: color, padding: "4px", fontFamily: "arial", fontSize: "18px" }}>
                         {letter.toUpperCase() + number}

@@ -34,7 +34,7 @@ export default function EventItem({ event, onAddUser, expanded, onExpand, onEdit
                 <RegisterInEventForm event={event} sx={{ marginBottom: 2 }} onSuccess={(user) => onAddUser(user)} />
                 <Card variant='outlined' sx={{ padding: 2 }}>
                     <Typography sx={{ marginBottom: 2 }} variant='h6'>
-                        کاربران ثبت‌نام شده
+                        اعضای شورا ثبت‌نام شده
                     </Typography>
                     <UsersGrid users={event.users} showColumns={['id', 'name', 'surname', 'student_number']} />
                 </Card>

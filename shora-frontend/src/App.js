@@ -27,36 +27,96 @@ import LostAndFoundPage from "./Pages/LostAndFoundPage";
 import DemandsPage from './Pages/DemandsPage';
 
 function App() {
-
-  const theme = createTheme({
+  const lightTheme = createTheme({
+    breakpoints: {
+      values: {
+        xs: 0,
+        sm: 600,
+        md: 900,
+        lg: 1200,
+        xl: 1536,
+        xxl: 2000,
+      }
+    },
+    palette: {
+      mode: 'light',
+      primary: {
+        main: '#e55c00',
+      },
+      secondary: {
+        light: '#ffe900',
+        main: '#ffe900',
+        contrastText: '#ffcc00',
+      },
+    },
     direction: "rtl",
     typography: {
       fontFamily: "B Nazanin",
       fontSize: 16,
     },
-  })
+  });
+
+  const darkTheme = createTheme({
+    palette: {
+      mode: 'dark',
+      primary: {
+        main: '#e55c00',
+      },
+      secondary: {
+        light: '#ffe900',
+        main: '#ffe900',
+        contrastText: '#ffcc00',
+      },
+    },
+    direction: "rtl",
+    typography: {
+      fontFamily: "B Nazanin",
+      fontSize: 16,
+    },
+  });
+
+  const [theme, setTheme] = React.useState('light');
+
+  const [selectedItem, setSelectedItem] = React.useState("اعضای شورا");
+
+  React.useEffect(() => {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => setTheme(e.matches ? 'dark' : 'light'));
+    setTheme(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+    return () => {
+      window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', () => { });
+    }
+  }, []);
 
   return (
     <CookiesProvider>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme == 'light' ? lightTheme : darkTheme}>
         <div dir='rtl'>
           <RecoilRoot>
             <RecoilNexus />
             <Routes>
+              
               <Route index={true} element={<MainPage />} />
               <Route path="/login" element={<LoginPage />} />
-              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/register" element={<RegisterPage isForRegister="true"/>} />
+              <Route path="/forgot-password" element={<RegisterPage isForRegister="false"/>} />
               <Route path="/reset-password/:hash" element={<PasswordResetPage />} />
               <Route path="/home" element={<ProtectedRoute />}>
-                <Route path="" element={<HomePage />}>
-                  <Route path="users" element={<UsersPage />} />
-                  <Route path="rents" element={<RentsPage />} />
-                  <Route path="lockers" element={<LockersPage />} />
-                  <Route path="transactions" element={<TransactionsPage />} />
-                  <Route path="lost-and-found" element={<LostAndFoundPage />} />
-                  <Route path="events" element={<EventsPage />}/>
-                  <Route path="demands" element={<DemandsPage />} />
-                  <Route path="demands/:id" element={<DemandsPage />} />
+                <Route path="" element={<HomePage selectedItem={selectedItem} setSelectedItem={setSelectedItem} />}>
+                  {/* <AnimatedSwitch
+                    atEnter={{ opacity: 0 }}
+                    atLeave={{ opacity: 0 }}
+                    atActive={{ opacity: 1 }}
+                    className="switch-wrapper"
+                  > */}
+                    <Route path="users" element={<UsersPage setSelectedItem={setSelectedItem} />} />
+                    <Route path="rents" element={<RentsPage setSelectedItem={setSelectedItem} />} />
+                    <Route path="lockers" element={<LockersPage setSelectedItem={setSelectedItem} />} />
+                    <Route path="transactions" element={<TransactionsPage setSelectedItem={setSelectedItem} />} />
+                    <Route path="lost-and-found" element={<LostAndFoundPage setSelectedItem={setSelectedItem} />} />
+                    <Route path="events" element={<EventsPage setSelectedItem={setSelectedItem} />}/>
+                    <Route path="demands" element={<DemandsPage setSelectedItem={setSelectedItem} />} />
+                    <Route path="demands/:id" element={<DemandsPage />} />
+                  {/* </AnimatedSwitch> */}
                 </Route>
               </Route>
             </Routes>
@@ -75,7 +135,7 @@ function ProtectedRoute() {
     setUser(userCookie.user)
     return (
       <div>
-        <h2>Loading...</h2>
+        {/* <h2>Loading...</h2> */}
       </div>
     )
   }

@@ -33,7 +33,7 @@ class RentController extends Controller
         $rent_user = User::where('id', $request->user_id)->first();
         $rentable = (Rent::mapType($request->rentable_type))::where('id', $request->rentable_id)->first();
         if (!$rentable)
-            return response()->json(['status' => 'error', 'message' => 'شماره لاکر / کتاب نادرست می‌باشد']);
+            return response()->json(['status' => 'error', 'message' => 'شماره کمد / کتاب نادرست می‌باشد']);
         if (!$rent_user)
             return response()->json(['status' => 'error', 'message' => 'کاربری با این شماره وجود ندارد']);
         $rent = Rent::create([

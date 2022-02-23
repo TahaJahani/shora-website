@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, AppBar, Divider, Drawer, List, Toolbar, IconButton, Typography, Button, Stack } from '@mui/material'
+import { Box, Collapse, AppBar, Divider, Drawer, List, Toolbar, IconButton, Typography, Button, Stack } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import CssBaseline from '@mui/material/CssBaseline';
 import { useRecoilState } from 'recoil';
@@ -32,14 +32,25 @@ function HomePage(props) {
             <SideAvatar />
             <List>
                 <Divider />
-                {user.roles.map((role) => (
+                {
+                user.roles.includes("owner") ? (
+                    <div key={"owner"}>
+                        <RolesAccess selectedItem={props.selectedItem} role={"owner"} onChanged={(name) => {setTitle(name); handleDrawerToggle();}}/>
+                        <Divider />
+                    </div>
+                 ) :
+                user.roles.map((role) => (
                     <div key={role}>
-                        <RolesAccess role={role} onChanged={(name) => {setTitle(name); handleDrawerToggle()}}/>
+                        <RolesAccess selectedItem={props.selectedItem} role={role} onChanged={(name) => {setTitle(name); handleDrawerToggle();}}/>
                         <Divider />
                     </div>
                 ))}
             </List>
-
+            {/* <div className="textCenter">
+                <Button variant='text'>
+                    درباره‌ی ما
+                </Button>
+            </div> */}
         </div>
     );
 
@@ -68,7 +79,9 @@ function HomePage(props) {
                 <Box
                     component="nav"
                     sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}>
+                        <Collapse orientation="horizontal" in={mobileOpen}>
                     <Drawer
+                        transitionDuration={0}
                         dir="rtl"
                         container={container}
                         variant="temporary"
@@ -82,7 +95,10 @@ function HomePage(props) {
                         }}>
                         {drawer}
                     </Drawer>
+                    </Collapse>
+                    {/* <Collapse orientation="horizontal" in={mobileOpen}> */}
                     <Drawer
+                         transitionDuration={0}
                         anchor='right'
                         variant="permanent"
                         sx={{
@@ -93,9 +109,11 @@ function HomePage(props) {
                     >
                         {drawer}
                     </Drawer>
+                    {/* </Collapse> */}
                 </Box>
             </Box>
-            <Box component="main" sx={{ p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` }, mt: {xs: `${appBarHeight}px`, sm: 0} }}>
+            {/* <Box component="main" sx={{ p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` }, mt: {xs: `${appBarHeight}px`, sm: 0} }}> */}
+            <Box component="main" sx={{ p: 3, width: '100%', mt: {xs: `${appBarHeight}px`, sm: 0} }}>
                 <Outlet />
             </Box>
             <CompleteUserInfoDialog open={!dataIsComplete} onSuccess={(data) => {

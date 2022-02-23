@@ -18,6 +18,12 @@ export default function AddDemandForm({ sx, onDemandAdded }) {
     const [demandsCategories, setDemandsCategories] = useRecoilState(demandCategoryAtom)
     const [selectedCategory, setSelectedCategory] = React.useState('')
 
+    React.useEffect(() => {
+        if (demandsCategories.length > 0) {
+            setSelectedCategory(demandsCategories[0].id)
+        } 
+    });
+
     const submitClicked = () => {
         setLoading(true)
         console.log({ body: body, category_id: selectedCategory })
@@ -32,8 +38,8 @@ export default function AddDemandForm({ sx, onDemandAdded }) {
     }
 
     return (
-        <Card sx={{ ...sx, padding: 2 }} elevation={2}>
-            <Typography variant='h6'>
+        <Card variant="" component='form' sx={{ ...sx, padding: 2, margin: 2 }} style={{borderRadius: 20}}>
+            <Typography variant='h5' sx={{mr: 2}}>
                 ثبت درخواست جدید
             </Typography>
             <CardContent>
@@ -41,7 +47,7 @@ export default function AddDemandForm({ sx, onDemandAdded }) {
                     multiline rows={5}
                     inputProps={{ maxLength: 500 }}
                     helperText={`500 / ${body.length}`}
-                    label="متن درخواست"
+                    placeholder="متن درخواست"
                     value={body}
                     onChange={(e) => { setError(''); setBody(e.target.value) }}
                     sx={{ marginBottom: 2 }} />
@@ -50,22 +56,30 @@ export default function AddDemandForm({ sx, onDemandAdded }) {
             <CardActions>
                 <Grid container justifyContent='space-between' alignItems='end' spacing={2}>
                     <Grid item xs={12} sm={3} md={4}>
+                        <span dir="rtl">
                         <FullWidthTextField
                             value={selectedCategory}
                             select
-                            label="دسته‌ی درخواست"
-                            onChange={(e) => { setSelectedCategory(e.target.value) }} >
+                            onChange={(e) => { setSelectedCategory(e.target.value) }}
+                            // className={"option-picker"}
+                            >
                             {demandsCategories.map((option) => (
                                 <MenuItem key={option.id} value={option.id}>
                                     {option.name}
                                 </MenuItem>
                             ))}
                         </FullWidthTextField>
+                        </span>
                     </Grid>
-                    <Grid item xs={12} md={1} sm={2}>
+                    {/* <Grid item xs={12} md={1} sm={2}>
                     <LoadingButton sx={{width: '100%'}} loading={loading} variant='contained' onClick={submitClicked}>
                         ثبت
                     </LoadingButton>
+                    </Grid> */}
+                    <Grid item xs={12} sm={1} md={1} justifyItems='flex-end' className={"submit-button"}>
+                        <LoadingButton loading={loading} variant="contained" sx={{ width: '100%' }} onClick={submitClicked}>
+                            <span style={{fontSize: 20, fontWeight: 'bold'}}>ثبت</span>
+                        </LoadingButton>
                     </Grid>
                 </Grid>
             </CardActions>

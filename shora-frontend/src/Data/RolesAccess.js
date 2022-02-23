@@ -14,75 +14,98 @@ import { Divider } from '@mui/material';
 import translate from '../Helpers/translate';
 
 
-const RolesAccess = ({ role, onChanged }) => {
+const RolesAccess = ({ role, onChanged, selectedItem }) => {
+
+    
 
     const navigate = useNavigate()
 
     const onClick = (path) => {
         onChanged(translate(path));
-        navigate(path)
+        navigate(path);
     }
 
     const usersItem = (
-        <ListItem button key='کاربران' onClick={() => onClick('users')}>
-            <ListItemIcon>
+        <ListItem button key='اعضای شورا' onClick={() => onClick('users')}
+        className="on-hover-grey"
+        style={{backgroundColor: (selectedItem == 'اعضای شورا') ? '#e55c0077' : 'transparent'}}
+        >
+            <ListItemIcon sx={{ml: -2}}>
                 <GroupIcon />
             </ListItemIcon>
-            <ListItemText primary='کاربران' />
+            <ListItemText primary='اعضای شورا' style={{textAlign: 'right'}} />
         </ListItem>
     )
 
     const rentsItem = (
-        <ListItem button key='کرایه‌ها' onClick={() => onClick('rents')}>
-            <ListItemIcon>
+        <ListItem button key='کرایه‌ها' onClick={() => onClick('rents')}
+        className="on-hover-grey"
+        style={{backgroundColor: (selectedItem == 'کرایه‌ها') ? '#e55c0077' : 'transparent'}}
+        >
+            <ListItemIcon sx={{ml: -2}}>
                 <PaidIcon />
             </ListItemIcon>
-            <ListItemText primary='کرایه‌ها' />
+            <ListItemText primary='کرایه‌ها' style={{textAlign: 'right'}} />
         </ListItem>
     )
 
     const lockersItem = (
-        <ListItem button key='لاکرها' onClick={() => onClick('lockers')}>
-            <ListItemIcon>
+        <ListItem button key='کمدها' onClick={() => onClick('lockers')}
+        className="on-hover-grey"
+        style={{backgroundColor: (selectedItem == 'کمدها') ? '#e55c0077' : 'transparent'}}
+        >
+            <ListItemIcon sx={{ml: -2}}>
                 <LockIcon />
             </ListItemIcon>
-            <ListItemText primary='لاکرها' />
+            <ListItemText primary='کمدها' style={{textAlign: 'right'}} />
         </ListItem>
     )
 
     const transactionsItem = (
-        <ListItem button key='تراکنش‌ها' onClick={() => onClick('transactions')}>
-            <ListItemIcon>
+        <ListItem button key='تراکنش‌ها' onClick={() => onClick('transactions')}
+        className="on-hover-grey"
+        style={{backgroundColor: (selectedItem == 'تراکنش‌ها') ? '#e55c0077' : 'transparent'}}
+        >
+            <ListItemIcon sx={{ml: -2}}>
                 <CreditCardIcon />
             </ListItemIcon>
-            <ListItemText primary='تراکنش‌ها' />
+            <ListItemText primary='تراکنش‌ها' style={{textAlign: 'right'}} />
         </ListItem>
     )
 
     const lostAndFoundItem = (
-        <ListItem button key='اشیاء پیدا شده' onClick={() => onClick('lost-and-found')}>
-            <ListItemIcon>
+        <ListItem button key='اشیای پیدا شده' onClick={() => onClick('lost-and-found')}
+        className="on-hover-grey"
+        style={{backgroundColor: (selectedItem == 'اشیای پیدا شده') ? '#e55c0077' : 'transparent'}}
+        >
+            <ListItemIcon sx={{ml: -2}}>
                 <TravelExploreIcon />
             </ListItemIcon>
-            <ListItemText primary='اشیاء پیدا شده' />
+            <ListItemText primary='اشیای پیدا شده' style={{textAlign: 'right'}} />
         </ListItem>
     )
 
     const eventsItem = (
-        <ListItem button key='رویدادها' onClick={() => onClick('events')}>
-            <ListItemIcon>
+        <ListItem button key='رویدادها' onClick={() => onClick('events')}
+        className="on-hover-grey"
+        style={{backgroundColor: (selectedItem == 'رویدادها') ? '#e55c0077' : 'transparent'}}
+        >
+            <ListItemIcon sx={{ml: -2}}>
                 <EventIcon />
             </ListItemIcon>
-            <ListItemText primary='رویدادها' />
+            <ListItemText primary='رویدادها' style={{textAlign: 'right'}} />
         </ListItem>
     )
 
     const demandsItem = (
-        <ListItem button key='درخواست‌ها' onClick={() => onClick('demands')}>
-            <ListItemIcon>
+        <ListItem button key='درخواست‌ها' onClick={() => onClick('demands')}
+        className="on-hover-grey"
+        style={{backgroundColor: (selectedItem == 'درخواست‌ها') ? '#e55c0077' : 'transparent'}}
+        >
+            <ListItemIcon sx={{ml: -2}}>
                 <SchoolIcon />
             </ListItemIcon>
-            <ListItemText primary='درخواست‌ها' />
+            <ListItemText primary='درخواست‌ها' style={{textAlign: 'right'}} />
         </ListItem>
     )
 
@@ -95,10 +118,12 @@ const RolesAccess = ({ role, onChanged }) => {
                     {lostAndFoundItem}
                     <Divider />
                     {rentsItem}
+                    <Divider />
                     {transactionsItem}
+                    <Divider />
                     {lockersItem}
                     <Divider />
-                    {eventsItem}
+                    {/* {eventsItem} TODO */}
                     <Divider />
                     {demandsItem}
                 </div>
@@ -117,7 +142,9 @@ const RolesAccess = ({ role, onChanged }) => {
             return (
                 <div>
                     {rentsItem}
+                    <Divider />
                     {transactionsItem}
+                    <Divider />
                     {lockersItem}
                 </div>
             );
@@ -132,7 +159,7 @@ const RolesAccess = ({ role, onChanged }) => {
         case 'welfare':
             return (
                 <div>
-                    {eventsItem}
+                    {/* {eventsItem} TODO */}
                 </div>
             )
         default:
