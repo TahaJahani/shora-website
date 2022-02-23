@@ -116,8 +116,8 @@ function App() {
                     <Route path="lost-and-found" element={<LostAndFoundPage setSelectedItem={setSelectedItem} />} />
                     <Route path="events" element={<EventsPage setSelectedItem={setSelectedItem} />}/>
                     <Route path="demands" element={<DemandsPage setSelectedItem={setSelectedItem} />} />
-                    <Route path="demands/:id" element={<DemandsPage />} />
-                    <Route path="notifications" element={<NotificationsPage />} />
+                    <Route path="demands/:id" element={<DemandsPage setSelectedItem={setSelectedItem}/>} />
+                    <Route path="notifications" element={<NotificationsPage setSelectedItem={setSelectedItem}/>} />
                   {/* </AnimatedSwitch> */}
                 </Route>
               </Route>

@@ -29,8 +29,6 @@ import DemandsPage from './Pages/DemandsPage';
 
 function App() {
 
-  console.log(process.env)
-
   const lightTheme = createTheme({
     breakpoints: {
       values: {

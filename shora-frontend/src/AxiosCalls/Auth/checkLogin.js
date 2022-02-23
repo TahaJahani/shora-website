@@ -1,4 +1,6 @@
 import links from "../../Data/Links";
+import { setRecoil } from "recoil-nexus";
+import {notificationsAtom} from "../../Atoms/notificationsAtom"
 const axios = require('axios')
 
 export default function checkLogin(user, onSuccess, onFailure) {
@@ -13,6 +15,7 @@ export default function checkLogin(user, onSuccess, onFailure) {
     axios(options)
         .then((res) => {
             if (res.data.status === 'ok') {
+                setRecoil(notificationsAtom, res.data.data.notifications)
                 onSuccess();
             } else{
                 onFailure();

@@ -27,6 +27,7 @@ const links = {
     'banDemand': base_url + "/demands/ban-user",
     'changeDemandStatus': base_url + "/demands/status",
     'getDemandCategories': base_url + "/demands/categories",
+    'getNotifications': base_url + '/notifications',
 }
 
 export default links;

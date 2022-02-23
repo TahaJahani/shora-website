@@ -1,8 +1,18 @@
 import { Typography } from '@mui/material';
 import * as React from 'react'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import getNotifications from '../AxiosCalls/Notifications/getNotifications'
+import Notification from '../Components/Notifications/Notification';
 
-function NotificationsPage() {
+function NotificationsPage({setSelectedItem}) {
+
+    const [notifications, setNotifications] = React.useState([])
+    React.useEffect(() => {
+        setSelectedItem('اطلاعیه‌ها');
+        getNotifications((res) => {
+            setNotifications(res.data.notifications)
+        }, () => {})
+    }, [])
     return (
         <div>
             <ReactCSSTransitionGroup
@@ -12,9 +22,7 @@ function NotificationsPage() {
                 transitionLeaveTimeout={200}
                 transitionName={'SlideIn'}
             >
-                <Typography>
-                    Hello World!
-                </Typography>
+                {notifications.map(notif => <Notification {...notif}/>)}
             </ReactCSSTransitionGroup>
         </div>
     )

@@ -6,6 +6,7 @@ import DownloadIcon from '@mui/icons-material/Download';
 import { useRecoilState } from 'recoil'
 import { useNavigate } from 'react-router-dom';
 import { userAtom } from '../Atoms/userAtom';
+import { notificationsAtom } from '../Atoms/notificationsAtom';
 import { useCookies } from 'react-cookie';
 import checkLogin from "../AxiosCalls/Auth/checkLogin"
 import links from '../Data/Links';
@@ -15,6 +16,7 @@ const axios = require('axios')
 function LoginPage() {
     const navigate = useNavigate()
     const [user, setUser] = useRecoilState(userAtom)
+    const [notifications, setNotifications] = useRecoilState(notificationsAtom)
     const [username, setUsername] = React.useState();
     const [password, setPassword] = React.useState();
     const [error, setError] = React.useState();
@@ -37,6 +39,7 @@ function LoginPage() {
                 if (res.data.status === 'ok') {
                     setLoading(false);
                     setUserCookie('user', JSON.stringify(res.data.data.user))
+                    setNotifications(res.data.data.notifications)
                     setUser(res.data.data.user)
                     navigate('/home/demands');
                 } else {

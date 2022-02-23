@@ -17,7 +17,7 @@ class NotificationController extends Controller
         $user = Auth::user();
         $lastSeen = $user->last_seen_notification_id;
         $data = Notification::select('notifications.*', 
-            DB::raw("CASE WHEN notifications.id > $lastSeen THEN TRUE ELSE FALSE END AS seen"))->orderBy('id', 'DESC')->get();
+            DB::raw("CASE WHEN notifications.id > $lastSeen THEN FALSE ELSE TRUE END AS seen"))->orderBy('id', 'DESC')->get();
         User::where('id', $user->id)->update(['last_seen_notification_id' => $data[0]->id]);
         return response()->json(['status' =>'ok', 'data' => ['notifications' => NotificationResource::collection($data)]]);
     }
