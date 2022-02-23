@@ -6,6 +6,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\LockerController;
 use App\Http\Controllers\LostAndFoundContoller;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\RentController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
@@ -92,6 +93,11 @@ Route::prefix('demands')->middleware(['auth:sanctum'])->group(function() {
     Route::prefix('categories')->group(function() {
         Route::get('/', [DemandCategoryController::class, 'get']);
     });
+});
+
+Route::prefix('/notifications')->middleware('auth:sanctum')->group(function() {
+    Route::get('/', [NotificationController::class, 'getAll']);
+    Route::middleware('ability:owner,admin')->post('/', [NotificationController::class, 'add']);
 });
 
 Route::get('/install', function (Request $request) {

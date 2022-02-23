@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notification;
 use App\Models\PasswordReset;
 use App\Models\Role;
 use App\Models\User;
@@ -81,9 +82,12 @@ class UserController extends Controller
         if (!$request->token)
             return response()->json(['status' => 'error', 'message' => 'unauthorized']);
         $token = $request->token;
-        if (PersonalAccessToken::findToken($token))
-            return response()->json(['status' => 'ok']);
-        else
+        $token = PersonalAccessToken::findToken($token);
+        if ($token){
+            $user = $token->tokenable()->first();
+            $newNotifs = Notification::where('id', '>', $user->last_seen_notification_id)->count();
+            return response()->json(['status' => 'ok', ['data' => ['notifications' => $newNotifs]]]);
+        }else
             return response()->json(['status' => 'error', 'message' => 'unauthorized']);
     }
 
@@ -129,6 +133,7 @@ class UserController extends Controller
             }, $user->roles->toArray());
             sort($roles);
             $token = $user->createToken('default name', $roles)->plainTextToken;
+            $newNotifs = Notification::where('id', '>', $user->last_seen_notification_id)->count();
             $user = [
                 'name' => $user->name,
                 'surname' => $user->surname,
@@ -136,7 +141,7 @@ class UserController extends Controller
                 'roles' => $roles,
                 'token' => $token,
             ];
-            return response()->json(['status' => 'ok', 'message' => 'خوش آمدید', 'data' => ['user' => $user]]);
+            return response()->json(['status' => 'ok', 'message' => 'خوش آمدید', 'data' => ['user' => $user, 'notifications' => $newNotifs]]);
         }
         return response()->json(['status' => 'error', 'message' => 'نام کاربری یا رمز عبور نادرست می‌باشد']);
     }
