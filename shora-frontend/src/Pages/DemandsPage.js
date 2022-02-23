@@ -154,13 +154,13 @@ export default function DemandsPage({setSelectedItem}) {
         getDemandCategories(() => { }, () => { })
     }, []);
 
-    React.useEffect(() => {
-        let myWebSocket = new WebSocket("ws://localhost:9091");
-        myWebSocket.onmessage = function(evt) {
-            getDemandCategories(() => { }, () => { });
-            setSnackbarOpen(true);
-        };
-    });
+    // React.useEffect(() => {
+    //     let myWebSocket = new WebSocket("ws://localhost:9091");
+    //     myWebSocket.onmessage = function(evt) {
+    //         getDemandCategories(() => { }, () => { });
+    //         setSnackbarOpen(true);
+    //     };
+    // });
 
     React.useEffect(() => {
         changePage(1)
@@ -305,11 +305,11 @@ export default function DemandsPage({setSelectedItem}) {
         
         </ReactCSSTransitionGroup>
 
-        <Snackbar open={isSnackbarOpen} autoHideDuration={6000} onClose={() => setSnackbarOpen(false)}>
+        {/* <Snackbar open={isSnackbarOpen} autoHideDuration={6000} onClose={() => setSnackbarOpen(false)}>
             <span dir="ltr"><Alert onClose={() => setSnackbarOpen(false)} severity={"info"}>
                 درخواست جدیدی ثبت شده است
             </Alert></span>
-        </Snackbar>
+        </Snackbar> */}
 
         <Fab
                 sx={{
