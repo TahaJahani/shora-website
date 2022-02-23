@@ -77,7 +77,7 @@ function App() {
 
   const [theme, setTheme] = React.useState('light');
 
-  const [selectedItem, setSelectedItem] = React.useState("اعضای شورا");
+  const [selectedItem, setSelectedItem] = React.useState("کاربران");
 
   React.useEffect(() => {
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => setTheme(e.matches ? 'dark' : 'light'));

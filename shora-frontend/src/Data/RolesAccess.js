@@ -26,14 +26,14 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
     }
 
     const usersItem = (
-        <ListItem button key='اعضای شورا' onClick={() => onClick('users')}
+        <ListItem button key='کاربران' onClick={() => onClick('users')}
         className="on-hover-grey"
-        style={{backgroundColor: (selectedItem == 'اعضای شورا') ? '#e55c0077' : 'transparent'}}
+        style={{backgroundColor: (selectedItem == 'کاربران') ? '#e55c0077' : 'transparent'}}
         >
             <ListItemIcon sx={{ml: -2}}>
                 <GroupIcon />
             </ListItemIcon>
-            <ListItemText primary='اعضای شورا' style={{textAlign: 'right'}} />
+            <ListItemText primary='کاربران' style={{textAlign: 'right'}} />
         </ListItem>
     )
 

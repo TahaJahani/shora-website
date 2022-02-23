@@ -11,7 +11,7 @@ export default function ({setSelectedItem}) {
 
     
     React.useEffect(() => {
-        setSelectedItem('اعضای شورا');
+        setSelectedItem('کاربران');
         getAllUsers(user, (res) => {setUsersList(res.data)}, () => {})
     }, [])
     return (
