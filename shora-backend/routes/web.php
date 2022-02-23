@@ -13,10 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::fallback(function() {
     return view('welcome');
 });
 
-Route::get('/login', function() {
-    return response()->json(['status'=>'error', 'message' => 'لطفا ابتدا وارد شوید']);
-})->name('login');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+// Route::get('/login', function() {
+//     return response()->json(['status'=>'error', 'message' => 'لطفا ابتدا وارد شوید']);
+// })->name('login');
