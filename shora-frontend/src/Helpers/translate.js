@@ -19,6 +19,7 @@ const dictionary = {
         'lost-and-found': 'اشیای پیدا شده',
         'events': 'رویدادها',
         'demands': 'درخواست‌ها',
+        'notifications': 'اطلاعیه‌ها',
     }
 }
 

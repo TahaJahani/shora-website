@@ -9,6 +9,7 @@ import LockersPage from './Pages/LockersPage';
 import EventsPage from './Pages/EventsPage';
 import RegisterPage from './Pages/RegisterPage';
 import PasswordResetPage from './Pages/PasswordResetPage';
+import NotificationsPage from './Pages/NotificationsPage';
 import React from 'react'
 import { CookiesProvider, useCookies } from 'react-cookie';
 import {
@@ -116,6 +117,7 @@ function App() {
                     <Route path="events" element={<EventsPage setSelectedItem={setSelectedItem} />}/>
                     <Route path="demands" element={<DemandsPage setSelectedItem={setSelectedItem} />} />
                     <Route path="demands/:id" element={<DemandsPage />} />
+                    <Route path="notifications" element={<NotificationsPage />} />
                   {/* </AnimatedSwitch> */}
                 </Route>
               </Route>

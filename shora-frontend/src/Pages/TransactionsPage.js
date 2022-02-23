@@ -4,42 +4,42 @@ import AddTransactionForm from '../Components/Transactions/AddTransactionForm'
 import TransactionsGrid from '../Components/Transactions/TransactionsGrid'
 import { transactionsAtom } from '../Atoms/transactionsAtom'
 import getTransactions from "../AxiosCalls/Transactions/getTransactions"
-import { Alert, Backdrop, CircularProgress, Dialog, Fab, Grid, Pagination, Snackbar, Paper, IconButton, InputBase, Divider, Menu, MenuItem, AlertTitle, Collapse, Autocomplete, TextField } from '@mui/material'
+import { Dialog, Fab } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-export default function TransactionsPage({setSelectedItem}) {
+export default function TransactionsPage({ setSelectedItem }) {
 
     const [transactions, setTransaction] = useRecoilState(transactionsAtom);
 
     React.useEffect(() => {
         setSelectedItem('تراکنش‌ها');
         if (!transactions)
-            getTransactions(() => {}, () => {})
+            getTransactions(() => { }, () => { })
     }, [])
 
     const [dialogOpen, setDialogOpen] = React.useState(false);
 
     return (
-        <div style={{height: '100%'}}>
+        <div style={{ height: '100%' }}>
             <ReactCSSTransitionGroup
-            transitionAppear={true}
-            transitionAppearTimeout={600}
-            transitionEnterTimeout={600}
-            transitionLeaveTimeout={200}
-            transitionName={'SlideIn'}
+                transitionAppear={true}
+                transitionAppearTimeout={600}
+                transitionEnterTimeout={600}
+                transitionLeaveTimeout={200}
+                transitionName={'SlideIn'}
             >
-            <TransactionsGrid transactions={transactions}/>
+                <TransactionsGrid transactions={transactions} />
             </ReactCSSTransitionGroup>
 
             <Dialog
-                style={{borderRadius: 20}}
+                style={{ borderRadius: 20 }}
                 dir='rtl'
                 open={dialogOpen}
                 onClose={() => setDialogOpen(false)}
                 fullWidth={true}
                 maxWidth='md'>
-                    <AddTransactionForm onCancel={() => setDialogOpen(false)} />
+                <AddTransactionForm onCancel={() => setDialogOpen(false)} />
             </Dialog>
 
             <Fab

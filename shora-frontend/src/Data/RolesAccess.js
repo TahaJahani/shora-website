@@ -9,6 +9,7 @@ import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import EventIcon from '@mui/icons-material/Event';
 import SchoolIcon from '@mui/icons-material/School';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 import { useNavigate } from 'react-router-dom';
 import { Divider } from '@mui/material';
 import translate from '../Helpers/translate';
@@ -109,6 +110,18 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
         </ListItem>
     )
 
+    const notificationsItem = (
+        <ListItem button key='اطلاعیه‌ها' onClick={() => onClick('notifications')}
+        className="on-hover-grey"
+        style={{backgroundColor: (selectedItem == 'اطلاعیه‌ها') ? '#e55c0077' : 'transparent'}}
+        >
+            <ListItemIcon sx={{ml: -2}}>
+                <NotificationsIcon />
+            </ListItemIcon>
+            <ListItemText primary='اطلاعیه‌ها' style={{textAlign: 'right'}} />
+        </ListItem>
+    )
+
     switch (role) {
         case 'owner':
             return (
@@ -126,6 +139,8 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
                     {/* {eventsItem} TODO */}
                     <Divider />
                     {demandsItem}
+                    <Divider />
+                    {notificationsItem}
                 </div>
             )
         case 'admin':
@@ -136,6 +151,8 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
                     {lostAndFoundItem}
                     <Divider />
                     {demandsItem}
+                    <Divider />
+                    {notificationsItem}
                 </div>
             );
         case 'financial':
@@ -154,6 +171,8 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
                     {lostAndFoundItem}
                     <Divider />
                     {demandsItem}
+                    <Divider />
+                    {notificationsItem}
                 </div>
             )
         case 'welfare':
