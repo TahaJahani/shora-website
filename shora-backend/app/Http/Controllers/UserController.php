@@ -216,7 +216,7 @@ class UserController extends Controller
         ]);
 
         if ($validator->fails())
-        return response()->json(['status' => 'error', 'message' => $validator->errors()->first()]);
+            return response()->json(['status' => 'error', 'message' => $validator->errors()->first()]);
 
         $password_reset = PasswordReset::where('hash', $request->hash)->first();
         if (!$password_reset)

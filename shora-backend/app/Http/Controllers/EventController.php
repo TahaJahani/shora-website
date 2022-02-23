@@ -49,7 +49,7 @@ class EventController extends Controller
     public function edit(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            "event_id" => 'required|numberic',
+            "event_id" => 'required|numeric',
             "start_at" => 'date',
             "finish_at" => 'date',
             "fee" => 'numeric|min:0',

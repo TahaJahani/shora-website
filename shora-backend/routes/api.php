@@ -37,7 +37,7 @@ Route::prefix('/auth')->middleware('auth:sanctum')->group(function () {
     Route::withoutMiddleware('auth:sanctum')->post('/login', [UserController::class, 'login']);
     Route::post('/change-password', [UserController::class, 'changePassword']);
     Route::post('/logout', [UserController::class, 'logout']);
-    Route::middleware('abilities:admin,owner')->get('/{student_number}', [UserController::class, 'getUser'])
+    Route::middleware('ability:admin,owner')->get('/{student_number}', [UserController::class, 'getUser'])
         ->whereNumber('student_number');
 });
 
