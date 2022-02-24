@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\DemandCategoryController;
 use App\Http\Controllers\DemandController;
 use App\Http\Controllers\EventController;
@@ -63,6 +64,11 @@ Route::prefix('transactions')->middleware(['auth:sanctum', 'ability:owner,financ
 Route::prefix('lockers')->middleware(['auth:sanctum', 'ability:owner,financial'])->group(function() {
     Route::get('/', [LockerController::class, 'getLockers']);
     Route::get('/all', [LockerController::class, 'getLockersStatus']);
+});
+
+Route::prefix('books')->middleware(['auth:sanctum'])->group(function() {
+    Route::middleware('ability:owner,financial')->get('data/{id}', [BookController::class, 'getData'])->whereNumber('id');
+    Route::middleware('ability:owner,financial')->post('/', [BookController::class, 'add']);
 });
 
 Route::prefix('lost-and-found')->middleware(['auth:sanctum'])->group(function() {

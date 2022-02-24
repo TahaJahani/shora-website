@@ -9,6 +9,13 @@ class Book extends Model
 {
     use HasFactory;
 
+    public $incrementing = false;
+    public $timestamps = false;
+
+    public $fillable = [
+        'id', 'name', 'bookcase', 'shelf', 'pages'
+    ];
+
     public function rents() {
         return $this->morphMany(Rent::class, 'rentable');
     }
