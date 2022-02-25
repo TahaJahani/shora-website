@@ -133,6 +133,18 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
         </ListItem>
     )
 
+    const booksItem = (
+        <ListItem button key='کتاب‌ها' onClick={() => onClick('books')}
+            className="on-hover-grey"
+            style={{ backgroundColor: (selectedItem == 'کتاب‌ها') ? '#e55c0077' : 'transparent' }}
+        >
+            <ListItemIcon sx={{ ml: -2 }}>
+                <NotificationsIcon />
+            </ListItemIcon>
+            <ListItemText primary='کتاب‌ها' style={{ textAlign: 'right' }} />
+        </ListItem>   
+    )
+
     switch (role) {
         case 'owner':
             return (
@@ -152,6 +164,8 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
                     {demandsItem}
                     <Divider />
                     {notificationsItem}
+                    <Divider />
+                    {booksItem}
                 </div>
             )
         case 'admin':
@@ -174,6 +188,8 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
                     {transactionsItem}
                     <Divider />
                     {lockersItem}
+                    <Divider />
+                    {booksItem}
                 </div>
             );
         case 'user':

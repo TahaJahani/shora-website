@@ -26,6 +26,7 @@ import RecoilNexus from 'recoil-nexus';
 import TransactionsPage from './Pages/TransactionsPage';
 import LostAndFoundPage from "./Pages/LostAndFoundPage";
 import DemandsPage from './Pages/DemandsPage';
+import BookPage from './Pages/BookPage';
 
 function App() {
   const lightTheme = createTheme({
@@ -118,6 +119,7 @@ function App() {
                     <Route path="demands" element={<DemandsPage setSelectedItem={setSelectedItem} />} />
                     <Route path="demands/:id" element={<DemandsPage setSelectedItem={setSelectedItem}/>} />
                     <Route path="notifications" element={<NotificationsPage setSelectedItem={setSelectedItem}/>} />
+                    <Route path="books/:id" element={<BookPage />} />
                   {/* </AnimatedSwitch> */}
                 </Route>
               </Route>

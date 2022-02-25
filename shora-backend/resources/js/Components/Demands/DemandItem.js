@@ -48,7 +48,7 @@ export default function DemandItem({ demand, onLikeClicked, loading, variant = '
     };
 
     return (
-        <Card variant={variant} sx={{ ...sx, padding: 2, marginBottom: 2 }} onContextMenu={handleContextMenu} sx={{borderRadius: 5, padding: 2}} className={"demand-card-bg on-hover-light-grey"}>
+        <Card variant={variant} onContextMenu={handleContextMenu} sx={{...sx, borderRadius: 5, padding: 2}} className={"demand-card-bg on-hover-light-grey"}>
             <Menu
                 open={contextMenu !== null}
                 onClose={handleCloseContextMenu}

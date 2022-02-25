@@ -14,7 +14,6 @@ function MainPage() {
     React.useEffect(() => {
         if (userCookie && userCookie.user) {
             checkLogin(userCookie.user, () => {
-                console.log(userCookie.user)
                 setUser(userCookie.user)
                 navigate('/home')
             }, () => {

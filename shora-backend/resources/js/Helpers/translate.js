@@ -20,6 +20,7 @@ const dictionary = {
         'events': 'رویدادها',
         'demands': 'درخواست‌ها',
         'notifications': 'اطلاعیه‌ها',
+        'books': 'کتاب‌ها',
     }
 }
 
