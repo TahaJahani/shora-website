@@ -1,9 +1,9 @@
 import { ButtonBase, Card, CardActionArea, CardContent, CardHeader, Checkbox, Typography } from '@mui/material';
 import * as React from 'react'
 
-function CourseItem({ name, teacher, selected, onToggle }) {
+function CourseItem({ id, name, teacher, selected, onToggle }) {
     return (
-        <ButtonBase onClick={onToggle}>
+        <ButtonBase onClick={() => onToggle(id)}>
             <Card variant='outlined'>
                 <CardContent>
                     <Typography variant='h6'>

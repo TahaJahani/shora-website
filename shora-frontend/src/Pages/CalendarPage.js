@@ -20,11 +20,13 @@ function CalendarPage() {
     for (let d = new Date(firstDate.getTime()); d <= lastDate; d.setDate(d.getDate() + 1)) {
         daysCopy.push(new Date(d))
     }
-    let data = [
+    let [data, setData] = React.useState([
         {
+            id: 1,
             name: 'ساختمان‌های گسسته',
             teacher: 'دکتر ضرابی‌زاده',
             color: '#C5D0EB',
+            selected: false,
             assignments: [
                 {
                     type: 'homework',
@@ -39,9 +41,11 @@ function CalendarPage() {
             ]
         },
         {
+            id: 2,
             name: 'مدارهای منطقی',
             teacher: 'دکتر ارشدی',
             color: '#F5CBCB',
+            selected: false,
             assignments: [
                 {
                     type: 'homework',
@@ -55,22 +59,41 @@ function CalendarPage() {
                 }
             ]
         }
-    ]
+    ])
+
+    const onToggleCourse = (courseId) => {
+        setData(data.map(item => {
+            if (item.id == courseId)
+                return { ...item, selected: !item.selected }
+            return item
+        }))
+    }
+
+    const getIndexOfSelected = (courseId) => {
+        let index = -1
+        for (let i = 0 ; i < data.length; i++) {
+            if (data[i].selected)
+                index++
+            if (data[i].id == courseId)
+                return index
+        }
+    }
 
     return (
         <div>
-            <CourseSelection courses={data}/>
+            <CourseSelection courses={data} onToggleCourse={onToggleCourse} />
             <Div sx={{ overflow: 'auto', position: 'absolute', top: { xs: 404, sm: 348 }, left: 16, right: { xs: 36, sm: 256 }, bottom: -332 }}>
                 <Div sx={{ height: 150, position: 'sticky', top: 0, background: '#ffffffdf', zIndex: 5000, boxShadow: '0px 2px 4px #888888' }}>
                     <div style={{ position: 'absolute', right: 64, height: '100%' }}>
                         {data.map(course => {
-                            return (
-                                <Div sx={{ display: 'inline-block', height: '100%', width: 48, marginLeft: '16px', borderLeft: '1px solid' }}>
-                                    <Typography sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', textOrientation: 'mixed', writingMode: 'vertical-lr', width: '100%' }}>
-                                        {course.name}
-                                    </Typography>
-                                </Div>
-                            )
+                            if (course.selected)
+                                return (
+                                    <Div sx={{ display: 'inline-block', height: '100%', width: 48, marginLeft: '16px', borderLeft: '1px solid' }}>
+                                        <Typography sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', textOrientation: 'mixed', writingMode: 'vertical-lr', width: '100%' }}>
+                                            {course.name}
+                                        </Typography>
+                                    </Div>
+                                )
                         })}
                     </div>
                 </Div>
@@ -88,15 +111,17 @@ function CalendarPage() {
                             )
                         })}
                     </Div>
-                    {data.map((course, index) =>
-                        <Column offset={64 * index + 48} height={days.length * 100} label={course.name} />
-                    )}
                     {data.map((course, index) => {
-                        return course.assignments.map(assignment => {
-                            let offset = (Math.ceil(Math.abs(assignment.release_date - firstDate) / (1000 * 60 * 60 * 24)) - 1) * 100 + 5;
-                            let length = (Math.ceil(Math.abs(assignment.due_date - assignment.release_date) / (1000 * 60 * 60 * 24)) + 1) * 100 - 10
-                            return <Bar row={index + 1} offset={offset} length={length} color={course.color} />
-                        })
+                        if (course.selected)
+                            return <Column offset={64 * getIndexOfSelected(course.id) + 48} height={days.length * 100} label={course.name} />
+                    })}
+                    {data.map((course, index) => {
+                        if (course.selected)
+                            return course.assignments.map(assignment => {
+                                let offset = (Math.ceil(Math.abs(assignment.release_date - firstDate) / (1000 * 60 * 60 * 24)) - 1) * 100 + 5;
+                                let length = (Math.ceil(Math.abs(assignment.due_date - assignment.release_date) / (1000 * 60 * 60 * 24)) + 1) * 100 - 10
+                                return <Bar row={getIndexOfSelected(course.id) + 1} offset={offset} length={length} color={course.color} />
+                            })
                     })}
                 </div>
             </Div>

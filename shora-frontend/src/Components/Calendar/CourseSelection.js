@@ -9,7 +9,7 @@ function CourseSelection({ onToggleCourse, courses }) {
             <Grid container spacing={2}>
                 {courses.map(course =>
                     <Grid item xs={6} md={1.5}>
-                        <CourseItem name={course.name} teacher={course.teacher} />
+                        <CourseItem {...course} onToggle={onToggleCourse} />
                     </Grid>
                 )}
             </Grid>
