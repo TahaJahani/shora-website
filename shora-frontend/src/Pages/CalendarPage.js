@@ -7,6 +7,7 @@ import { unstable_styleFunctionSx } from '@mui/system';
 import CourseSelection from '../Components/Calendar/CourseSelection';
 import ColumnHeader from '../Components/Calendar/ColumnHeader';
 import DayHeader from '../Components/Calendar/DayHeader';
+import translate from '../Helpers/translate'
 
 const Div = styled('div')(unstable_styleFunctionSx);
 
@@ -46,7 +47,7 @@ function CalendarPage() {
                     due_date: new Date('2022-03-15'),
                 },
                 {
-                    type: 'exam',
+                    type: 'midterm',
                     release_date: new Date('2022-03-17'),
                     due_date: new Date('2022-03-17'),
                 }
@@ -65,7 +66,7 @@ function CalendarPage() {
                     due_date: new Date('2022-03-14'),
                 },
                 {
-                    type: 'exam',
+                    type: 'midterm',
                     release_date: new Date('2022-03-16'),
                     due_date: new Date('2022-03-16'),
                 }
@@ -84,7 +85,7 @@ function CalendarPage() {
                     due_date: new Date('2022-03-14'),
                 },
                 {
-                    type: 'exam',
+                    type: 'midterm',
                     release_date: new Date('2022-03-16'),
                     due_date: new Date('2022-03-16'),
                 }
@@ -103,7 +104,7 @@ function CalendarPage() {
                     due_date: new Date('2022-03-14'),
                 },
                 {
-                    type: 'exam',
+                    type: 'midterm',
                     release_date: new Date('2022-03-16'),
                     due_date: new Date('2022-03-16'),
                 }
@@ -122,7 +123,7 @@ function CalendarPage() {
                     due_date: new Date('2022-03-14'),
                 },
                 {
-                    type: 'exam',
+                    type: 'midterm',
                     release_date: new Date('2022-03-16'),
                     due_date: new Date('2022-03-16'),
                 }
@@ -141,7 +142,7 @@ function CalendarPage() {
                     due_date: new Date('2022-03-14'),
                 },
                 {
-                    type: 'exam',
+                    type: 'midterm',
                     release_date: new Date('2022-03-16'),
                     due_date: new Date('2022-03-16'),
                 }
@@ -160,7 +161,7 @@ function CalendarPage() {
                     due_date: new Date('2022-03-14'),
                 },
                 {
-                    type: 'exam',
+                    type: 'midterm',
                     release_date: new Date('2022-03-16'),
                     due_date: new Date('2022-03-16'),
                 }
@@ -178,7 +179,7 @@ function CalendarPage() {
                     due_date: new Date('2022-03-14'),
                 },
                 {
-                    type: 'exam',
+                    type: 'midterm',
                     release_date: new Date('2022-03-16'),
                     due_date: new Date('2022-03-16'),
                 }
@@ -226,7 +227,7 @@ function CalendarPage() {
                             return course.assignments.map(assignment => {
                                 let offset = (Math.ceil(Math.abs(assignment.release_date - firstDate) / (1000 * 60 * 60 * 24)) - 1) * setting.rowHeight + 5;
                                 let length = (Math.ceil(Math.abs(assignment.due_date - assignment.release_date) / (1000 * 60 * 60 * 24)) + 1) * setting.rowHeight - 10
-                                return <Bar columnWidth={setting.columnWidth} row={getIndexOfSelected(course.id) + 1} offset={offset} length={length} color={course.color} />
+                                return <Bar data={translate(assignment.type)} columnWidth={setting.columnWidth} row={getIndexOfSelected(course.id) + 1} offset={offset} length={length} color={course.color} />
                             })
                     })}
                 </div>

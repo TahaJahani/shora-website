@@ -6,7 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 
 const Div = styled('div')(unstable_styleFunctionSx);
 
-function ColumnHeader({ data, onAddClicked, height=150 }) {
+function ColumnHeader({ data, onAddClicked, height = 150 }) {
     return (
         <Div sx={{ height: height, position: 'sticky', top: 0, background: '#ffffffdf', zIndex: 2, boxShadow: '0px 2px 4px #888888' }}>
             <div style={{ position: 'absolute', right: 56, height: '100%' }}>
@@ -14,7 +14,7 @@ function ColumnHeader({ data, onAddClicked, height=150 }) {
                     if (course.selected)
                         return (
                             <Div sx={{ display: 'inline-block', height: '100%', width: 48, marginLeft: '16px', borderLeft: '1px solid' }}>
-                                <Typography sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', textOrientation: 'mixed', writingMode: 'vertical-lr', width: '100%' }}>
+                                <Typography sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center', textOrientation: 'mixed', writingMode: 'vertical-lr', width: '100%', height: '100%' }}>
                                     {course.name}
                                 </Typography>
                             </Div>

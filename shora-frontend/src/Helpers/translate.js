@@ -22,6 +22,11 @@ const dictionary = {
         'notifications': 'اطلاعیه‌ها',
         'books': 'کتاب‌ها',
         'calendar': 'تقویم آموزشی',
+        'homework': 'تمرین',
+        'midterm': 'میانترم',
+        'quiz': 'کوییز',
+        'project': 'پروژه',
+        'final': 'پایانترم',
     }
 }
 
