@@ -3,11 +3,10 @@ import { Paper } from '@mui/material'
 
 function Bar({ row, offset, length, width = 36, color, columnWidth = 
 64 }) {
-    let right = row * (columnWidth) - width - (columnWidth - width) / 2 + 48
+    let right = (row * columnWidth) - (columnWidth - width) / 2 + 4
     return (
         <div style={{
             width: width,
-            marginLeft: 12,
             height: length,
             background: color,
             position: 'absolute',
