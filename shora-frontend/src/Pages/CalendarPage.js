@@ -4,10 +4,9 @@ import Column from '../Components/Calendar/Column';
 import Day from '../Components/Calendar/Day';
 import styled from 'styled-components';
 import { unstable_styleFunctionSx } from '@mui/system';
-import { Typography } from '@mui/material';
 import CourseSelection from '../Components/Calendar/CourseSelection';
-import { ButtonBase, Card, CardContent } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
+import ColumnHeader from '../Components/Calendar/ColumnHeader';
+import DayHeader from '../Components/Calendar/DayHeader';
 
 const Div = styled('div')(unstable_styleFunctionSx);
 
@@ -86,46 +85,18 @@ function CalendarPage() {
         <div>
             <CourseSelection courses={data} onToggleCourse={onToggleCourse} open={selectCourseOpen} onClose={() => setSelectCourseOpen(false)} />
             <Div sx={{ overflow: 'auto', position: 'absolute', top: { xs: 72, sm: 16 }, left: 16, right: { xs: 36, sm: 256 }, bottom: -332 }}>
-                <Div sx={{ height: 150, position: 'sticky', top: 0, background: '#ffffffdf', zIndex: 2, boxShadow: '0px 2px 4px #888888' }}>
-                    <div style={{ position: 'absolute', right: 64, height: '100%' }}>
-                        {data.map(course => {
-                            if (course.selected)
-                                return (
-                                    <Div sx={{ display: 'inline-block', height: '100%', width: 48, marginLeft: '16px', borderLeft: '1px solid' }}>
-                                        <Typography sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', textOrientation: 'mixed', writingMode: 'vertical-lr', width: '100%' }}>
-                                            {course.name}
-                                        </Typography>
-                                    </Div>
-                                )
-                        })}
-                    </div>
-                    <ButtonBase onClick={() => setSelectCourseOpen(true)} sx={{width: 48}}>
-                        <Card sx={{ height: 150 }}>
-                            <CardContent sx={{ justifyContent: 'center', alignItems: 'center', display: 'flex', height: '100%' }}>
-                                <AddIcon fontSize='large' />
-                            </CardContent>
-                        </Card>
-                    </ButtonBase>
-                </Div>
+                <ColumnHeader data={data} onAddClicked={() => setSelectCourseOpen(true)}/>
                 <div style={{ position: 'absolute', height: days.length * 100, width: 2580, minWidth: '100%' }}>
                     {days.map(day => {
                         let offset = (Math.ceil(Math.abs(day - firstDate) / (1000 * 60 * 60 * 24))) * 100;
                         return <Day offset={offset} label={day.toLocaleDateString('fa-IR')} width='1280px' />
                     })}
-                    <Div sx={{ height: 100 * days.length, position: 'absolute', top: 0, right: 16, maxWidth: '32px', borderLeft: '1px solid' }}>
-                        {daysCopy.map(day => {
-                            return (
-                                <Typography sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', textOrientation: 'mixed', writingMode: 'vertical-lr', height: 100 }}>
-                                    {day.toLocaleDateString('fa-IR')}
-                                </Typography>
-                            )
-                        })}
-                    </Div>
-                    {data.map((course, index) => {
+                    <DayHeader days={daysCopy} />
+                    {data.map((course) => {
                         if (course.selected)
                             return <Column offset={64 * getIndexOfSelected(course.id) + 48} height={days.length * 100} label={course.name} />
                     })}
-                    {data.map((course, index) => {
+                    {data.map((course) => {
                         if (course.selected)
                             return course.assignments.map(assignment => {
                                 let offset = (Math.ceil(Math.abs(assignment.release_date - firstDate) / (1000 * 60 * 60 * 24)) - 1) * 100 + 5;
