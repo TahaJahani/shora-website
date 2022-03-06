@@ -10,11 +10,7 @@ function Column({label, offset, height=100, width=64, start=0}) {
             right: offset,
             top: start,
             width: width,
-            // background: '#ffffffaf'
         }}>
-            <Typography>
-                {label}
-            </Typography>
         </div>
     )
 }

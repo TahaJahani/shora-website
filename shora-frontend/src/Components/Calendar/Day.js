@@ -16,9 +16,6 @@ function Day({ label, offset, height = 100, width = '100%' }) {
                 float: 'left',
                 width: 'auto',
             }}>
-                <Typography sx={{transform: 'rotate(-90deg) translate(-50%, -50%)'}}>
-                    {label}
-                </Typography>
             </div>
         </div>
     )

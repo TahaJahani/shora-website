@@ -3,7 +3,7 @@ import { Paper } from '@mui/material'
 
 function Bar({ row, offset, length, width = 36, color, columnWidth = 
 64 }) {
-    let right = row * (columnWidth) - width - (columnWidth - width) / 2
+    let right = row * (columnWidth) - width - (columnWidth - width) / 2 + 48
     return (
         <div style={{
             width: width,
