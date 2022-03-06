@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { Paper } from '@mui/material'
 
-function Bar({ row, offset, length, width = 24, color, margin = 
-16 }) {
-    let right = row * (width + margin)
+function Bar({ row, offset, length, width = 36, color, columnWidth = 
+64 }) {
+    let right = row * (columnWidth) - width - (columnWidth - width) / 2
     return (
         <div style={{
             width: width,

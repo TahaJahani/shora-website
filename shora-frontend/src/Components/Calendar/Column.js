@@ -1,9 +1,10 @@
+import { Typography } from '@mui/material'
 import * as React from 'react'
 
-function Column({label, offset, height=100, width=100, start=50}) {
+function Column({label, offset, height=100, width=64, start=0}) {
     return(
         <div style={{
-            borderRight: '1px solid #000000',
+            borderLeft: '1px solid #000000',
             height: height,
             position: 'absolute',
             right: offset,
@@ -11,7 +12,9 @@ function Column({label, offset, height=100, width=100, start=50}) {
             width: width,
             // background: '#ffffffaf'
         }}>
-
+            <Typography>
+                {label}
+            </Typography>
         </div>
     )
 }
