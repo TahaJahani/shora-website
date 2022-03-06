@@ -26,11 +26,11 @@ function BookPage() {
             {state == 'show' &&
                 <div>
                     در این قسمت اطلاعات کتاب نمایش داده خواهد شد!
-                    در حال حاضر تنها می‌دانیم که نام کتاب ${book.name} می‌باشد.
+                    در حال حاضر تنها می‌دانیم که نام کتاب {book.name} می‌باشد.
                 </div>
             }
             {state == 'add' &&
-                <SubmitBookForm />
+                <SubmitBookForm id={id} onSubmit={(book) => {setBook(book); setState('show')}}/>
             }
             {state == 'error' &&
                 <div>

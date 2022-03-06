@@ -3,7 +3,7 @@ import links from "../../Data/Links";
 import { getRecoil } from "recoil-nexus";
 import { userAtom } from "../../Atoms/userAtom";
 
-export default function addDemand(data, onSuccess, onFailure) {
+export default function addBook(data, onSuccess, onFailure) {
 
     const user = getRecoil(userAtom)
 

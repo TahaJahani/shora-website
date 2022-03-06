@@ -10,6 +10,8 @@ import CreditCardIcon from '@mui/icons-material/CreditCard';
 import EventIcon from '@mui/icons-material/Event';
 import SchoolIcon from '@mui/icons-material/School';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import EventNoteIcon from '@mui/icons-material/EventNote';
+import BookIcon from '@mui/icons-material/Book';
 import { useNavigate } from 'react-router-dom';
 import { Avatar, Divider } from '@mui/material';
 import translate from '../Helpers/translate';
@@ -139,10 +141,22 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
             style={{ backgroundColor: (selectedItem == 'کتاب‌ها') ? '#e55c0077' : 'transparent' }}
         >
             <ListItemIcon sx={{ ml: -2 }}>
-                <NotificationsIcon />
+                <BookIcon />
             </ListItemIcon>
             <ListItemText primary='کتاب‌ها' style={{ textAlign: 'right' }} />
-        </ListItem>   
+        </ListItem>
+    )
+
+    const calendarItem = (
+        <ListItem button key='تقویم آموزشی' onClick={() => onClick('calendar')}
+            className="on-hover-grey"
+            style={{ backgroundColor: (selectedItem == 'تقویم آموزشی') ? '#e55c0077' : 'transparent' }}
+        >
+            <ListItemIcon sx={{ ml: -2 }}>
+                <EventNoteIcon />
+            </ListItemIcon>
+            <ListItemText primary='تقویم آموزشی' style={{ textAlign: 'right' }} />
+        </ListItem>
     )
 
     switch (role) {
@@ -159,13 +173,13 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
                     <Divider />
                     {lockersItem}
                     <Divider />
+                    {booksItem}
                     {/* {eventsItem} TODO */}
                     <Divider />
                     {demandsItem}
                     <Divider />
                     {notificationsItem}
-                    <Divider />
-                    {booksItem}
+                    {calendarItem}
                 </div>
             )
         case 'admin':
@@ -178,6 +192,7 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
                     {demandsItem}
                     <Divider />
                     {notificationsItem}
+                    {calendarItem}
                 </div>
             );
         case 'financial':
@@ -200,6 +215,7 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
                     {demandsItem}
                     <Divider />
                     {notificationsItem}
+                    {calendarItem}
                 </div>
             )
         case 'welfare':

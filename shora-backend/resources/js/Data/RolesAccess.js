@@ -10,6 +10,7 @@ import CreditCardIcon from '@mui/icons-material/CreditCard';
 import EventIcon from '@mui/icons-material/Event';
 import SchoolIcon from '@mui/icons-material/School';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import BookIcon from '@mui/icons-material/Book';
 import { useNavigate } from 'react-router-dom';
 import { Avatar, Divider } from '@mui/material';
 import translate from '../Helpers/translate';
@@ -139,7 +140,7 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
             style={{ backgroundColor: (selectedItem == 'کتاب‌ها') ? '#e55c0077' : 'transparent' }}
         >
             <ListItemIcon sx={{ ml: -2 }}>
-                <NotificationsIcon />
+                <BookIcon />
             </ListItemIcon>
             <ListItemText primary='کتاب‌ها' style={{ textAlign: 'right' }} />
         </ListItem>   
@@ -159,13 +160,12 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
                     <Divider />
                     {lockersItem}
                     <Divider />
+                    {booksItem}
                     {/* {eventsItem} TODO */}
                     <Divider />
                     {demandsItem}
                     <Divider />
                     {notificationsItem}
-                    <Divider />
-                    {booksItem}
                 </div>
             )
         case 'admin':

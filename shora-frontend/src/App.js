@@ -27,6 +27,7 @@ import TransactionsPage from './Pages/TransactionsPage';
 import LostAndFoundPage from "./Pages/LostAndFoundPage";
 import DemandsPage from './Pages/DemandsPage';
 import BookPage from './Pages/BookPage';
+import CalendarPage from './Pages/CalendarPage'
 
 function App() {
   const lightTheme = createTheme({
@@ -120,6 +121,7 @@ function App() {
                     <Route path="demands/:id" element={<DemandsPage setSelectedItem={setSelectedItem}/>} />
                     <Route path="notifications" element={<NotificationsPage setSelectedItem={setSelectedItem}/>} />
                     <Route path="books/:id" element={<BookPage />} />
+                    <Route path="calendar" element={<CalendarPage />} />
                   {/* </AnimatedSwitch> */}
                 </Route>
               </Route>

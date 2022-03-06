@@ -30,6 +30,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/info', function() {
+    return phpinfo();
+});
+
 Route::prefix('/auth')->middleware('auth:sanctum')->group(function () {
     Route::post("/complete-info", [UserController::class, 'completeUserInfo']);
     Route::withoutMiddleware('auth:sanctum')->post('/send-reset-mail', [UserController::class, 'sendResetEmail']);

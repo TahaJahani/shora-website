@@ -21,6 +21,7 @@ const dictionary = {
         'demands': 'درخواست‌ها',
         'notifications': 'اطلاعیه‌ها',
         'books': 'کتاب‌ها',
+        'calendar': 'تقویم آموزشی',
     }
 }
 
