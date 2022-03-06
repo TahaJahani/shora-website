@@ -6,6 +6,8 @@ import styled from 'styled-components';
 import { unstable_styleFunctionSx } from '@mui/system';
 import { Typography } from '@mui/material';
 import CourseSelection from '../Components/Calendar/CourseSelection';
+import { ButtonBase, Card, CardContent } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 
 const Div = styled('div')(unstable_styleFunctionSx);
 
@@ -20,6 +22,7 @@ function CalendarPage() {
     for (let d = new Date(firstDate.getTime()); d <= lastDate; d.setDate(d.getDate() + 1)) {
         daysCopy.push(new Date(d))
     }
+    let [selectCourseOpen, setSelectCourseOpen] = React.useState(false)
     let [data, setData] = React.useState([
         {
             id: 1,
@@ -71,7 +74,7 @@ function CalendarPage() {
 
     const getIndexOfSelected = (courseId) => {
         let index = -1
-        for (let i = 0 ; i < data.length; i++) {
+        for (let i = 0; i < data.length; i++) {
             if (data[i].selected)
                 index++
             if (data[i].id == courseId)
@@ -81,9 +84,9 @@ function CalendarPage() {
 
     return (
         <div>
-            <CourseSelection courses={data} onToggleCourse={onToggleCourse} />
-            <Div sx={{ overflow: 'auto', position: 'absolute', top: { xs: 404, sm: 348 }, left: 16, right: { xs: 36, sm: 256 }, bottom: -332 }}>
-                <Div sx={{ height: 150, position: 'sticky', top: 0, background: '#ffffffdf', zIndex: 5000, boxShadow: '0px 2px 4px #888888' }}>
+            <CourseSelection courses={data} onToggleCourse={onToggleCourse} open={selectCourseOpen} onClose={() => setSelectCourseOpen(false)} />
+            <Div sx={{ overflow: 'auto', position: 'absolute', top: { xs: 72, sm: 16 }, left: 16, right: { xs: 36, sm: 256 }, bottom: -332 }}>
+                <Div sx={{ height: 150, position: 'sticky', top: 0, background: '#ffffffdf', zIndex: 2, boxShadow: '0px 2px 4px #888888' }}>
                     <div style={{ position: 'absolute', right: 64, height: '100%' }}>
                         {data.map(course => {
                             if (course.selected)
@@ -96,6 +99,13 @@ function CalendarPage() {
                                 )
                         })}
                     </div>
+                    <ButtonBase onClick={() => setSelectCourseOpen(true)} sx={{width: 48}}>
+                        <Card sx={{ height: 150 }}>
+                            <CardContent sx={{ justifyContent: 'center', alignItems: 'center', display: 'flex', height: '100%' }}>
+                                <AddIcon fontSize='large' />
+                            </CardContent>
+                        </Card>
+                    </ButtonBase>
                 </Div>
                 <div style={{ position: 'absolute', height: days.length * 100, width: 2580, minWidth: '100%' }}>
                     {days.map(day => {
