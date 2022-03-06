@@ -5,6 +5,7 @@ import Day from '../Components/Calendar/Day';
 import styled from 'styled-components';
 import { unstable_styleFunctionSx } from '@mui/system';
 import { Typography } from '@mui/material';
+import CourseSelection from '../Components/Calendar/CourseSelection';
 
 const Div = styled('div')(unstable_styleFunctionSx);
 
@@ -58,7 +59,8 @@ function CalendarPage() {
 
     return (
         <div>
-            <Div sx={{ overflow: 'auto', position: 'absolute', top: { xs: 72, sm: 16 }, left: 16, right: { xs: 36, sm: 256 }, bottom: 16 }}>
+            <CourseSelection courses={data}/>
+            <Div sx={{ overflow: 'auto', position: 'absolute', top: { xs: 404, sm: 348 }, left: 16, right: { xs: 36, sm: 256 }, bottom: -332 }}>
                 <Div sx={{ height: 150, position: 'sticky', top: 0, background: '#ffffffdf', zIndex: 5000, boxShadow: '0px 2px 4px #888888' }}>
                     <div style={{ position: 'absolute', right: 64, height: '100%' }}>
                         {data.map(course => {
