@@ -19,6 +19,7 @@ class CreateAssignmentsTable extends Migration
             $table->foreignId('user_id');
             $table->date('release_date');
             $table->date('due_date');
+            $table->string('description');
             $table->foreignId('course_semester_id');
             $table->enum('type', Assignment::$TYPES)->default('homework');
             $table->string('link')->nullable();

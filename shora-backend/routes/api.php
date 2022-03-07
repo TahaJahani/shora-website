@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\DemandCategoryController;
 use App\Http\Controllers\DemandController;
@@ -108,6 +109,12 @@ Route::prefix('demands')->middleware(['auth:sanctum'])->group(function() {
 Route::prefix('/notifications')->middleware('auth:sanctum')->group(function() {
     Route::get('/', [NotificationController::class, 'getAll']);
     Route::middleware('ability:owner,admin')->post('/', [NotificationController::class, 'add']);
+});
+
+Route::prefix('/courses')->middleware('auth:sanctum')->group(function() {
+    Route::get('/assignments', [AssignmentController::class, 'getAssignments']);
+    Route::get('/', [AssignmentController::class, 'getCourses']);
+    Route::post('/', [AssignmentController::class, 'addAssignment']);
 });
 
 Route::get('/install', function (Request $request) {

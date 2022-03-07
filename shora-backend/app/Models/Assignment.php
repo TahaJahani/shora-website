@@ -12,7 +12,7 @@ class Assignment extends Model
     public static $TYPES = ['midterm', 'quiz', 'homework', 'final', 'project'];
 
     protected $fillable = [
-        'user_id', 'release_date', 'due_date', 
+        'user_id', 'release_date', 'due_date', 'description',
         'course_semester_id', 'type', 'link', 'verified'
     ];
 
