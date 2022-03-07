@@ -10,6 +10,7 @@ use App\Http\Controllers\LockerController;
 use App\Http\Controllers\LostAndFoundContoller;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\RentController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -115,6 +116,10 @@ Route::prefix('/courses')->middleware('auth:sanctum')->group(function() {
     Route::get('/assignments', [AssignmentController::class, 'getAssignments']);
     Route::get('/', [AssignmentController::class, 'getCourses']);
     Route::post('/', [AssignmentController::class, 'addAssignment']);
+});
+
+Route::prefix('/report-problems')->middleware('auth:sanctum')->group(function() {
+    Route::post('/', [ReportController::class, 'addReport']);
 });
 
 Route::get('/install', function (Request $request) {

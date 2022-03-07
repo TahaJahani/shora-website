@@ -32,6 +32,7 @@ const links = {
     addBook: base_url + "/books",
     courses: base_url + "/courses",
     assignments: base_url + "/courses/assignments",
+    reportProblem: base_url + "/report-problems",
 }
 
 export default links;
