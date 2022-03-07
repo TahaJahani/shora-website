@@ -45,6 +45,7 @@ function Bar({ assignment, row, offset, length, width = 36, color, columnWidth =
         <div onContextMenu={handleContextMenu}>
             <SubmitProblemForm open={dialogOpen} onSuccess={closeDialog} onFailure={closeDialog} reportable={{id: assignment.id, type: 'assignment'}} />
             <Tooltip
+                followCursor={true}
                 title={
                     <div>
                         <Typography sx={{ textAlign: 'center' }}>
