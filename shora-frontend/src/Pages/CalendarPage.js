@@ -8,10 +8,17 @@ import CourseSelection from '../Components/Calendar/CourseSelection';
 import ColumnHeader from '../Components/Calendar/ColumnHeader';
 import DayHeader from '../Components/Calendar/DayHeader';
 import translate from '../Helpers/translate'
+import getCourses from '../AxiosCalls/Calendar/getCourses'
+import getAssignments from '../AxiosCalls/Calendar/getAssignments'
+import { assignmentsAtom } from '../Atoms/assignmentsAtom';
+import Recoil from 'recoil'
 
 const Div = styled('div')(unstable_styleFunctionSx);
 
 function CalendarPage() {
+
+    let [selectCourseOpen, setSelectCourseOpen] = React.useState(false)
+    let [data, setData] = Recoil.useRecoilState(assignmentsAtom)
 
     let setting = {
         columnWidth: 64,
@@ -22,8 +29,42 @@ function CalendarPage() {
         topAppBarHeight: 56,
     }
 
-    let firstDate = new Date('2022-03-05')
-    let lastDate = new Date('2022-03-19')
+    const getFirstDate = () => {
+        let firstDate = null
+        for (let item of data) {
+            for (let assignment of item.assignments) {
+                let release_date = new Date(assignment.release_date);
+                if (firstDate && firstDate.getTime() > release_date.getTime())
+                    firstDate = release_date;
+                else
+                    firstDate = release_date;
+            }
+        }
+        if (!firstDate)
+            firstDate = new Date()
+        firstDate.setDate(firstDate.getDate() - 1);
+        return firstDate;
+    }
+
+    const getLastDate = () => {
+        let lastDate = null
+        for (let item of data) {
+            for (let assignment of item.assignments) {
+                let due_date = new Date(assignment.due_date);
+                if (lastDate && lastDate.getTime() < due_date.getTime())
+                    lastDate = due_date;
+                else
+                    lastDate = due_date;
+            }
+        }
+        if (!lastDate)
+            lastDate = new Date()
+        lastDate.setDate(lastDate.getDate() + 1);
+        return lastDate;
+    }
+
+    let firstDate = getFirstDate()
+    let lastDate = getLastDate()
     let days = []
     let daysCopy = []
     for (let d = new Date(lastDate.getTime()); d >= firstDate; d.setDate(d.getDate() - 1)) {
@@ -32,8 +73,11 @@ function CalendarPage() {
     for (let d = new Date(firstDate.getTime()); d <= lastDate; d.setDate(d.getDate() + 1)) {
         daysCopy.push(new Date(d))
     }
-    let [selectCourseOpen, setSelectCourseOpen] = React.useState(false)
-    let [data, setData] = React.useState([])
+
+    React.useEffect(() => {
+        getCourses(() => { }, () => { })
+        getAssignments(() => { }, () => { })
+    }, [])
 
     const onToggleCourse = (courseId) => {
         setData(data.map(item => {
@@ -68,14 +112,17 @@ function CalendarPage() {
                     <DayHeader days={daysCopy} rowHeight={setting.rowHeight} width={setting.rowTitleWidth} />
                     {data.map((course) => {
                         if (course.selected)
-                            return <Column offset={setting.columnWidth * getIndexOfSelected(course.id) + setting.rowTitleWidth + 8} height={days.length * setting.rowHeight}/>
+                            return <Column offset={setting.columnWidth * getIndexOfSelected(course.id) + setting.rowTitleWidth + 8} height={days.length * setting.rowHeight} />
                     })}
                     {data.map((course) => {
                         if (course.selected)
                             return course.assignments.map(assignment => {
-                                let offset = (Math.ceil(Math.abs(assignment.release_date - firstDate) / (1000 * 60 * 60 * 24)) - 1) * setting.rowHeight + 5;
-                                let length = (Math.ceil(Math.abs(assignment.due_date - assignment.release_date) / (1000 * 60 * 60 * 24)) + 1) * setting.rowHeight - 10
-                                return <Bar data={translate(assignment.type)} columnWidth={setting.columnWidth} row={getIndexOfSelected(course.id) + 1} offset={offset} length={length} color={course.color} />
+                                let release_date = new Date(assignment.release_date);
+                                let due_date = new Date(assignment.due_date);
+                                let offset = (Math.ceil(Math.abs(release_date - firstDate) / (1000 * 60 * 60 * 24))) * setting.rowHeight + 5;
+                                let length = (Math.ceil(Math.abs(due_date - release_date) / (1000 * 60 * 60 * 24)) + 1) * setting.rowHeight - 10
+                                console.log('length ' + length)
+                                return <Bar data={translate(assignment.type)} columnWidth={setting.columnWidth} row={getIndexOfSelected(course.id) + 1} offset={offset} length={length} color={`#${course.color}`} />
                             })
                     })}
                 </div>

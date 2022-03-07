@@ -17,7 +17,7 @@ export default function getCourses(onSuccess, onFailure) {
         .then((res) => {
             if (res.data.status === 'ok') {
                 setRecoil(coursesAtom, res.data.data.courses);
-                console.log(res.data.data.courses);
+                // console.log(res.data.data.courses);
                 onSuccess(res.data);
             } else
                 onFailure(res.data.message);
