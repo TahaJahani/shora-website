@@ -30,6 +30,8 @@ const links = {
     getNotifications: base_url + '/notifications',
     getBookData: base_url + "/books/data",
     addBook: base_url + "/books",
+    courses: base_url + "/courses",
+    assignments: base_url + "/courses/assignments",
 }
 
 export default links;
