@@ -11,14 +11,21 @@ import translate from '../Helpers/translate'
 import getCourses from '../AxiosCalls/Calendar/getCourses'
 import getAssignments from '../AxiosCalls/Calendar/getAssignments'
 import { assignmentsAtom } from '../Atoms/assignmentsAtom';
+import { coursesAtom } from '../Atoms/coursesAtom';
 import Recoil from 'recoil'
+import { Dialog, Fab } from '@mui/material';
+import AddAssignmentForm from '../Components/Calendar/AddAssignmentForm';
+import AddIcon from '@mui/icons-material/Add';
+import DaysGrid from '../Components/Calendar/DaysGrid';
 
 const Div = styled('div')(unstable_styleFunctionSx);
 
 function CalendarPage() {
 
+    let [dialogOpen, setDialogOpen] = React.useState(false)
     let [selectCourseOpen, setSelectCourseOpen] = React.useState(false)
     let [data, setData] = Recoil.useRecoilState(assignmentsAtom)
+    let [courses, setCourses] = Recoil.useRecoilState(coursesAtom)
 
     let setting = {
         columnWidth: 64,
@@ -30,59 +37,55 @@ function CalendarPage() {
     }
 
     const getFirstDate = () => {
-        let firstDate = null
+        let firstDate = new Date()
         for (let item of data) {
-            for (let assignment of item.assignments) {
-                let release_date = new Date(assignment.release_date);
-                if (firstDate && firstDate.getTime() > release_date.getTime())
-                    firstDate = release_date;
-                else
-                    firstDate = release_date;
+            if (item.selected) {
+                for (let assignment of item.assignments) {
+                    let release_date = new Date(assignment.release_date);
+                    if (firstDate.getTime() > release_date.getTime())
+                        firstDate = release_date;
+                }
             }
         }
-        if (!firstDate)
-            firstDate = new Date()
-        firstDate.setDate(firstDate.getDate() - 1);
+        firstDate.setTime(firstDate.getTime() - 1000 * 60 * 60 * 24);
         return firstDate;
     }
 
     const getLastDate = () => {
-        let lastDate = null
+        let lastDate = new Date();
         for (let item of data) {
-            for (let assignment of item.assignments) {
-                let due_date = new Date(assignment.due_date);
-                if (lastDate && lastDate.getTime() < due_date.getTime())
-                    lastDate = due_date;
-                else
-                    lastDate = due_date;
+            if (item.selected) {
+                for (let assignment of item.assignments) {
+                    let due_date = new Date(assignment.due_date);
+                    if (lastDate.getTime() < due_date.getTime())
+                        lastDate = due_date;
+                }
             }
         }
-        if (!lastDate)
-            lastDate = new Date()
         lastDate.setDate(lastDate.getDate() + 1);
         return lastDate;
     }
 
-    let firstDate = getFirstDate()
-    let lastDate = getLastDate()
-    let days = []
-    let daysCopy = []
-    for (let d = new Date(lastDate.getTime()); d >= firstDate; d.setDate(d.getDate() - 1)) {
-        days.push(new Date(d));
-    }
-    for (let d = new Date(firstDate.getTime()); d <= lastDate; d.setDate(d.getDate() + 1)) {
-        daysCopy.push(new Date(d))
-    }
+    let [firstDate, setFirstDate] = React.useState(getFirstDate())
+    let [lastDate, setLastDate] = React.useState(getLastDate())
 
     React.useEffect(() => {
         getCourses(() => { }, () => { })
         getAssignments(() => { }, () => { })
     }, [])
 
+    React.useEffect(() => {
+        setFirstDate(getFirstDate())
+        setLastDate(getLastDate())
+    }, [data, courses])
+
     const onToggleCourse = (courseId) => {
         setData(data.map(item => {
-            if (item.id == courseId)
-                return { ...item, selected: !item.selected }
+            if (item.id == courseId) {
+                if (item.selected == false || item.selected == true)
+                    return { ...item, selected: !item.selected }
+                return { ...item, selected: true }
+            }
             return item
         }))
     }
@@ -97,22 +100,51 @@ function CalendarPage() {
         }
     }
 
+    const getNumDays = () => {
+        return Math.floor((lastDate.getTime() - firstDate.getTime()) / (1000 * 60 * 60 * 24)) + 1
+    }
+
+    const addAssignmentToCourse = (assignment) => {
+        let isAdded = false
+        setData(data.filter(item => {
+            if (item.id === assignment.course_semester_id) {
+                isAdded = true
+                return { ...item, assignments: [...item.assignments, assignment], selected: true }
+            }
+            return item;
+        }))
+        if (!isAdded) {
+            let course = courses.filter(item => item.id === assignment.course_semester_id)[0];
+            setData([...data, { ...course, selected: true, assignments: [assignment] }])
+        }
+    }
+
     let numSelectedCourses = data.filter(item => item.selected).length
 
     return (
         <div>
+            <Dialog
+                dir='rtl'
+                open={dialogOpen}
+                onClose={() => setDialogOpen(false)}
+                fullWidth={true}
+                maxWidth='md'>
+                <AddAssignmentForm
+                    onCancel={() => setDialogOpen(false)}
+                    onSuccess={(assignment) => {
+                        addAssignmentToCourse(assignment)
+                        setDialogOpen(false)
+                    }} />
+            </Dialog>
             <CourseSelection courses={data} onToggleCourse={onToggleCourse} open={selectCourseOpen} onClose={() => setSelectCourseOpen(false)} />
             <Div sx={{ overflow: 'auto', position: 'absolute', top: { xs: setting.topAppBarHeight + 16, sm: 16 }, left: 16, right: { xs: 16, sm: setting.sidebarWidth + 16 }, bottom: 16 }}>
                 <ColumnHeader data={data} onAddClicked={() => setSelectCourseOpen(true)} height={setting.columnHeaderHeight} />
-                <div style={{ position: 'absolute', height: days.length * setting.rowHeight, width: numSelectedCourses * setting.columnWidth, minWidth: '100%' }}>
-                    {days.map(day => {
-                        let offset = (Math.ceil(Math.abs(day - firstDate) / (1000 * 60 * 60 * 24))) * setting.rowHeight;
-                        return <Day height={setting.rowHeight} offset={offset} label={day.toLocaleDateString('fa-IR')} width={numSelectedCourses * setting.columnWidth} />
-                    })}
-                    <DayHeader days={daysCopy} rowHeight={setting.rowHeight} width={setting.rowTitleWidth} />
+                <div style={{ position: 'absolute', height: getNumDays() * setting.rowHeight, width: numSelectedCourses * setting.columnWidth, minWidth: '100%' }}>
+                    <DaysGrid firstDate={firstDate} lastDate={lastDate} setting={setting} numSelectedCourses={numSelectedCourses}/>
+                    <DayHeader firstDate={firstDate} lastDate={lastDate} rowHeight={setting.rowHeight} width={setting.rowTitleWidth} />
                     {data.map((course) => {
                         if (course.selected)
-                            return <Column offset={setting.columnWidth * getIndexOfSelected(course.id) + setting.rowTitleWidth + 8} height={days.length * setting.rowHeight} />
+                            return <Column key={course.id} offset={setting.columnWidth * getIndexOfSelected(course.id) + setting.rowTitleWidth + 8} height={getNumDays() * setting.rowHeight} />
                     })}
                     {data.map((course) => {
                         if (course.selected)
@@ -121,12 +153,24 @@ function CalendarPage() {
                                 let due_date = new Date(assignment.due_date);
                                 let offset = (Math.ceil(Math.abs(release_date - firstDate) / (1000 * 60 * 60 * 24))) * setting.rowHeight + 5;
                                 let length = (Math.ceil(Math.abs(due_date - release_date) / (1000 * 60 * 60 * 24)) + 1) * setting.rowHeight - 10
-                                console.log('length ' + length)
-                                return <Bar data={translate(assignment.type)} columnWidth={setting.columnWidth} row={getIndexOfSelected(course.id) + 1} offset={offset} length={length} color={`#${course.color}`} />
+                                return <Bar key={assignment.id} data={translate(assignment.type)} columnWidth={setting.columnWidth} row={getIndexOfSelected(course.id) + 1} offset={offset} length={length} color={`#${course.color}`} />
                             })
                     })}
                 </div>
             </Div>
+            <Fab
+                sx={{
+                    margin: 1,
+                    position: "fixed",
+                    bottom: 8,
+                    left: 8
+                }}
+                onClick={() => setDialogOpen(true)}
+                variant='extended'
+                color='primary'>
+                <AddIcon sx={{ ml: 1 }} />
+                {'افزودن تکلیف'}
+            </Fab>
         </div>
     )
 }

@@ -13,7 +13,7 @@ function ColumnHeader({ data, onAddClicked, height = 150 }) {
                 {data.map(course => {
                     if (course.selected)
                         return (
-                            <Div sx={{ display: 'inline-block', height: '100%', width: 48, marginLeft: '16px', borderLeft: '1px solid' }}>
+                            <Div key={course.id} sx={{ display: 'inline-block', height: '100%', width: 48, marginLeft: '16px', borderLeft: '1px solid' }}>
                                 <Typography sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center', textOrientation: 'mixed', writingMode: 'vertical-lr', width: '100%', height: '100%' }}>
                                     {course.name}
                                 </Typography>

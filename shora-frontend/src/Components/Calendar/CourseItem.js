@@ -3,28 +3,12 @@ import * as React from 'react'
 
 function CourseItem({ id, name, teacher, selected, onToggle }) {
     return (
-        // <ButtonBase onClick={() => onToggle(id)}>
-        //     <Card variant='outlined'>
-        //         <CardContent>
-        //             <Typography variant='h6'>
-        //                 {name}
-        //             </Typography>
-        //             <Typography variant='caption'>
-        //                 {teacher}
-        //             </Typography>
-        //         </CardContent>
-        //         <CardActionArea disabled>
-        //             <Checkbox checked={selected}>
-        //             </Checkbox>
-        //         </CardActionArea>
-        //     </Card>
-        // </ButtonBase>
         <ListItem key={id}>
             <ListItemButton role={undefined} onClick={() => onToggle(id)}>
                 <ListItemIcon>
                     <Checkbox
                         edge="start"
-                        checked={selected}
+                        checked={selected ? true : false}
                         tabIndex={-1}
                         disableRipple
                     />
