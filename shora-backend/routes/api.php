@@ -116,6 +116,8 @@ Route::prefix('/courses')->middleware('auth:sanctum')->group(function() {
     Route::get('/assignments', [AssignmentController::class, 'getAssignments']);
     Route::get('/', [AssignmentController::class, 'getCourses']);
     Route::post('/', [AssignmentController::class, 'addAssignment']);
+    Route::post('/{course_id}', [AssignmentController::class, 'addCourseToUser'])->whereNumber('course_id');
+    Route::delete('/{course_id}', [AssignmentController::class, 'removeCourseFromUser'])->whereNumber('course_id');
 });
 
 Route::prefix('/report-problems')->middleware('auth:sanctum')->group(function() {

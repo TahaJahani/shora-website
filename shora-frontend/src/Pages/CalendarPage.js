@@ -17,6 +17,8 @@ import { Dialog, Fab } from '@mui/material';
 import AddAssignmentForm from '../Components/Calendar/AddAssignmentForm';
 import AddIcon from '@mui/icons-material/Add';
 import DaysGrid from '../Components/Calendar/DaysGrid';
+import addCourse from '../AxiosCalls/Calendar/addCourse'
+import removeCourse from '../AxiosCalls/Calendar/removeCourse'
 
 const Div = styled('div')(unstable_styleFunctionSx);
 
@@ -80,10 +82,13 @@ function CalendarPage() {
     }, [data, courses])
 
     const onToggleCourse = (courseId) => {
+        let emptyFunc = () => { }
         setData(data.map(item => {
             if (item.id == courseId) {
-                if (item.selected == false || item.selected == true)
+                if (item.selected == false || item.selected == true) {
+                    item.selected ? removeCourse(courseId, emptyFunc, emptyFunc) : addCourse(courseId, emptyFunc, emptyFunc)
                     return { ...item, selected: !item.selected }
+                }
                 return { ...item, selected: true }
             }
             return item
@@ -140,7 +145,7 @@ function CalendarPage() {
             <Div sx={{ overflow: 'auto', position: 'absolute', top: { xs: setting.topAppBarHeight + 16, sm: 16 }, left: 16, right: { xs: 16, sm: setting.sidebarWidth + 16 }, bottom: 16 }}>
                 <ColumnHeader data={data} onAddClicked={() => setSelectCourseOpen(true)} height={setting.columnHeaderHeight} />
                 <div style={{ position: 'absolute', height: getNumDays() * setting.rowHeight, width: numSelectedCourses * setting.columnWidth, minWidth: '100%' }}>
-                    <DaysGrid firstDate={firstDate} lastDate={lastDate} setting={setting} numSelectedCourses={numSelectedCourses}/>
+                    <DaysGrid firstDate={firstDate} lastDate={lastDate} setting={setting} numSelectedCourses={numSelectedCourses} />
                     <DayHeader firstDate={firstDate} lastDate={lastDate} rowHeight={setting.rowHeight} width={setting.rowTitleWidth} />
                     {data.map((course) => {
                         if (course.selected)

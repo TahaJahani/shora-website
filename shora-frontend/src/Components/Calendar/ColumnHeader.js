@@ -1,12 +1,14 @@
 import * as React from 'react'
 import styled from 'styled-components';
 import { unstable_styleFunctionSx } from '@mui/system';
-import { ButtonBase, Card, CardContent, Typography } from '@mui/material';
+import { ButtonBase, Card, CardContent, Menu, MenuItem, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+import removeCourse from '../../AxiosCalls/Calendar/removeCourse';
 
 const Div = styled('div')(unstable_styleFunctionSx);
 
 function ColumnHeader({ data, onAddClicked, height = 150 }) {
+
     return (
         <Div sx={{ height: height, position: 'sticky', top: 0, background: '#ffffffdf', zIndex: 2, boxShadow: '0px 2px 4px #888888' }}>
             <div style={{ position: 'absolute', right: 56, height: '100%' }}>
