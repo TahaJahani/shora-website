@@ -143,8 +143,8 @@ function CalendarPage() {
             </Dialog>
             <CourseSelection courses={data} onToggleCourse={onToggleCourse} open={selectCourseOpen} onClose={() => setSelectCourseOpen(false)} />
             <Div sx={{ overflow: 'auto', position: 'absolute', top: { xs: setting.topAppBarHeight + 16, sm: 16 }, left: 16, right: { xs: 16, sm: setting.sidebarWidth + 16 }, bottom: 16 }}>
-                <ColumnHeader data={data} onAddClicked={() => setSelectCourseOpen(true)} height={setting.columnHeaderHeight} />
-                <div style={{ position: 'absolute', height: getNumDays() * setting.rowHeight, width: numSelectedCourses * setting.columnWidth, minWidth: '100%' }}>
+                <ColumnHeader data={data} onAddClicked={() => setSelectCourseOpen(true)} height={setting.columnHeaderHeight} width={numSelectedCourses * setting.columnWidth + 38} />
+                <div style={{ position: 'absolute', height: getNumDays() * setting.rowHeight, width: numSelectedCourses * setting.columnWidth + setting.rowTitleWidth, minWidth: '100%' }}>
                     <DaysGrid firstDate={firstDate} lastDate={lastDate} setting={setting} numSelectedCourses={numSelectedCourses} />
                     <DayHeader firstDate={firstDate} lastDate={lastDate} rowHeight={setting.rowHeight} width={setting.rowTitleWidth} />
                     {data.map((course) => {

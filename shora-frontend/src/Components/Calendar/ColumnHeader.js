@@ -7,11 +7,11 @@ import removeCourse from '../../AxiosCalls/Calendar/removeCourse';
 
 const Div = styled('div')(unstable_styleFunctionSx);
 
-function ColumnHeader({ data, onAddClicked, height = 150 }) {
+function ColumnHeader({ data, onAddClicked, height = 150, width }) {
 
     return (
-        <Div className='calendar_header' sx={{ height: height }} >
-            <div style={{ position: 'absolute', right: 56, height: '100%' }} >
+        <Div className='calendar_header' sx={{ height: height, minWidth: '100%', width: width }} >
+            <div style={{ position: 'absolute', right: 56, height: '100%', width: '100%' }} >
                 {data.map(course => {
                     if (course.selected)
                         return (

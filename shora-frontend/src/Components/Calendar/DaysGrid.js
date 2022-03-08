@@ -7,7 +7,7 @@ function DaysGrid({ firstDate, lastDate, setting, numSelectedCourses }) {
         <div>
             {range.map(i => {
                 let offset = (i) * setting.rowHeight
-                return <Day key={i} height={setting.rowHeight} offset={offset} width={numSelectedCourses * setting.columnWidth} />
+                return <Day key={i} height={setting.rowHeight} offset={offset} width={numSelectedCourses * setting.columnWidth + 38} />
             })}
         </div>
     )
