@@ -16,16 +16,23 @@ class CourseSeeder extends Seeder
      */
     public function run()
     {
+        // $this->seedCourses();
+        $this->seedGeneralCourses();
+    }
+
+    public function seedCourses()
+    {
         $csv_file = storage_path() . '/Courses.csv';
         $data = $this->readCSV($csv_file);
         $current_semester = SemesterService::getCurrentSemester();
         $last_created_id = 0;
         foreach ($data as $course) {
             try {
-                $created = Course::create([
+                Course::insertOrIgnore([
                     'name' => $course[2],
                     'course_number' => $course[0],
                 ]);
+                $created = Course::where('course_number', $course[0])->first();
                 $semester = $created->semesters()->create([
                     'teacher' => $course[3],
                     'group_number' => $course[1],
@@ -35,7 +42,32 @@ class CourseSeeder extends Seeder
                 $last_created_id = $semester->id;
             } catch (Exception $e) {
             }
-        }   
+        }
+    }
+
+    public function seedGeneralCourses()
+    {
+        $csv_file = storage_path() . '/GeneralCourses.csv';
+        $data = $this->readCSV($csv_file);
+        $current_semester = SemesterService::getCurrentSemester();
+        $last_created_id = 80; //TODO: change
+        foreach ($data as $course) {
+            try {
+                Course::insertOrIgnore([
+                    'name' => $course[2],
+                    'course_number' => $course[0],
+                ]);
+                $created = Course::where('course_number', $course[0])->first();
+                $semester = $created->semesters()->create([
+                    'teacher' => $course[3],
+                    'group_number' => $course[1],
+                    'semester' => $current_semester,
+                    'color' => $this->getColor($last_created_id),
+                ]);
+                $last_created_id = $semester->id;
+            } catch (Exception $e) {
+            }
+        }
     }
 
     public function readCSV($csvFile)
@@ -48,7 +80,8 @@ class CourseSeeder extends Seeder
         return $line_of_text;
     }
 
-    public function getColor($id) {
+    public function getColor($id)
+    {
         $colors = [
             'E0BBE4',
             '957DAD',
@@ -94,4 +127,3 @@ class CourseSeeder extends Seeder
         return $colors[$id % 40];
     }
 }
-

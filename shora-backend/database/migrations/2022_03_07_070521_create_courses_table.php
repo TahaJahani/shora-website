@@ -17,6 +17,8 @@ class CreateCoursesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('course_number');
+
+            $table->unique('course_number');
         });
     }
 
