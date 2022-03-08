@@ -45,7 +45,7 @@ function AddAssignmentForm({ onCancel, onSuccess }) {
     }
 
     return (
-        <Card variant="" component='form' sx={{ padding: 2, margin: 2 }} style={{ borderRadius: 20 }}>
+        <Card variant="" component='form' sx={{ padding: 2, margin: 2, borderRadius: '20px', overflow: 'auto' }} >
             <Snackbar
                 anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
                 open={snackbarOpen}
@@ -116,8 +116,8 @@ function AddAssignmentForm({ onCancel, onSuccess }) {
             <Grid container color='red'>
                 {error}
             </Grid>
-            <Grid container justifyContent='flex-end' sx={{ marginTop: 2 }}>
-                <Grid item xs={12} sm={1} md={1} justifyItems='flex-end' style={{ marginLeft: 20 }}>
+            <Grid container justifyContent='flex-end' sx={{ marginTop: 2 }} spacing={2}>
+                <Grid item xs={12} sm={1} md={1} justifyItems='flex-end'>
                     <Button variant="outlined" sx={{ width: '100%' }} onClick={() => { onCancel(); }}>
                         <span style={{ fontSize: 20, fontWeight: 'bold' }}>لغو</span>
                     </Button>
