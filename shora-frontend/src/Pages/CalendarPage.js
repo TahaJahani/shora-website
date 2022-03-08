@@ -38,17 +38,25 @@ function CalendarPage() {
         topAppBarHeight: 56,
     }
 
+    const removeHours = (date) => {
+        date.setHours(0)
+        date.setMinutes(0)
+        date.setSeconds(0)
+        return date
+    }
+
     const getFirstDate = () => {
         let firstDate = new Date()
         for (let item of data) {
             if (item.selected) {
                 for (let assignment of item.assignments) {
-                    let release_date = new Date(assignment.release_date);
+                    let release_date = removeHours(new Date(assignment.release_date));
                     if (firstDate.getTime() > release_date.getTime())
                         firstDate = release_date;
                 }
             }
         }
+        console.log(firstDate)
         firstDate.setTime(firstDate.getTime() - 1000 * 60 * 60 * 24);
         return firstDate;
     }
@@ -58,7 +66,7 @@ function CalendarPage() {
         for (let item of data) {
             if (item.selected) {
                 for (let assignment of item.assignments) {
-                    let due_date = new Date(assignment.due_date);
+                    let due_date = removeHours(new Date(assignment.due_date));
                     if (lastDate.getTime() < due_date.getTime())
                         lastDate = due_date;
                 }
@@ -154,10 +162,10 @@ function CalendarPage() {
                     {data.map((course) => {
                         if (course.selected)
                             return course.assignments.map(assignment => {
-                                let release_date = new Date(assignment.release_date);
-                                let due_date = new Date(assignment.due_date);
-                                let offset = (Math.floor(Math.abs(release_date - firstDate) / (1000 * 60 * 60 * 24))) * setting.rowHeight + 5;
-                                let length = (Math.floor(Math.abs(due_date - release_date) / (1000 * 60 * 60 * 24)) + 1) * setting.rowHeight - 10
+                                let release_date = removeHours(new Date(assignment.release_date));
+                                let due_date = removeHours(new Date(assignment.due_date));
+                                let offset = (Math.ceil(Math.abs(release_date - firstDate) / (1000 * 60 * 60 * 24))) * setting.rowHeight + 5;
+                                let length = (Math.ceil(Math.abs(due_date - release_date) / (1000 * 60 * 60 * 24)) + 1) * setting.rowHeight - 10
                                 return <Bar assignment={assignment} key={assignment.id} columnWidth={setting.columnWidth} row={getIndexOfSelected(course.id) + 1} offset={offset} length={length} color={`#${course.color}`} />
                             })
                     })}
