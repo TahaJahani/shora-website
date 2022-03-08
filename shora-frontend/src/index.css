@@ -1,42 +1,33 @@
 :root {
-  --color1: white;
-  --color2: #d6d586;
-  --color3: #d1a588;
-
-  /* --color1: #9dcedb;
+    --color1: white;
+    --color2: #d6d586;
+    --color3: #d1a588;
+    /* --color1: #9dcedb;
   --color2: #c8dde2;
   --color3: #d5eaf0; */
-
-
-  --my-orange: #e55c00;
-
-  --bg-primary: #c0ebfa;
-  --bg-secondary: #7FD7F5;
+    --my-orange: #e55c00;
+    --bg-primary: #c0ebfa;
+    --bg-secondary: #7FD7F5;
 }
 
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  /* Light Mode */
-  /* background: radial-gradient(1.5em 6.28571em at 1.95em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(1.5em 6.28571em at -0.45em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 1.5em 5.5em, radial-gradient(2.3em 4.57143em at 2.99em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.3) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(2.3em 4.57143em at -0.69em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.3) 55%, rgba(255, 255, 255, 0) 55%) 2.3em 4em, radial-gradient(3.5em 6.28571em at 4.55em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(3.5em 6.28571em at -1.05em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 3.5em 5.5em,
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Light Mode */
+    /* background: radial-gradient(1.5em 6.28571em at 1.95em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(1.5em 6.28571em at -0.45em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 1.5em 5.5em, radial-gradient(2.3em 4.57143em at 2.99em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.3) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(2.3em 4.57143em at -0.69em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.3) 55%, rgba(255, 255, 255, 0) 55%) 2.3em 4em, radial-gradient(3.5em 6.28571em at 4.55em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(3.5em 6.28571em at -1.05em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 3.5em 5.5em,
   radial-gradient(rgb(226, 206, 115),rgb(245, 222, 93));
   background-color: mediumspringgreen;
   background-size: 1.5em 11em, 1.5em 11em, 2.3em 8em, 2.3em 8em, 3.5em 11em, 3.5em 11em, 100% 100%;
   background-repeat: repeat; */
-
-  /* Dark Mode */
-  /* background: radial-gradient(1.5em 6.28571em at 1.95em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(1.5em 6.28571em at -0.45em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 1.5em 5.5em, radial-gradient(2.3em 4.57143em at 2.99em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.3) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(2.3em 4.57143em at -0.69em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.3) 55%, rgba(255, 255, 255, 0) 55%) 2.3em 4em, radial-gradient(3.5em 6.28571em at 4.55em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(3.5em 6.28571em at -1.05em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 3.5em 5.5em,
+    /* Dark Mode */
+    /* background: radial-gradient(1.5em 6.28571em at 1.95em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(1.5em 6.28571em at -0.45em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 1.5em 5.5em, radial-gradient(2.3em 4.57143em at 2.99em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.3) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(2.3em 4.57143em at -0.69em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.3) 55%, rgba(255, 255, 255, 0) 55%) 2.3em 4em, radial-gradient(3.5em 6.28571em at 4.55em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(3.5em 6.28571em at -1.05em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 3.5em 5.5em,
   radial-gradient(rgb(236, 196, 15),rgb(236, 202, 5));
   background-color: mediumspringgreen;
   background-size: 1.5em 11em, 1.5em 11em, 2.3em 8em, 2.3em 8em, 3.5em 11em, 3.5em 11em, 100% 100%;
   background-repeat: repeat; */
-
-  /* background-color: var(--color1);
+    /* background-color: var(--color1);
   background-image: linear-gradient(30deg, var(--color2) 12%, transparent 12.5%, transparent 87%, var(--color2) 87.5%, var(--color2)),
   linear-gradient(150deg, var(--color2) 12%, transparent 12.5%, transparent 87%, var(--color2) 87.5%, var(--color2)),
   linear-gradient(30deg, var(--color2) 12%, transparent 12.5%, transparent 87%, var(--color2) 87.5%, var(--color2)),
@@ -47,174 +38,192 @@ body {
   background-position: 0 0, 0 0, 20px 35px, 20px 35px, 0 0, 20px 35px; */
 }
 
+
 /* .MuiBox-root {
   width: 100%;
 } */
 
 .option-picker {
-  margin-right: 10px;
+    margin-right: 10px;
 }
 
 .submit-button {
-  margin-right: 5px;
-  width: 120%;
+    margin-right: 5px;
+    width: 120%;
 }
 
 .switch-wrapper {
-  position: relative;
+    position: relative;
 }
 
-.switch-wrapper > div {
-  position: absolute;
+.switch-wrapper>div {
+    position: absolute;
 }
 
 @media (max-width: 599px) {
-  .form-laghv-button-style {
-    margin-bottom: 10px !important;
-  }
-
-  .center-details-in-small {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-  }
+    .form-laghv-button-style {
+        margin-bottom: 10px !important;
+    }
+    .center-details-in-small {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 @media (min-width: 600px) {
-  .form-father-div-style {
-    margin-left: 25px !important;
-  }
-
-  .form-grid-buttons-style {
-    margin-left: 30px !important;
-    margin-top: 2px !important;
-  }
-
-  .form-laghv-button-style {
-    margin-left: 40px !important;
-  }
-
-  .option-picker {
-    margin-right: 15px;
-  }
-
-  .submit-button {
-    margin-left: 20px;
-    margin-right: 0;
-    width: 100%;
-  }
+    .form-father-div-style {
+        margin-left: 25px !important;
+    }
+    .form-grid-buttons-style {
+        margin-left: 30px !important;
+        margin-top: 2px !important;
+    }
+    .form-laghv-button-style {
+        margin-left: 40px !important;
+    }
+    .option-picker {
+        margin-right: 15px;
+    }
+    .submit-button {
+        margin-left: 20px;
+        margin-right: 0;
+        width: 100%;
+    }
 }
 
 @media (prefers-color-scheme: light) {
-  body {
-    background: radial-gradient(1.5em 6.28571em at 1.95em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(1.5em 6.28571em at -0.45em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 1.5em 5.5em, radial-gradient(2.3em 4.57143em at 2.99em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.3) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(2.3em 4.57143em at -0.69em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.3) 55%, rgba(255, 255, 255, 0) 55%) 2.3em 4em, radial-gradient(3.5em 6.28571em at 4.55em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(3.5em 6.28571em at -1.05em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 3.5em 5.5em,
-    radial-gradient(rgb(226, 206, 115),rgb(245, 222, 93));
-    background-color: yellow;
-    background-size: 1.5em 11em, 1.5em 11em, 2.3em 8em, 2.3em 8em, 3.5em 11em, 3.5em 11em, 100% 100%;
-    background-repeat: repeat;
-  }
-
-  .demand-card-bg {
-    background-color: #ffffffcc !important;    
-  }
-
-  .text-color {
-    color: #000000;
-  }
-
-  .MuiPaper-root {
-    background-image: none !important;
-  }
-
-  @media (min-width: 600px) {
-    .MuiPaper-root.MuiPaper-elevation.MuiDrawer-paper.MuiDrawer-paperAnchorRight.MuiDrawer-paperAnchorDockedRight {
-      background-color: #ffffffcc !important;
-      background-image: none !important;
+    body {
+        background: radial-gradient(1.5em 6.28571em at 1.95em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(1.5em 6.28571em at -0.45em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 1.5em 5.5em, radial-gradient(2.3em 4.57143em at 2.99em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.3) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(2.3em 4.57143em at -0.69em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.3) 55%, rgba(255, 255, 255, 0) 55%) 2.3em 4em, radial-gradient(3.5em 6.28571em at 4.55em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(3.5em 6.28571em at -1.05em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 3.5em 5.5em, radial-gradient(rgb(226, 206, 115), rgb(245, 222, 93));
+        background-color: yellow;
+        background-size: 1.5em 11em, 1.5em 11em, 2.3em 8em, 2.3em 8em, 3.5em 11em, 3.5em 11em, 100% 100%;
+        background-repeat: repeat;
     }
-  }
-
-  .on-hover-grey:hover {
-    background-color: #ddd3be !important;
-    transition: all 0.25s;
-  }
-
-  .on-hover-light-grey:hover {
-    background-color: #ebe6dc !important;
-    transition: all 0.25s;
-  }
+    .demand-card-bg {
+        background-color: #ffffffcc !important;
+    }
+    .text-color {
+        color: #000000;
+    }
+    .MuiPaper-root {
+        background-image: none !important;
+    }
+    @media (min-width: 600px) {
+        .MuiPaper-root.MuiPaper-elevation.MuiDrawer-paper.MuiDrawer-paperAnchorRight.MuiDrawer-paperAnchorDockedRight {
+            background-color: #ffffffcc !important;
+            background-image: none !important;
+        }
+    }
+    .on-hover-grey:hover {
+        background-color: #ddd3be !important;
+        transition: all 0.25s;
+    }
+    .on-hover-light-grey:hover {
+        background-color: #ebe6dc !important;
+        transition: all 0.25s;
+    }
+    .calendar_row {
+        border-bottom: 1px solid #000000;
+        position: absolute;
+        min-width: 100%;
+        background: #ffffffaf;
+    }
+    .calendar_header {
+        position: sticky;
+        top: 0;
+        background: #ffffffdf;
+        z-index: 2;
+        box-shadow: 0px 2px 4px #888888
+    }
+    .calendar_column {
+        border-left: 1px solid #000000;
+        position: absolute;
+    }
 }
 
 .on-hover-lighten:hover {
-  opacity: 0.8;
-  transition: all 0.25s;
-  transform: translate(0, -3px);
+    opacity: 0.8;
+    transition: all 0.25s;
+    transform: translate(0, -3px);
 }
 
 @media (prefers-color-scheme: dark) {
-  body {
-    background: radial-gradient(1.5em 6.28571em at 1.95em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(1.5em 6.28571em at -0.45em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 1.5em 5.5em, radial-gradient(2.3em 4.57143em at 2.99em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.3) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(2.3em 4.57143em at -0.69em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.3) 55%, rgba(255, 255, 255, 0) 55%) 2.3em 4em, radial-gradient(3.5em 6.28571em at 4.55em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(3.5em 6.28571em at -1.05em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 3.5em 5.5em,
-    radial-gradient(rgb(236, 196, 15),rgb(236, 202, 5));
-    /* radial-gradient(rgb(236, 196, 15),rgb(50, 50, 5)); */
-    background-color: yellow;
-    background-size: 1.5em 11em, 1.5em 11em, 2.3em 8em, 2.3em 8em, 3.5em 11em, 3.5em 11em, 100% 100%;
-    background-repeat: repeat;
-  }
-
-  .demand-card-bg {
-    background-color: #000000cc !important;
-  }
-
-  .text-color {
-    color: #ffffff;
-  }
-
-  .MuiPaper-root {
-    background-image: none !important;
-  }
-
-  @media (min-width: 600px) {
-    .MuiPaper-root.MuiPaper-elevation.MuiDrawer-paper.MuiDrawer-paperAnchorRight.MuiDrawer-paperAnchorDockedRight {
-      background-color: #000000cc !important;
-      background-image: none !important;
+    body {
+        background: radial-gradient(1.5em 6.28571em at 1.95em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(1.5em 6.28571em at -0.45em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 1.5em 5.5em, radial-gradient(2.3em 4.57143em at 2.99em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.3) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(2.3em 4.57143em at -0.69em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.3) 55%, rgba(255, 255, 255, 0) 55%) 2.3em 4em, radial-gradient(3.5em 6.28571em at 4.55em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(3.5em 6.28571em at -1.05em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 3.5em 5.5em, radial-gradient(rgb(236, 196, 15), rgb(236, 202, 5));
+        /* radial-gradient(rgb(236, 196, 15),rgb(50, 50, 5)); */
+        background-color: yellow;
+        background-size: 1.5em 11em, 1.5em 11em, 2.3em 8em, 2.3em 8em, 3.5em 11em, 3.5em 11em, 100% 100%;
+        background-repeat: repeat;
     }
-  }
-
-  .on-hover-grey:hover {
-    background-color: #494747 !important;
-    transition: all 0.25s;
-  }
-
-  .on-hover-light-grey:hover {
-    background-color: #383636 !important;
-    transition: all 0.25s;
-  }
+    .demand-card-bg {
+        background-color: #000000cc !important;
+    }
+    .text-color {
+        color: #ffffff;
+    }
+    .MuiPaper-root {
+        background-image: none !important;
+    }
+    .calendar_row {
+        border-bottom: 1px solid #ffffff;
+        position: absolute;
+        min-width: 100%;
+        background: #000000af;
+    }
+    .calendar_header {
+        position: sticky;
+        top: 0;
+        background: #000000df;
+        z-index: 2;
+        box-shadow: 0px 2px 4px #888888
+    }
+    .calendar_column {
+        border-left: 1px solid #ffffff;
+        position: absolute;
+    }
+    .calendar_bar {
+        filter: brightness(70%);
+    }
+    @media (min-width: 600px) {
+        .MuiPaper-root.MuiPaper-elevation.MuiDrawer-paper.MuiDrawer-paperAnchorRight.MuiDrawer-paperAnchorDockedRight {
+            background-color: #000000cc !important;
+            background-image: none !important;
+        }
+    }
+    .on-hover-grey:hover {
+        background-color: #494747 !important;
+        transition: all 0.25s;
+    }
+    .on-hover-light-grey:hover {
+        background-color: #383636 !important;
+        transition: all 0.25s;
+    }
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 @font-face {
-  font-family: "B Nazanin";
-  src: local("B Nazanin"), url("./Fonts/B-Nazanin.TTF") format("truetype");
+    font-family: "B Nazanin";
+    src: local("B Nazanin"), url("./Fonts/B-Nazanin.TTF") format("truetype");
 }
 
 .MuiTablePagination-displayedRows {
-  visibility: hidden;
+    visibility: hidden;
 }
 
 .MuiDataGrid-cell {
-  font-size: 120%;
+    font-size: 120%;
 }
 
 .MuiDataGrid-columnHeaderTitle {
-  font-size: 120%;
+    font-size: 120%;
 }
 
 .MuiDataGrid-overlay {
-  visibility: hidden;
+    visibility: hidden;
 }
 
 input:-webkit-autofill,
@@ -226,27 +235,33 @@ input:-webkit-autofill:active {
 }
 
 .SlideIn-appear {
-  transform: translateX(30px);
-  opacity: 0;
+    transform: translateX(30px);
+    opacity: 0;
 }
+
 .SlideIn-appear.SlideIn-appear-active {
-  opacity: 1;
-  transform: translateX(0);;
-  transition: all 0.6s linear;
+    opacity: 1;
+    transform: translateX(0);
+    ;
+    transition: all 0.6s linear;
 }
+
 .SlideIn-enter {
     opacity: 0;
     transform: translateX(30px);
 }
+
 .SlideIn-enter.SlideIn-enter-active {
     opacity: 1;
     transform: translateX(0);
     transition: all 0.2s linear 0.4s;
 }
+
 .SlideIn-leave {
     opacity: 1.0;
     transform: translateX(0);
 }
+
 .SlideIn-leave.SlideIn-leave-active {
     opacity: 0;
     position: absolute;

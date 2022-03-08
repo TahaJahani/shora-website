@@ -57,7 +57,7 @@ function Bar({ assignment, row, offset, length, width = 36, color, columnWidth =
                     </div>
                 }
                 arrow>
-                <div style={{
+                <div className='calendar_bar' style={{
                     width: width,
                     height: length,
                     background: color,

@@ -1,16 +1,12 @@
 import { Divider, Typography } from '@mui/material';
 import * as React from 'react'
 
-function Day({ label, offset, height = 100, width = '100%' }) {
+function Day({ offset, height = 100, width = '100%' }) {
     return (
-        <div style={{
-            borderBottom: '1px solid #000000',
+        <div className='calendar_row' style={{
             height: height,
-            position: 'absolute',
             top: offset,
             width: width,
-            minWidth: '100%',
-            background: '#ffffffaf'
         }}>
             <div style={{
                 float: 'left',

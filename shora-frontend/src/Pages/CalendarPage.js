@@ -156,8 +156,8 @@ function CalendarPage() {
                             return course.assignments.map(assignment => {
                                 let release_date = new Date(assignment.release_date);
                                 let due_date = new Date(assignment.due_date);
-                                let offset = (Math.ceil(Math.abs(release_date - firstDate) / (1000 * 60 * 60 * 24))) * setting.rowHeight + 5;
-                                let length = (Math.ceil(Math.abs(due_date - release_date) / (1000 * 60 * 60 * 24)) + 1) * setting.rowHeight - 10
+                                let offset = (Math.floor(Math.abs(release_date - firstDate) / (1000 * 60 * 60 * 24))) * setting.rowHeight + 5;
+                                let length = (Math.floor(Math.abs(due_date - release_date) / (1000 * 60 * 60 * 24)) + 1) * setting.rowHeight - 10
                                 return <Bar assignment={assignment} key={assignment.id} columnWidth={setting.columnWidth} row={getIndexOfSelected(course.id) + 1} offset={offset} length={length} color={`#${course.color}`} />
                             })
                     })}
