@@ -12,13 +12,13 @@ function CourseSelection({ onToggleCourse, courses, open, onClose }) {
     })
 
     return (
-        <Dialog open={open} onClose={onClose} maxWidth='md' fullWidth>
+        <Dialog open={open} onClose={onClose} maxWidth='md' fullWidth sx={{textAlign: 'right', direction: 'rtl'}}>
             <DialogTitle>
                 {'انتخاب درس'}
             </DialogTitle>
             <TextField 
-                label='جستجو'
-                sx={{margin: 4, borderRadius: 8}}
+                placeholder='جستجو'
+                sx={{margin: 4, borderRadius: 8, textAlign: 'right'}}
                 onChange={(e) => setSearch(e.target.value)}
             />
             <Divider />

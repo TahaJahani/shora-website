@@ -10,11 +10,13 @@ import translate from '../../Helpers/translate';
 const types = ['homework', 'midterm', 'final', 'project', 'quiz']
 
 const FullWidthTextField = styled(TextField)(() => ({
-    width: '100%'
+    width: '100%',
+    textAlign: 'right'
 }))
 
 const FullWidthAutoComplete = styled(Autocomplete)(() => ({
     width: '100%',
+    textAlign: 'right'
 }))
 
 function AddAssignmentForm({ onCancel, onSuccess }) {
@@ -60,7 +62,7 @@ function AddAssignmentForm({ onCancel, onSuccess }) {
             <Grid container spacing={2} my={2}>
                 <Grid item xs={12} sm={6} md={6}>
                     <FullWidthTextField
-                        label="نام تکلیف"
+                        placeholder="نام تکلیف"
                         value={data.description}
                         onChange={(e) => setData({ ...data, description: e.target.value })} />
                 </Grid>
@@ -71,7 +73,7 @@ function AddAssignmentForm({ onCancel, onSuccess }) {
                         noOptionsText='درس یافت نشد'
                         onChange={(e, newValue) => setData({ ...data, course_semester_id: newValue ? newValue.id : null })}
                         getOptionLabel={(option) => option.name + " | " + option.teacher + " | " + option.group_number}
-                        renderInput={(params) => <TextField {...params} label="درس" />}
+                        renderInput={(params) => <TextField {...params} placeholder="درس" />}
                     />
                 </Grid>
             </Grid>
@@ -80,7 +82,7 @@ function AddAssignmentForm({ onCancel, onSuccess }) {
                     <FullWidthTextField
                         select
                         key={data.type}
-                        label="نوع تکلیف"
+                        placeholder="نوع تکلیف"
                         value={data.type}
                         onChange={(e) => setData({ ...data, type: e.target.value })} >
                         {types.map((option) => (
@@ -92,21 +94,21 @@ function AddAssignmentForm({ onCancel, onSuccess }) {
                 </Grid>
                 <Grid item xs={12} sm={4} md={3}>
                     <FullWidthTextField
-                        label="تاریخ انتشار"
+                        placeholder="تاریخ انتشار"
                         value={data.release_date}
                         helperText="به فرمت yyyy-mm-dd"
                         onChange={(e) => setData({ ...data, release_date: e.target.value })} />
                 </Grid>
                 <Grid item xs={12} sm={4} md={3}>
                     <FullWidthTextField
-                        label="تاریخ پایان"
+                        placeholder="تاریخ پایان"
                         helperText="به فرمت yyyy-mm-dd"
                         value={data.due_date}
                         onChange={(e) => setData({ ...data, due_date: e.target.value })} />
                 </Grid>
                 <Grid item xs={12} sm={4} md={3}>
                     <FullWidthTextField
-                        label="لینک دانلود"
+                        placeholder="لینک دانلود"
                         value={data.link}
                         onChange={(e) => setData({ ...data, link: e.target.value })} />
                 </Grid>
