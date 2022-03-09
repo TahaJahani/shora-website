@@ -22,7 +22,7 @@ import removeCourse from '../AxiosCalls/Calendar/removeCourse'
 
 const Div = styled('div')(unstable_styleFunctionSx);
 
-function CalendarPage() {
+function CalendarPage({setSelectedItem}) {
 
     let [dialogOpen, setDialogOpen] = React.useState(false)
     let [selectCourseOpen, setSelectCourseOpen] = React.useState(false)
@@ -80,6 +80,7 @@ function CalendarPage() {
     let [lastDate, setLastDate] = React.useState(getLastDate())
 
     React.useEffect(() => {
+        setSelectedItem('تقویم آموزشی')
         getCourses(() => { }, () => { })
         getAssignments(() => { }, () => { })
     }, [])

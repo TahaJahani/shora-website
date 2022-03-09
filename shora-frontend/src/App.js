@@ -121,7 +121,7 @@ function App() {
                     <Route path="demands/:id" element={<DemandsPage setSelectedItem={setSelectedItem}/>} />
                     <Route path="notifications" element={<NotificationsPage setSelectedItem={setSelectedItem}/>} />
                     <Route path="books/:id" element={<BookPage />} />
-                    <Route path="calendar" element={<CalendarPage />} />
+                    <Route path="calendar" element={<CalendarPage setSelectedItem={setSelectedItem}/>} />
                   {/* </AnimatedSwitch> */}
                 </Route>
               </Route>
