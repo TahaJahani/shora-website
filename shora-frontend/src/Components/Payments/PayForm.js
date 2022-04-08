@@ -15,6 +15,10 @@ function PayForm({ title,  subtitle, value = null, onSubmit }) {
         onSubmit(amount)
     }
 
+    const getHelperText = () => {
+        
+    }
+
     return (
         <Stack direction={'column'}>
             <Typography sx={{ marginBottom: 2 }} variant='h6'>
@@ -34,7 +38,7 @@ function PayForm({ title,  subtitle, value = null, onSubmit }) {
                         <TextField
                             value={amount}
                             type={'number'}
-                            helperText={amount == 0 ? '' : `${amount / 10} تومان`}
+                            helperText={amount == 0 ? '' : `${(amount / 10).toLocaleString('en-US')} تومان`}
                             fullWidth
                             placeholder={'مبلغ (ریال)'}
                             onChange={(e) => setAmount(e.target.value)} />

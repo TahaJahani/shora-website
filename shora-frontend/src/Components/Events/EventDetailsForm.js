@@ -105,7 +105,7 @@ export default function EventDetailsForm({ sx, event, isReadOnly = true, onSubmi
                             value={data.fee} />
                     }
                 </Grid>
-                {data.gift != 0 && <Grid item xs={xs} md={md}>
+                {(data.gift != 0 || !isReadOnly) && <Grid item xs={xs} md={md}>
                     {isReadOnly ?
                         <Stack spacing={2}>
                             <Typography variant={'h6'}>جایزه مسابقه</Typography>

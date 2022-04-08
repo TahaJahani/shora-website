@@ -211,7 +211,7 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
                     {notificationsItem}
                     {calendarItem}
                     <Divider />
-                    {paymentsItemh}
+                    {paymentsItem}
                 </div>
             );
         case 'financial':

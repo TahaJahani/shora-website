@@ -9,6 +9,7 @@ import { hasAccess } from "../../Helpers/UserHelper"
 import PayForm from '../../Components/Payments/PayForm'
 import { LoadingButton } from '@mui/lab';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import PaymentsGrid from '../Payments/PaymentsGrid';
 
 
 const ExpandMore = styled((props) => {
@@ -24,6 +25,10 @@ const ExpandMore = styled((props) => {
 export default function EventItem({ event, onAddUser, onEnroll, expanded, onExpand, onEdit, loading, onPay }) {
 
     const editable = hasAccess(['welfare', 'owner'])
+
+    const getTotalAmount = () => {
+        return (event.payments.reduce((prev, curr) => parseInt(prev) + parseInt(curr.amount), 0) / 10).toLocaleString("en-US")
+    }
 
     return (
         <Card className={'card-bg'} sx={{ borderRadius: 5, p: 4 }}>
@@ -74,9 +79,22 @@ export default function EventItem({ event, onAddUser, onEnroll, expanded, onExpa
                         </Card>
                     </>
                 }
-                <Card variant={'outlined'} sx={{ p: 4, background: 'transparent', borderRadius: 5 }}>
+                <Card variant={'outlined'} sx={{ p: 4, background: 'transparent', borderRadius: 5, mb: 2 }}>
                     <PayForm title={'حمایت از رویداد'} subtitle={'شما می‌توانید با حمایت از این رویداد، به بهبود کیفیت برگزاری آن کمک کنید.'} onSubmit={onPay} />
                 </Card>
+                {editable &&
+                    <Card variant='outlined' sx={{ p: 4, background: 'transparent', borderRadius: 5 }}>
+                        <Stack direction={'row'} sx={{mb: 2}} justifyContent={"space-between"}>
+                            <Typography variant='h6'>
+                                پرداخت‌های این رویداد
+                            </Typography>
+                            <Typography>
+                                {`مجموعا ${getTotalAmount()} تومان`}
+                            </Typography>
+                        </Stack>
+                        <PaymentsGrid data={event.payments} />
+                    </Card>
+                }
             </Collapse>
         </Card>
     )
