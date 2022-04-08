@@ -8,7 +8,7 @@ function PayForm({ title,  subtitle, value = null, onSubmit }) {
 
     const onPayClicked = () => {
         if (!value && amount < 1000 || amount > 500000000) {
-            setError("مبلغ مورد نظر باید بین ۱۰۰۰ و ۵۰۰.۰۰۰.۰۰۰ ریال باشد")
+            setError("مبلغ مورد نظر باید بین ۱.۰۰۰ و ۵۰۰.۰۰۰.۰۰۰ ریال باشد")
             return;
         }
         setError('')
@@ -34,6 +34,7 @@ function PayForm({ title,  subtitle, value = null, onSubmit }) {
                         <TextField
                             value={amount}
                             type={'number'}
+                            helperText={amount == 0 ? '' : `${amount / 10} تومان`}
                             fullWidth
                             placeholder={'مبلغ (ریال)'}
                             onChange={(e) => setAmount(e.target.value)} />

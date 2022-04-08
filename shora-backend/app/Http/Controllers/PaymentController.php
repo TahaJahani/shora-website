@@ -54,7 +54,7 @@ class PaymentController extends Controller
             "amount" => $payment->amount,
             "mail" => $user->email,
             "desc" => $payment->description,
-            "callback" => "https://taha7900.ir/shora/payments/finish",
+            "callback" => "https://taha7900.ir/api.shora/api/payments/finish",
         ]);
 
         if ($response->status() == 201) {
@@ -82,8 +82,7 @@ class PaymentController extends Controller
         ]);
         if ($validator->fails())
             return response()->json(['status' => 'error', 'message' => $validator->errors()->first()]);
-        $isPaid = Payment::where('track_id', $request->track_id)
-            ->orWhere('idpay_id', $request->id)->exists();
+        $isPaid = Payment::where('track_id', $request->track_id)->exists();
         if ($isPaid)
             return response()->json(['status' => 'error', 'message' => 'این تراکنش قبلا پایان یافته است']);
         if ($request->status != 10) {
@@ -96,7 +95,10 @@ class PaymentController extends Controller
             ]);
             return redirect("https://shora.taha7900.ir/home");
         }
-        $response = Http::post("https://api.idpay.ir/v1.1/payment/verify", [
+        $response = Http::withHeaders([
+            "X-API-KEY" => "0bd8a496-ce9d-485f-9f44-2ee1f77cf662",
+            "X-SANDBOX" => "true",
+        ])->post("https://api.idpay.ir/v1.1/payment/verify", [
             "id" => $request->id,
             "order_id" => $request->order_id,
         ]);
@@ -108,7 +110,7 @@ class PaymentController extends Controller
                 'amount' => $request->amount,
                 'card_no' => $request->card_no,
                 'hashed_card_no' => $request->hashed_card_no,
-                'paid_at' => $request->date,
+                'paid_at' => Date::createFromTimestamp($request->date),
                 'verified_at' => now(),
             ]);
             Transaction::create([
@@ -117,7 +119,7 @@ class PaymentController extends Controller
                 'type' => Transaction::TYPE_DEPOSIT,
                 'at' => now(),
             ]);
-            return redirect("https://shora.taha7900.ir/home");
+            return redirect("https://shora.taha7900.ir/home/my-payments");
         } else {
             return response()->json(['status' => 'error', 'message' => 'مشکلی در پرداخت پیش آمده. مبلغ به حساب شما باز خواهد گشت']);
         }
