@@ -28,6 +28,7 @@ import LostAndFoundPage from "./Pages/LostAndFoundPage";
 import DemandsPage from './Pages/DemandsPage';
 import BookPage from './Pages/BookPage';
 import CalendarPage from './Pages/CalendarPage'
+import PaymentsPage from './Pages/PaymentsPage';
 
 function App() {
   const lightTheme = createTheme({
@@ -105,12 +106,6 @@ function App() {
               <Route path="/reset-password/:hash" element={<PasswordResetPage />} />
               <Route path="/home" element={<ProtectedRoute />}>
                 <Route path="" element={<HomePage selectedItem={selectedItem} setSelectedItem={setSelectedItem} />}>
-                  {/* <AnimatedSwitch
-                    atEnter={{ opacity: 0 }}
-                    atLeave={{ opacity: 0 }}
-                    atActive={{ opacity: 1 }}
-                    className="switch-wrapper"
-                  > */}
                     <Route path="users" element={<UsersPage setSelectedItem={setSelectedItem} />} />
                     <Route path="rents" element={<RentsPage setSelectedItem={setSelectedItem} />} />
                     <Route path="lockers" element={<LockersPage setSelectedItem={setSelectedItem} />} />
@@ -122,7 +117,7 @@ function App() {
                     <Route path="notifications" element={<NotificationsPage setSelectedItem={setSelectedItem}/>} />
                     <Route path="books/:id" element={<BookPage />} />
                     <Route path="calendar" element={<CalendarPage setSelectedItem={setSelectedItem}/>} />
-                  {/* </AnimatedSwitch> */}
+                    <Route path="my-payments" element={<PaymentsPage setSelectedItem={setSelectedItem} />} />
                 </Route>
               </Route>
             </Routes>

@@ -12,6 +12,7 @@ import SchoolIcon from '@mui/icons-material/School';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import BookIcon from '@mui/icons-material/Book';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { useNavigate } from 'react-router-dom';
 import { Avatar, Divider } from '@mui/material';
 import translate from '../Helpers/translate';
@@ -66,13 +67,25 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
         </ListItem>
     )
 
+    const paymentsItem = (
+        <ListItem button key='پرداخت‌های من' onClick={() => onClick('my-payments')}
+            className="on-hover-grey"
+            style={{ backgroundColor: (selectedItem == 'پرداخت‌های من') ? '#e55c0077' : 'transparent' }}
+        >
+            <ListItemIcon sx={{ ml: -2 }}>
+                <CreditCardIcon />
+            </ListItemIcon>
+            <ListItemText primary='پرداخت‌های من' style={{ textAlign: 'right' }} />
+        </ListItem>
+    )
+
     const transactionsItem = (
         <ListItem button key='تراکنش‌ها' onClick={() => onClick('transactions')}
             className="on-hover-grey"
             style={{ backgroundColor: (selectedItem == 'تراکنش‌ها') ? '#e55c0077' : 'transparent' }}
         >
             <ListItemIcon sx={{ ml: -2 }}>
-                <CreditCardIcon />
+                <AttachMoneyIcon />
             </ListItemIcon>
             <ListItemText primary='تراکنش‌ها' style={{ textAlign: 'right' }} />
         </ListItem>
@@ -126,7 +139,7 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
             {getRecoil(notificationsAtom) != 0 &&
                 <Avatar sx={{
                     backgroundColor: '#e55c00', width: 30,
-                    height: 30, textAlign: 'center', justifyContent: 'center', 
+                    height: 30, textAlign: 'center', justifyContent: 'center',
                     alignItems: 'center', flexDirection: 'column'
                 }}>
                     {getRecoil(notificationsAtom)}
@@ -171,10 +184,13 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
                     <Divider />
                     {transactionsItem}
                     <Divider />
+                    {paymentsItem}
+                    <Divider />
                     {lockersItem}
                     <Divider />
                     {booksItem}
-                    {/* {eventsItem} TODO */}
+                    <Divider />
+                    {eventsItem}
                     <Divider />
                     {demandsItem}
                     <Divider />
@@ -216,6 +232,8 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
                     <Divider />
                     {notificationsItem}
                     {calendarItem}
+                    <Divider />
+                    {paymentsItem}
                 </div>
             )
         case 'welfare':

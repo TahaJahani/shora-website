@@ -10,7 +10,7 @@ import EventDetailsForm from "../Components/Events/EventDetailsForm"
 import addEvent from '../AxiosCalls/Events/addEvent';
 import editEvent from '../AxiosCalls/Events/editEvent';
 
-export default function EventsPage() {
+export default function EventsPage({setSelectedItem}) {
 
     const [users, setUsers] = useRecoilState(usersAtom)
     const [events, setEvents] = useRecoilState(eventsAtom)
@@ -19,6 +19,7 @@ export default function EventsPage() {
     const [expandedItem, setExpandedItem] = React.useState(-1);
 
     React.useEffect(() => {
+        setSelectedItem("رویدادها")
         if (!users)
             getAllStudentNumbers((res) => setUsers(res.data.users), () => { })
         if (!events)

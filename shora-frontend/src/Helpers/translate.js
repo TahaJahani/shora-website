@@ -12,7 +12,7 @@ const dictionary = {
         'rejected': 'رد شده',
         'pending': 'در حال بررسی',
         'accepted': 'تایید شده',
-        'users': 'اعضای شورا',
+        'users': 'کاربران',
         'rents': 'کرایه‌ها',
         'lockers': 'کمدها',
         'transactions': 'تراکنش‌ها',

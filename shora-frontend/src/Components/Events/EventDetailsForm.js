@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { styled } from "@mui/material/styles";
-import { Box, Grid, TextField, Typography } from '@mui/material';
+import { Box, Divider, Grid, Stack, TextField, Typography } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
@@ -20,8 +20,8 @@ export default function EventDetailsForm({ sx, event, isReadOnly = true, onSubmi
 
     const initialData = {
         name: event ? event.name : '',
-        start_at: event ? formatDate(new Date(event.start_at)) : formatDate(new Date()),
-        finish_at: event ? formatDate(new Date(event.finish_at)) : formatDate(new Date()),
+        start_at: event ? new Date(event.start_at) : new Date(),
+        finish_at: event ? new Date(event.finish_at) : new Date(),
         fee: event ? event.fee : '',
         gift: event ? event.gift : '',
         description: event ? event.description : '',
@@ -37,10 +37,10 @@ export default function EventDetailsForm({ sx, event, isReadOnly = true, onSubmi
             <Grid container mb={2}>
                 <Grid item xs={12} md={8}>
                 {isReadOnly ?
-                        <div>
-                            <Typography>نام رویداد</Typography>
+                        <Stack spacing={2}>
+                            <Typography variant={'h6'}>نام رویداد</Typography>
                             <Typography>{data.name}</Typography>
-                        </div>
+                        </Stack>
                         :
                         <FullWidthTextField
                             label='نام رویداد'
@@ -49,13 +49,14 @@ export default function EventDetailsForm({ sx, event, isReadOnly = true, onSubmi
                     }
                 </Grid>
             </Grid>
+            {isReadOnly && <Divider sx={{mb: 2}}/>}
             <Grid container spacing={2} mb={2}>
                 <Grid item xs={xs} md={md}>
                     {isReadOnly ?
-                        <div>
-                            <Typography>زمان شروع</Typography>
+                        <Stack spacing={2}>
+                            <Typography variant={'h6'}>زمان شروع</Typography>
                             <Typography>{data.start_at.toLocaleDateString('fa-IR')}</Typography>
-                        </div>
+                        </Stack>
                         :
                         <LocalizationProvider dateAdapter={AdapterDateFns}>
                             <DatePicker
@@ -70,10 +71,10 @@ export default function EventDetailsForm({ sx, event, isReadOnly = true, onSubmi
                 </Grid>
                 <Grid item xs={xs} md={md}>
                     {isReadOnly ?
-                        <div>
-                            <Typography>زمان پایان</Typography>
+                        <Stack spacing={2}>
+                            <Typography variant={'h6'}>زمان پایان</Typography>
                             <Typography>{data.finish_at.toLocaleDateString('fa-IR')}</Typography>
-                        </div>
+                        </Stack>
                         :
                         <LocalizationProvider dateAdapter={AdapterDateFns}>
                             <DatePicker
@@ -87,13 +88,14 @@ export default function EventDetailsForm({ sx, event, isReadOnly = true, onSubmi
                     }
                 </Grid>
             </Grid>
+            {isReadOnly && <Divider sx={{mb: 2}}/>}
             <Grid container spacing={2} mb={2}>
                 <Grid item xs={xs} md={md}>
                     {isReadOnly ?
-                        <div>
-                            <Typography>هزینه ثبت نام</Typography>
-                            <Typography>{data.fee}</Typography>
-                        </div>
+                        <Stack spacing={2}>
+                            <Typography variant={'h6'}>هزینه ثبت نام</Typography>
+                            <Typography>{data.fee == 0 ? "رایگان" : `${data.fee} ریال`}</Typography>
+                        </Stack>
                         :
                         <FullWidthTextField
                             label='هزینه ثبت نام'
@@ -103,12 +105,12 @@ export default function EventDetailsForm({ sx, event, isReadOnly = true, onSubmi
                             value={data.fee} />
                     }
                 </Grid>
-                <Grid item xs={xs} md={md}>
+                {data.gift != 0 && <Grid item xs={xs} md={md}>
                     {isReadOnly ?
-                        <div>
-                            <Typography>جایزه مسابقه</Typography>
+                        <Stack spacing={2}>
+                            <Typography variant={'h6'}>جایزه مسابقه</Typography>
                             <Typography>{data.gift}</Typography>
-                        </div>
+                        </Stack>
                         :
                         <FullWidthTextField
                             label="جایزه مسابقه"
@@ -116,15 +118,16 @@ export default function EventDetailsForm({ sx, event, isReadOnly = true, onSubmi
                             onChange={e => setData({ ...data, gift: e.target.value })}
                             value={data.gift} />
                     }
-                </Grid>
+                </Grid>}
             </Grid>
+            {isReadOnly && <Divider sx={{mb: 2}}/>}
             <Grid container mb={2}>
                 <Grid item xs={12} md={8}>
                     {isReadOnly ?
-                        <div>
-                            <Typography>توضیحات</Typography>
-                            <Typography>{data.description}</Typography>
-                        </div>
+                        <Stack spacing={2}>
+                            <Typography variant={'h6'}>توضیحات</Typography>
+                            <Typography sx={{whiteSpace: 'pre-line'}}>{data.description}</Typography>
+                        </Stack>
                         :
                         <FullWidthTextField
                             label="توضیحات"
