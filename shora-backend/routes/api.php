@@ -33,7 +33,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/info', function() {
+Route::get('/info', function () {
     return phpinfo();
 });
 
@@ -50,51 +50,53 @@ Route::prefix('/auth')->middleware('auth:sanctum')->group(function () {
         ->whereNumber('student_number');
 });
 
-Route::prefix('users')->middleware('auth:sanctum')->group(function() {
+Route::prefix('users')->middleware('auth:sanctum')->group(function () {
     Route::middleware('ability:admin,owner')->get('/', [UserController::class, 'getUsers']);
     Route::middleware('ability:financial,admin,owner')->get('/student-numbers', [UserController::class, 'getAllUsersStudentNumber']);
     Route::middleware('ability:owner,admin')->post('/ban/{id}', [UserController::class, 'banUser'])->whereNumber('id');
     Route::middleware('ability:owner,admin')->post('/unban/{id}', [UserController::class, 'unbanUser'])->whereNumber('id');
 });
 
-Route::prefix('rents')->middleware(['auth:sanctum', 'ability:owner,financial'])->group(function() {
+Route::prefix('rents')->middleware(['auth:sanctum', 'ability:owner,financial'])->group(function () {
     Route::get('/', [RentController::class, 'getRents']);
     Route::post('/add', [RentController::class, 'addRent']);
     Route::post('/return', [RentController::class, 'returnRent']);
 });
 
-Route::prefix('transactions')->middleware(['auth:sanctum', 'ability:owner,financial'])->group(function() {
+Route::prefix('transactions')->middleware(['auth:sanctum', 'ability:owner,financial'])->group(function () {
     Route::get('/', [TransactionController::class, 'getTransactions']);
     Route::post('/add', [TransactionController::class, 'addTransaction']);
 });
 
-Route::prefix('lockers')->middleware(['auth:sanctum', 'ability:owner,financial'])->group(function() {
+Route::prefix('lockers')->middleware(['auth:sanctum', 'ability:owner,financial'])->group(function () {
     Route::get('/', [LockerController::class, 'getLockers']);
     Route::get('/all', [LockerController::class, 'getLockersStatus']);
 });
 
-Route::prefix('books')->middleware(['auth:sanctum'])->group(function() {
+Route::prefix('books')->middleware(['auth:sanctum'])->group(function () {
     Route::middleware('ability:owner,financial')->get('data/{id}', [BookController::class, 'getData'])->whereNumber('id');
     Route::middleware('ability:owner,financial')->post('/', [BookController::class, 'add']);
 });
 
-Route::prefix('lost-and-found')->middleware(['auth:sanctum'])->group(function() {
+Route::prefix('lost-and-found')->middleware(['auth:sanctum'])->group(function () {
     Route::get('/', [LostAndFoundContoller::class, 'getAll']);
     Route::middleware('ability:owner,admin,financial')->post('/', [LostAndFoundContoller::class, 'add']);
     Route::middleware('ability:owner,admin,financial')->delete('/{found_id}', [LostAndFoundContoller::class, 'remove'])->whereNumber('found_id');
     Route::middleware('ability:owner,admin,financial')->post('/{found_id}', [LostAndFoundContoller::class, 'return'])->whereNumber('found_id');
 });
 
-Route::prefix('events')->middleware(['auth:sanctum', 'ability:owner,welfare'])->group(function() {
+Route::prefix('events')->middleware(['auth:sanctum'])->group(function () {
+    Route::middleware('ability:owner,welfare')->group(function () {
+        Route::post('/', [EventController::class, 'add']);
+        Route::delete('/{id}', [EventController::class, 'delete'])->whereNumber('id');
+        Route::put('/', [EventController::class, 'edit']);
+        Route::post('/register', [EventController::class, 'addUser']);
+    });
     Route::get('/', [EventController::class, 'getAll']);
-    Route::post('/', [EventController::class, 'add']);
-    Route::delete('/{id}', [EventController::class, 'delete'])->whereNumber('id');
-    Route::put('/', [EventController::class, 'edit']);
-    Route::post('/register', [EventController::class, 'addUser']);
     Route::post('/enroll', [EventController::class, 'enroll']);
 });
 
-Route::prefix('demands')->middleware(['auth:sanctum'])->group(function() {
+Route::prefix('demands')->middleware(['auth:sanctum'])->group(function () {
     Route::get('/{id}', [DemandController::class, 'get'])->whereNumber('id');
     Route::get('/', [DemandController::class, 'getAll']);
     Route::post('/', [DemandController::class, 'addDemand']);
@@ -104,17 +106,17 @@ Route::prefix('demands')->middleware(['auth:sanctum'])->group(function() {
     Route::middleware(['ability:owner,admin'])->delete('/{id}', [DemandController::class, 'delete'])->whereNumber('id');
     Route::middleware(['ability:owner,admin'])->post('/status', [DemandController::class, 'changeStatus']);
 
-    Route::prefix('categories')->group(function() {
+    Route::prefix('categories')->group(function () {
         Route::get('/', [DemandCategoryController::class, 'get']);
     });
 });
 
-Route::prefix('/notifications')->middleware('auth:sanctum')->group(function() {
+Route::prefix('/notifications')->middleware('auth:sanctum')->group(function () {
     Route::get('/', [NotificationController::class, 'getAll']);
     Route::middleware('ability:owner,admin')->post('/', [NotificationController::class, 'add']);
 });
 
-Route::prefix('/courses')->middleware('auth:sanctum')->group(function() {
+Route::prefix('/courses')->middleware('auth:sanctum')->group(function () {
     Route::get('/assignments', [AssignmentController::class, 'getAssignments']);
     Route::get('/', [AssignmentController::class, 'getCourses']);
     Route::post('/', [AssignmentController::class, 'addAssignment']);
@@ -122,7 +124,7 @@ Route::prefix('/courses')->middleware('auth:sanctum')->group(function() {
     Route::delete('/{course_id}', [AssignmentController::class, 'removeCourseFromUser'])->whereNumber('course_id');
 });
 
-Route::prefix('/report-problems')->middleware('auth:sanctum')->group(function() {
+Route::prefix('/report-problems')->middleware('auth:sanctum')->group(function () {
     Route::post('/', [ReportController::class, 'addReport']);
 });
 

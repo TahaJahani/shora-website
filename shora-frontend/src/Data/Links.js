@@ -21,6 +21,7 @@ const links = {
     lostAndFound: base_url + "/lost-and-found",
     events: base_url + "/events",
     registerUserInEvent: base_url + "/events/register",
+    enrollInEvent: base_url + "/events/enroll",
     getDemands: base_url + "/demands",
     likeDemand: base_url + "/demands/like",
     unlikeDemand: base_url + "/demands/unlike",
@@ -33,6 +34,8 @@ const links = {
     courses: base_url + "/courses",
     assignments: base_url + "/courses/assignments",
     reportProblem: base_url + "/report-problems",
+    getMyPayments: base_url + "/payments/my",
+    createPayment: base_url + "/payments/create",
 }
 
 export default links;

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\EventResource;
 use App\Models\Event;
 use App\Models\EventUser;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class EventController extends Controller
@@ -68,7 +70,7 @@ class EventController extends Controller
     public function getAll(Request $request)
     {
         $events = Event::with('users')->orderBy('start_at', 'DESC')->get();
-        return response()->json(['status' => 'ok', 'data' => ['events' => $events]]);
+        return response()->json(['status' => 'ok', 'data' => ['events' => EventResource::collection($events)]]);
     }
 
     public function addUser(Request $request)
@@ -104,12 +106,17 @@ class EventController extends Controller
         return response()->json(['status' => 'ok', 'message' => 'با موفقیت ثبت شد', 'data' => ['user' => $userToRgister]]);
     }
 
-    public function enroll(Request $request) {
+    public function enroll(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'event_id' => 'required|numeric|min:1',
         ]);
         if ($validator->fails())
             return response()->json(['status' => 'error', 'message' => $validator->errors()->first()]);
-        //TODO...
+        EventUser::insertOrIgnore([
+            'event_id' => $request->event_id,
+            'user_id' => Auth::id(),
+        ]);
+        return response()->json(['status' => 'ok', 'message' => 'با موفقیت ثبت نام شدید']);
     }
 }

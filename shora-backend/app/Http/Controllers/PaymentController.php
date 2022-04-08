@@ -45,9 +45,6 @@ class PaymentController extends Controller
             'user_id' => $user->id,
             'description' => $description,
         ]);
-        if (!$payment)
-            return response()->json(['status' => 'error', 'message' => 'خطایی هنگام ایجاد تراکنش رخ داده. دوباره تلاش کنید']);
-
 
         $response = Http::withHeaders([
             "X-API-KEY" => "0bd8a496-ce9d-485f-9f44-2ee1f77cf662",
@@ -60,14 +57,15 @@ class PaymentController extends Controller
             "callback" => "https://taha7900.ir/shora/payments/finish",
         ]);
 
-        if ($response->ok()) {
+        if ($response->status() == 201) {
             $response = $response->json();
             $payment->link = $response['link'];
             $payment->idpay_id = $response['id'];
             $payment->save();
             return response()->json(['status' => 'ok', 'data' => ['payment' => $payment]]);
-        } else
+        } else {
             return response()->json(['status' => 'error', 'message' => 'خطایی هنگام ایجاد تراکنش رخ داده. دوباره تلاش کنید']);
+        }
     }
 
     public function completePayment(Request $request)
@@ -88,11 +86,21 @@ class PaymentController extends Controller
             ->orWhere('idpay_id', $request->id)->exists();
         if ($isPaid)
             return response()->json(['status' => 'error', 'message' => 'این تراکنش قبلا پایان یافته است']);
+        if ($request->status != 10) {
+            Payment::where('id', $request->order_id)->update([
+                "status" => $request->status,
+                'track_id' => $request->track_id,
+                'amount' => $request->amount,
+                'card_no' => $request->card_no,
+                'hashed_card_no' => $request->hashed_card_no,
+            ]);
+            return redirect("https://shora.taha7900.ir/home");
+        }
         $response = Http::post("https://api.idpay.ir/v1.1/payment/verify", [
             "id" => $request->id,
             "order_id" => $request->order_id,
         ]);
-        if ($response->ok()) {
+        if ($response->status() == 200) {
             $payment = Payment::where('id', $request->order_id)->first();
             $payment->update([
                 "status" => $request->status,
@@ -118,7 +126,7 @@ class PaymentController extends Controller
     public function myPayments(Request $request)
     {
         $user_id = Auth::id();
-        $payments = Payment::where('user_id', $user_id)->whereNotNull('track_id')->get();
+        $payments = Payment::where('user_id', $user_id)->whereNotNull('verified_at')->get();
         return response()->json(['status' => 'ok', 'data' => ['payments' => $payments]]);
     }
 }

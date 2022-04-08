@@ -58,7 +58,7 @@ export default function DemandsPage({setSelectedItem}) {
                 isLoading: false,
             })
             setDemands(resdata.demands)
-            document.body.style.overflow = 'auto';    
+            document.body.style.overflow = 'auto';
         }
         
         getDemands({ page: page, search: search, category_id: selectedCategory }, (res) => {

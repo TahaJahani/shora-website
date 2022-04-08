@@ -17,6 +17,7 @@ export const isFinancial = () => {
 }
 
 export const hasAccess = (accesses) => {
+    // return false;
     const user = getRecoil(userAtom)
     return accesses.some(item => user.roles.includes(item))
 }

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Card, CardHeader, Collapse, Typography, IconButton, CardContent, Box } from '@mui/material'
+import { Card, CardHeader, Collapse, Typography, IconButton, CardContent, Box, Chip, Stack } from '@mui/material'
 import { styled } from '@mui/material/styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import RegisterInEventForm from './RegisterInEventForm';
@@ -8,6 +8,7 @@ import UsersGrid from "../UsersGrid"
 import { hasAccess } from "../../Helpers/UserHelper"
 import PayForm from '../../Components/Payments/PayForm'
 import { LoadingButton } from '@mui/lab';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 
 const ExpandMore = styled((props) => {
@@ -20,18 +21,28 @@ const ExpandMore = styled((props) => {
     }),
 }));
 
-export default function EventItem({ event, onAddUser, onEnroll, expanded, onExpand, onEdit, loading, payClicked }) {
+export default function EventItem({ event, onAddUser, onEnroll, expanded, onExpand, onEdit, loading, onPay }) {
 
-    // const editable = hasAccess(['welfare', 'owner'])
-    const editable = false;
+    const editable = hasAccess(['welfare', 'owner'])
 
     return (
         <Card className={'card-bg'} sx={{ borderRadius: 5, p: 4 }}>
             <CardHeader
                 onClick={onExpand}
-                title={<Typography variant='h6'>
-                    {event.name}
-                </Typography>}
+                title={
+                    <Stack direction={'row'} justifyContent={'space-between'} sx={{ pl: 4 }}>
+                        <Typography variant='h6'>
+                            {event.name}
+                        </Typography>
+                        {event.enrolled &&
+                            <Chip
+                                color='success'
+                                icon={<CheckCircleIcon />}
+                                label="ثبت‌نام شده"
+                                sx={{ direction: 'ltr' }} />
+                        }
+                    </Stack>
+                }
                 action={<ExpandMore expand={expanded} onClick={onExpand}>
                     <ExpandMoreIcon />
                 </ExpandMore>}
@@ -40,7 +51,7 @@ export default function EventItem({ event, onAddUser, onEnroll, expanded, onExpa
                 <Card variant={'outlined'} sx={{ borderRadius: 5, background: 'transparent', p: 4, mb: 2 }}>
                     <EventDetailsForm loading={loading} sx={{ marginBottom: 2 }} event={event} isReadOnly={!editable} onSubmit={onEdit} />
                     {!editable &&
-                        <Box sx={{justifyContent: 'flex-end', display: 'flex'}}>
+                        <Box sx={{ justifyContent: 'flex-end', display: 'flex' }}>
                             <LoadingButton
                                 loading={loading}
                                 variant={'contained'}
@@ -64,7 +75,7 @@ export default function EventItem({ event, onAddUser, onEnroll, expanded, onExpa
                     </>
                 }
                 <Card variant={'outlined'} sx={{ p: 4, background: 'transparent', borderRadius: 5 }}>
-                    <PayForm title={'حمایت از رویداد'} subtitle={'شما می‌توانید با حمایت از این رویداد، به بهبود کیفیت برگزاری آن کمک کنید.'} onSubmit={payClicked} />
+                    <PayForm title={'حمایت از رویداد'} subtitle={'شما می‌توانید با حمایت از این رویداد، به بهبود کیفیت برگزاری آن کمک کنید.'} onSubmit={onPay} />
                 </Card>
             </Collapse>
         </Card>

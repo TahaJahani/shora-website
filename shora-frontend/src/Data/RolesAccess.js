@@ -229,6 +229,7 @@ const RolesAccess = ({ role, onChanged, selectedItem }) => {
                     {lostAndFoundItem}
                     <Divider />
                     {demandsItem}
+                    {eventsItem}
                     <Divider />
                     {notificationsItem}
                     {calendarItem}
