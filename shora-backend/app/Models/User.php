@@ -49,4 +49,8 @@ class User extends Authenticatable
     public function passwordResets() {
         return $this->hasMany(PasswordReset::class);
     }
+
+    public function payments() {
+        return $this->hasMany(Payment::class);
+    }
 }

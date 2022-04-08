@@ -71,7 +71,7 @@ class EventController extends Controller
         return response()->json(['status' => 'ok', 'data' => ['events' => $events]]);
     }
 
-    public function registerUser(Request $request)
+    public function addUser(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'event_id' => 'required|numeric',
@@ -102,5 +102,14 @@ class EventController extends Controller
             ]);
         }
         return response()->json(['status' => 'ok', 'message' => 'با موفقیت ثبت شد', 'data' => ['user' => $userToRgister]]);
+    }
+
+    public function enroll(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'event_id' => 'required|numeric|min:1',
+        ]);
+        if ($validator->fails())
+            return response()->json(['status' => 'error', 'message' => $validator->errors()->first()]);
+        //TODO...
     }
 }

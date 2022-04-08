@@ -9,6 +9,7 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\LockerController;
 use App\Http\Controllers\LostAndFoundContoller;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RentController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TransactionController;
@@ -89,7 +90,8 @@ Route::prefix('events')->middleware(['auth:sanctum', 'ability:owner,welfare'])->
     Route::post('/', [EventController::class, 'add']);
     Route::delete('/{id}', [EventController::class, 'delete'])->whereNumber('id');
     Route::put('/', [EventController::class, 'edit']);
-    Route::post('/register', [EventController::class, 'registerUser']);
+    Route::post('/register', [EventController::class, 'addUser']);
+    Route::post('/enroll', [EventController::class, 'enroll']);
 });
 
 Route::prefix('demands')->middleware(['auth:sanctum'])->group(function() {
@@ -122,6 +124,12 @@ Route::prefix('/courses')->middleware('auth:sanctum')->group(function() {
 
 Route::prefix('/report-problems')->middleware('auth:sanctum')->group(function() {
     Route::post('/', [ReportController::class, 'addReport']);
+});
+
+Route::prefix('/payments')->group(function () {
+    Route::middleware(['auth:sanctum'])->post('/create', [PaymentController::class, 'newPayment']);
+    Route::post('/finish', [PaymentController::class, 'completePayment']);
+    Route::middleware(['auth:sanctum'])->get('/my', [PaymentController::class, 'myPayments']);
 });
 
 Route::get('/install', function (Request $request) {
