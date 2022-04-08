@@ -34,6 +34,7 @@ class EventResource extends JsonResource
             "description" => $this->description,
             "users" => $showUsers ? $this->users : [],
             "enrolled" => $enrolled,
+            "payments" => $this->payments ?? [],
         ];
     }
 }

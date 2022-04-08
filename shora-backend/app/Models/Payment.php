@@ -21,6 +21,8 @@ class Payment extends Model
         'hashed_card_no',
         'paid_at',
         'verified_at',
+        'payable_id',
+        'payable_type',
     ];
 
     public function user() {

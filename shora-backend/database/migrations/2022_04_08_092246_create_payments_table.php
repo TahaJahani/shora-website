@@ -17,6 +17,7 @@ class CreatePaymentsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('amount')->min(1000)->max(500000000);
             $table->foreignId('user_id');
+            $table->morphs('payable');
             $table->string('description');
             $table->string('link')->nullable();
             $table->string('idpay_id')->nullable();

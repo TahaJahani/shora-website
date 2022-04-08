@@ -16,25 +16,22 @@ use Morilog\Jalali\Jalalian;
 class PaymentController extends Controller
 {
     private $origins = [
-        'event' => "رویداد",
+        "رویداد" => Event::class,
     ];
 
     public function newPayment(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'amount' => 'required|numeric|min:1000|max:500000000',
-            'origin' => ['required', Rule::in($this->origins)],
+            'origin' => ['required'],
             'origin_id' => 'required|numeric|min:1',
         ]);
         if ($validator->fails())
             return response()->json(['status' => 'error', 'message' => $validator->errors()->first()]);
-        $relatedModel = null;
-        if ($request->origin === $this->origins['event']) {
-            $relatedModel = Event::class;
-        } //TODO: add other origins...
-
-        if (!$relatedModel)
+        if (!array_key_exists($request->origin, $this->origins))
             return response()->json(['status' => 'error', 'message' => 'bad origin']);
+        $relatedModel = $this->origins[$request->origin];
+
         $relatedModel = $relatedModel::where('id', $request->origin_id)->first();
         if (!$relatedModel)
             return response()->json(['status' => 'error', 'message' => 'origin not found']);
@@ -44,11 +41,12 @@ class PaymentController extends Controller
             'amount' => $request->amount,
             'user_id' => $user->id,
             'description' => $description,
+            'payable_id' => $relatedModel->id,
+            'payable_type' => $this->origins[$request->origin],
         ]);
 
         $response = Http::withHeaders([
             "X-API-KEY" => "0bd8a496-ce9d-485f-9f44-2ee1f77cf662",
-            "X-SANDBOX" => "true",
         ])->post("https://api.idpay.ir/v1.1/payment", [
             "order_id" => $payment->id,
             "amount" => $payment->amount,
@@ -78,7 +76,7 @@ class PaymentController extends Controller
             'amount' => 'required|numeric',
             'card_no' => 'required|string',
             'hashed_card_no' => 'required|string',
-            'date' => 'required|timestamp',
+            'date' => 'required',
         ]);
         if ($validator->fails())
             return response()->json(['status' => 'error', 'message' => $validator->errors()->first()]);
@@ -97,7 +95,6 @@ class PaymentController extends Controller
         }
         $response = Http::withHeaders([
             "X-API-KEY" => "0bd8a496-ce9d-485f-9f44-2ee1f77cf662",
-            "X-SANDBOX" => "true",
         ])->post("https://api.idpay.ir/v1.1/payment/verify", [
             "id" => $request->id,
             "order_id" => $request->order_id,

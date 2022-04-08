@@ -69,7 +69,16 @@ class EventController extends Controller
 
     public function getAll(Request $request)
     {
-        $events = Event::with('users')->orderBy('start_at', 'DESC')->get();
+        $user = Auth::user();
+        if ($user->tokenCan("owner") || $user->tokenCan("welfare")) {
+            $events = Event::with(["users", "payments" => function ($query) {
+                $query->join('users', 'users.id', 'payments.user_id')
+                    ->select('payments.id', 'payments.payable_id','payments.amount','users.name as name', 'users.surname as surname');
+            }])->orderBy('start_at', 'DESC')->get();
+        } else {
+            $events = Event::with("users")->orderBy('start_at', 'DESC')->get();
+        }
+
         return response()->json(['status' => 'ok', 'data' => ['events' => EventResource::collection($events)]]);
     }
 
