@@ -20,4 +20,8 @@ class Event extends Model
     public function payments() {
         return $this->morphMany(Payment::class, 'payable');
     }
+
+    public function anonymousPayments() {
+        return $this->morphMany(AnonymousPayment::class, 'payable');
+    }
 }

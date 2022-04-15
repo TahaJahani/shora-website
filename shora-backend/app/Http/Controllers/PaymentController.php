@@ -111,7 +111,7 @@ class PaymentController extends Controller
                 'verified_at' => now(),
             ]);
             Transaction::create([
-                'amount' => $request->amount,
+                'amount' => floor(($request->amount) / 10),
                 'description' => $payment->description . ' از طرف کاربر به شناسه‌ی ' . $payment->user_id,
                 'type' => Transaction::TYPE_DEPOSIT,
                 'at' => now(),

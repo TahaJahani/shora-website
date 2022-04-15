@@ -195,7 +195,7 @@ class UserController extends Controller
         ]);
         if ($validator->fails())
             return response()->json(['status' => 'error', 'message' => $validator->errors()->first()]);
-        $email = $request->email;
+        $email = strtolower($request->email);
         if (strpos($email, '@') == false)
             $email = $email . '@ce.sharif.edu';
         $user = User::where('email', $email)->first();

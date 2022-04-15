@@ -71,10 +71,17 @@ class EventController extends Controller
     {
         $user = Auth::user();
         if ($user->tokenCan("owner") || $user->tokenCan("welfare")) {
-            $events = Event::with(["users", "payments" => function ($query) {
-                $query->join('users', 'users.id', 'payments.user_id')
-                    ->select('payments.id', 'payments.payable_id','payments.amount','users.name as name', 'users.surname as surname');
-            }])->orderBy('start_at', 'DESC')->get();
+            $events = Event::with([
+                "users" => function ($query) {
+                    $query->orderBy("event_users.id");
+                },
+                "payments" => function ($query) {
+                    $query->join('users', 'users.id', 'payments.user_id')
+                        ->where('payments.status', '10')
+                        ->select('payments.id', 'payments.payable_id', 'payments.amount', 'users.name as name', 'users.surname as surname');
+                },
+                "anonymousPayments",
+            ])->orderBy('start_at', 'DESC')->get();
         } else {
             $events = Event::with("users")->orderBy('start_at', 'DESC')->get();
         }

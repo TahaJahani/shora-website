@@ -71,10 +71,15 @@ export default function EventItem({ event, onAddUser, onEnroll, expanded, onExpa
                 {editable &&
                     <>
                         <RegisterInEventForm event={event} sx={{ marginBottom: 2 }} onSuccess={(user) => onAddUser(user)} />
-                        <Card variant='outlined' sx={{ padding: 2, background: 'transparent', mb: 2 }}>
-                            <Typography sx={{ marginBottom: 2 }} variant='h6'>
-                                کاربران ثبت نام شده
-                            </Typography>
+                        <Card variant='outlined' sx={{ p: 4, background: 'transparent', borderRadius: 5 }}>
+                            <Stack direction={'row'} sx={{ mb: 2 }} justifyContent={"space-between"}>
+                                <Typography sx={{ marginBottom: 2 }} variant='h6'>
+                                    کاربران ثبت نام شده
+                                </Typography>
+                                <Typography>
+                                    {`${event.users.length} نفر`}
+                                </Typography>
+                            </Stack>
                             <UsersGrid users={event.users} showColumns={['id', 'name', 'surname', 'student_number']} />
                         </Card>
                     </>
@@ -84,7 +89,7 @@ export default function EventItem({ event, onAddUser, onEnroll, expanded, onExpa
                 </Card>
                 {editable &&
                     <Card variant='outlined' sx={{ p: 4, background: 'transparent', borderRadius: 5 }}>
-                        <Stack direction={'row'} sx={{mb: 2}} justifyContent={"space-between"}>
+                        <Stack direction={'row'} sx={{ mb: 2 }} justifyContent={"space-between"}>
                             <Typography variant='h6'>
                                 پرداخت‌های این رویداد
                             </Typography>

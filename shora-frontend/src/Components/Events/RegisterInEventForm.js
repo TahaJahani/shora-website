@@ -23,7 +23,7 @@ export default function RegisterInEventForm({ sx, event, onSuccess }) {
     }
 
     return (
-        <Card variant='outlined' sx={{ ...sx, padding: 2, background: 'transparent' }}>
+        <Card variant='outlined' sx={{ ...sx, p: 4, background: 'transparent', borderRadius: 5 }}>
             <Typography variant='h6'>
                 ثبت‌نام کاربر
             </Typography>

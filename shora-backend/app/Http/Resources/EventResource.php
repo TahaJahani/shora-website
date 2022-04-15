@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\MissingValue;
 use Illuminate\Support\Facades\Auth;
 
 class EventResource extends JsonResource
@@ -24,6 +25,11 @@ class EventResource extends JsonResource
                 break;
             }
         }
+        $payments = $this->whenLoaded('payments');
+        $anonymousPayments = $this->whenLoaded('anonymousPayments');
+        if (!$payments instanceof MissingValue)
+            $payments = $payments->merge($anonymousPayments);
+
         return [
             "id" => $this->id,
             "name" => $this->name,
@@ -34,7 +40,7 @@ class EventResource extends JsonResource
             "description" => $this->description,
             "users" => $showUsers ? $this->users : [],
             "enrolled" => $enrolled,
-            "payments" => $this->payments ?? [],
+            "payments" => PaymentResource::collection($payments),
         ];
     }
 }

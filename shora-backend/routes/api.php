@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnonymousPaymentController;
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\DemandCategoryController;
@@ -132,6 +133,10 @@ Route::prefix('/payments')->group(function () {
     Route::middleware(['auth:sanctum'])->post('/create', [PaymentController::class, 'newPayment']);
     Route::post('/finish', [PaymentController::class, 'completePayment']);
     Route::middleware(['auth:sanctum'])->get('/my', [PaymentController::class, 'myPayments']);
+
+    Route::prefix('anonymous')->group(function () {
+        Route::post('/submit/{password}', [AnonymousPaymentController::class, 'submit']);
+    });
 });
 
 Route::get('/install', function (Request $request) {

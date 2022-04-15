@@ -55,7 +55,7 @@ function RegisterPage(props) {
                     variant='outlined'
                     fullWidth
                     value={email}
-                    onChange={(val) => setEmail(val.target.value)}
+                    onChange={(val) => setEmail(val.target.value ? val.target.value.trim() : '')}
                     InputProps={{
                         inputProps: {
                             style: {textAlign: 'center',},
